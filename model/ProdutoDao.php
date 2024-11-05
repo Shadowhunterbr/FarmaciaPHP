@@ -36,8 +36,9 @@ class ProdutoDao{
         //Conexão com o Banco de Dados
         $pdo = Conexao::obterConexao();
 
-        $stmt = $pdo->prepare("INSERT INTO Produtos(nome, preco, cod_fornecedor, cod_prescricao, cod_categoria,quantidade_estoque, data_F, data_V) VALUES(:nome, :preco, :cod_fornecedor, :cod_prescricao, :cod_categoria, :quantidade_estoque, :data_F, :data_V)");
+        $stmt = $pdo->prepare("INSERT INTO Produtos(nome, preco_custo ,preco, cod_fornecedor, cod_prescricao, cod_categoria,quantidade_estoque, data_F, data_V, descricao_produto) VALUES(:nome, :preco_custo, :preco, :cod_fornecedor, :cod_prescricao, :cod_categoria, :quantidade_estoque, :data_F, :data_V, :descricao_produto)");
         $stmt->bindParam(':nome',$objProduto->getNomeProduto());
+        $stmt->bindParam(':preco_custo', $objProduto->getPrecoCusto());
         $stmt->bindParam(':preco',$objProduto->getPreco());
         $stmt->bindParam(':cod_fornecedor',$objProduto->getCodFornecedor());
         $stmt->bindParam(':cod_prescricao',$objProduto->getCodPrescricao());
@@ -45,6 +46,7 @@ class ProdutoDao{
         $stmt->bindParam(':quantidade_estoque',$objProduto->getQuantidadeEstoque());
         $stmt->bindParam(':data_F',$objProduto->getDataF());
         $stmt->bindparam(':data_V',$objProduto->getDataV());
+        $stmt->bindParam(':descricao_produto', $objProduto->getDescricaoProduto());
 
         $stmt->execute();
     }

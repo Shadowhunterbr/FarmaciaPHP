@@ -12,12 +12,15 @@ class Produto {
     private $data_V;
     private $preco;
     private $quantidade_estoque;
+    private $descricaoProduto;
+    private $precoCusto;
 // 9 variaveis
 
     // Construtor da classe Produto
-    public function __construct( $codigo,$nomeProduto, $preco, $quantidade_estoque, $cod_categoria, $cod_fornecedor, $cod_prescricao,$data_F,$data_V ) {
+    public function __construct( $codigo,$nomeProduto, $precoCusto, $preco, $quantidade_estoque, $cod_categoria, $cod_fornecedor, $cod_prescricao,$data_F,$data_V,$descricaoProduto) {
         $this->codigo = $codigo;
         $this->nomeProduto = $nomeProduto;
+        $this->precoCusto = $precoCusto;
         $this->preco = $preco;
         $this->quantidade_estoque = $quantidade_estoque;
         $this->cod_categoria = $cod_categoria;
@@ -25,7 +28,7 @@ class Produto {
         $this->cod_prescricao = $cod_prescricao;
         $this->data_F = $data_F;
         $this->data_V = $data_V;
-        
+        $this->descricaoProduto = $descricaoProduto;
         
         
     }
@@ -34,6 +37,15 @@ class Produto {
     public function getCodigo() {
         return $this->codigo;
     }
+
+    public function getDescricaoProduto() {
+        return $this->descricaoProduto;
+    }
+
+    public function getPrecoCusto() {
+        return $this->precoCusto;
+    }
+
 
     public function getNomeProduto() {
         return $this->nomeProduto;

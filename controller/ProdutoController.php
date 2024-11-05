@@ -31,6 +31,7 @@ class ProdutoController{
     public function cadastrar(){
         $codigo = null;
         $nomeProduto = $_POST['txtproduto'];
+        $precoCusto = $_POST['txtpreco_custo'];
         $preco = $_POST['txtprecounitario'];
         $quantidade_estoque = $_POST['txtquantidade_estoque'];
         $cod_prescricao = $_POST['prescricao_produto'];
@@ -38,9 +39,11 @@ class ProdutoController{
         $cod_forncedor = $_POST['fornecedor_produto'];
         $data_F = $_POST['txtdatafabricacao'];
         $data_V = $_POST['txtdatavalidade'];
+        $descricaoProduto = $_POST['txtdescricao_produto'];
+        
                 
 
-        $objProduto = new Produto($codigo,$nomeProduto,$preco,$quantidade_estoque,$cod_categoria,$cod_forncedor,$cod_prescricao,$data_F,$data_V);
+        $objProduto = new Produto($codigo,$nomeProduto,$precoCusto,$preco,$quantidade_estoque,$cod_categoria,$cod_forncedor,$cod_prescricao,$data_F,$data_V,$descricaoProduto);
         
         $produtoDao = new ProdutoDao();
         $produtoDao->cadastrar($objProduto);
@@ -55,7 +58,7 @@ class ProdutoController{
             
             $codigo = $_GET['codigo'];
             
-            $objProduto = new Produto($codigo,null,null,null,null,null,null,null,null);
+            $objProduto = new Produto($codigo,null,null,null,null,null,null,null,null,null,null);
 
             $produtoDao = new ProdutoDao();
             $produtoDao->excluir($objProduto);

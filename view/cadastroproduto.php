@@ -13,14 +13,21 @@
         <label for="txtcodigo">Código:</label>
         <input type="text" id="txtcodigo" name="txtcodigo" value="<?php echo isset($produtoData['codigo']) ? $produtoData['codigo'] : ''; ?>" readonly required><br><br>
         
-        <label for="txtproduto">Produto:</label>
+        <label for="txtproduto">Nome do Produto:</label>
         <input type="text" id="txtproduto" name="txtproduto" value="<?php echo isset($produtoData['nome']) ? $produtoData['nome'] : ''; ?>" required><br><br>
         
-        <label for="txtprecounitario">Preço Unitário:</label>
-        <input type="text" id="txtprecounitario" name="txtprecounitario" value="<?php echo isset($produtoData['preco']) ? $produtoData['preco'] : ''; ?>" required><br><br>
+        <label for="txtpreco_custo">Preço Custo:</label>
+        <input type="number" id="txtpreco_custo" step="0.010" name="txtpreco_custo" value="<?php echo isset($produtoData['preco_custo']) ? $produtoData['preco_custo'] : ''; ?>" required><br><br>
+        
+        <label for="txtprecounitario">Preço Varejo:</label>
+        <input type="number" id="txtprecounitario" step="0.010" name="txtprecounitario" value="<?php echo isset($produtoData['preco']) ? $produtoData['preco'] : ''; ?>" required><br><br>
         
         <label for="txtquantidade_estoque">Quantidade Estoque:</label>
         <input type="number"  id="txtquantidade_estoque" name="txtquantidade_estoque" value="<?php echo isset($produtoData['quantidade_estoque']) ? $produtoData['quantidade_estoque'] : ''; ?>" required><br><br>
+        
+        <label for="txtdescricao_produto">Descrição do produto:</label>
+        <input type="text" id="txtdescricao_produto" name="txtdescricao_produto" value="<?php echo isset($produtoData['descricao_produto']) ? $produtoData['descricao_produto'] : ''; ?>" required><br><br>
+
         Data de Fabricação: <input type="date" name="txtdatafabricacao" value="<?php echo isset($produtoData['data_f'])?$produtoData['data_f']:'' ?>" required><br><br>
         Data de Validade: <input type="date" name="txtdatavalidade" value="<?php echo isset($produtoData['data_v'])?$produtoData['data_v']:'' ?>" required><br><br>
         
