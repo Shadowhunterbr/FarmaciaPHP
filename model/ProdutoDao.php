@@ -86,4 +86,20 @@ class ProdutoDao{
 
     }
 */
+    public function cadastrarCategoria($objCategoria){
+        $pdo = Conexao::obterConexao();
+
+        $stmt = $pdo->prepare("INSERT INTO Categoria(codigo,categoria) VALUES (:codigo,:categoria)");
+
+        $stmt->bindParam(':codigo',$objCategoria->getCriarCategoria());
+        $stmt->bindParam(':categoria',$objCategoria->getNomeCategoria());
+
+        $stmt->execute();
+        
+        
+    }
+
+
+
+
 }
