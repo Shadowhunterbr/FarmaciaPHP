@@ -55,24 +55,24 @@ class ProdutoDao{
         //Conexão com o Banco de Dados
         $pdo = Conexao::obterConexao();
         
-        $stmt = $pdo->prepare("DELETE FROM Produto WHERE codigo = :codigo");
+        $stmt = $pdo->prepare("DELETE FROM Produtos WHERE codigo = :codigo");
         $stmt->bindParam(':codigo',$objProduto->getCodigo());
 
         $stmt->execute();
     }
-/*
+
     public function buscarProdutoPorCodigo($codigo){
         //Conexão com o Banco de Dados
         $pdo = Conexao::obterConexao();
  
-        $stmt = $pdo->prepare("SELECT * FROM Produto WHERE codigo = :codigo");
+        $stmt = $pdo->prepare("SELECT * FROM Produtos WHERE codigo = :codigo");
         $stmt->bindParam(':codigo',$codigo);
         $stmt->execute();
 
         return $stmt->fetch(\PDO::FETCH_ASSOC);
         
     }
-
+/*
     public function alterar(){
         //Conexão com o Banco de Dados
         $pdo = Conexao::obterConexao();
