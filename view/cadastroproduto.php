@@ -15,7 +15,7 @@ include('protect.php');
 
     <h1><?php echo isset($produtoData['codigo']) ? "Alteração do Produto" : "Cadastro do Produto"; ?></h1>
 
-    <form action="index.php?acao=alterar&codigo" method="POST">
+    <form action="index.php?acao=<?php echo isset($produtoData['codigo']) ? 'alterar' : 'cadastrar'; ?>" method="POST">
         <label for="txtcodigo">Código:</label>
         <input type="text" id="txtcodigo" name="txtcodigo" value="<?php echo isset($produtoData['codigo']) ? $produtoData['codigo'] : ''; ?>" readonly required><br><br>
         
