@@ -7,6 +7,8 @@ require_once __DIR__ . "/../model/FornecedorDao.php";
 use \model\Produto;
 
 class ProdutoController{
+
+    
     public function listarProdutos(){
         
         $produtoDao = new ProdutoDao();
@@ -48,7 +50,7 @@ class ProdutoController{
         $produtoDao = new ProdutoDao();
         $produtoDao->cadastrar($objProduto);
 
-        header("Location: index.php");
+        header("Location: index.php?acao=listarProdutos");
         exit();
     }
 
@@ -63,21 +65,30 @@ class ProdutoController{
             $produtoDao = new ProdutoDao();
             $produtoDao->excluir($objProduto);
 
-            header("Location: index.php");
+            header("Location: index.php?acao=listarProdutos");
             exit();
 
         }
 
     }
-/*
+
     public function mostrarPaginaAlterar(){
 
         if(isset($_GET['codigo'])){
 
             $codigo = $_GET['codigo'];
 
-            $produtoModel = new Produto(null,null,null);
-            $produtoData = $produtoModel->buscarProdutoPorCodigo($codigo);
+            // Instancia o ProdutoDao
+            $produtoDao = new ProdutoDao();
+    
+            // Busca os dados do produto pelo código
+        $produtoData = $produtoDao->buscarProdutoPorCodigo($codigo);
+        $fornecedorDao = new FornecedorDao();
+        $fornecedores = $fornecedorDao->buscarTodosFornecedores();
+        $categoriaDao = new ProdutoDao();
+        $categorias = $categoriaDao->buscarTodasCategorias();
+        $prescricaoDao = new ProdutoDao();
+        $prescricao = $prescricaoDao->arrayPrescricao();
 
             include __DIR__ . "/../view/cadastroproduto.php";
 
@@ -86,17 +97,27 @@ class ProdutoController{
 
     public function alterar(){
         $codigo = $_POST['txtcodigo'];
-        $produto = $_POST['txtproduto'];
-        $precoUnitario = $_POST['txtprecounitario'];
+        $nomeProduto = $_POST['txtproduto'];
+        $precoCusto = $_POST['txtpreco_custo'];
+        $preco = $_POST['txtprecounitario'];
+        $quantidade_estoque = $_POST['txtquantidade_estoque'];
+        $cod_prescricao = $_POST['prescricao_produto'];
+        $cod_categoria = $_POST['categoria_produto'];
+        $cod_forncedor = $_POST['fornecedor_produto'];
+        $data_F = $_POST['txtdatafabricacao'];
+        $data_V = $_POST['txtdatavalidade'];
+        $descricaoProduto = $_POST['txtdescricao_produto'];
 
-        $produtoModel = new Produto($codigo,$produto,$precoUnitario);
-        $produtoModel->alterar();
+        $produtoDao = new ProdutoDao();
 
-        header("Location: index.php");
+        $objProduto = new Produto($codigo,$nomeProduto,$precoCusto,$preco,$quantidade_estoque,$cod_categoria,$cod_forncedor,$cod_prescricao,$data_F,$data_V,$descricaoProduto);
+        $produtoDao->alterar($objProduto);
+
+        header("Location: index.php?acao=listarProdutos");
         exit();
 
     }
-*/
+
 }
 
 

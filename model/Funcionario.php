@@ -39,9 +39,15 @@ class Funcionario{
     public function getLoginFuncionario() {
         return $this->loginFuncionario;
     }
+    public function setLoginFuncionario($loginFuncionario) {
+        $this->loginFuncionario = $loginFuncionario;
+    }
 
     public function getSenhaFuncionario() {
         return $this->senhaFuncionario;
+    }
+    public function setSenhaFuncionario($senhaFuncionario) {
+        $this->senhaFuncionario = $senhaFuncionario;
     }
 
     public function getTelefoneFunc() {

@@ -1,3 +1,9 @@
+<?php
+
+include('protect.php');
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +15,7 @@
 
     <h1><?php echo isset($produtoData['codigo']) ? "Alteração do Produto" : "Cadastro do Produto"; ?></h1>
 
-    <form action="index.php" method="POST">
+    <form action="index.php?acao=alterar&codigo" method="POST">
         <label for="txtcodigo">Código:</label>
         <input type="text" id="txtcodigo" name="txtcodigo" value="<?php echo isset($produtoData['codigo']) ? $produtoData['codigo'] : ''; ?>" readonly required><br><br>
         
@@ -22,14 +28,17 @@
         <label for="txtprecounitario">Preço Varejo:</label>
         <input type="number" id="txtprecounitario" step="0.010" name="txtprecounitario" value="<?php echo isset($produtoData['preco']) ? $produtoData['preco'] : ''; ?>" required><br><br>
         
-        <label for="txtquantidade_estoque">Quantidade Estoque:</label>
+        <label for="txtquantidade_estoque">Quantidade Estoque:</label>  
         <input type="number"  id="txtquantidade_estoque" name="txtquantidade_estoque" value="<?php echo isset($produtoData['quantidade_estoque']) ? $produtoData['quantidade_estoque'] : ''; ?>" required><br><br>
         
         <label for="txtdescricao_produto">Descrição do produto:</label>
         <input type="text" id="txtdescricao_produto" name="txtdescricao_produto" value="<?php echo isset($produtoData['descricao_produto']) ? $produtoData['descricao_produto'] : ''; ?>" required><br><br>
 
-        Data de Fabricação: <input type="date" name="txtdatafabricacao" value="<?php echo isset($produtoData['data_f'])?$produtoData['data_f']:'' ?>" required><br><br>
-        Data de Validade: <input type="date" name="txtdatavalidade" value="<?php echo isset($produtoData['data_v'])?$produtoData['data_v']:'' ?>" required><br><br>
+        <label for="txtdatafabricacao"> Data de Fabricação: </label> 
+        <input type="date" name="txtdatafabricacao" value="<?php echo isset($produtoData['data_f'])?$produtoData['data_f']:'' ?>" required><br><br>
+        
+        <label for="txtdatavalidade"> Data de Validade: </label>
+        <input type="date" name="txtdatavalidade" value="<?php echo isset($produtoData['data_V'])?$produtoData['data_V']:'' ?>" required><br><br>
         
         <label for="categoria_produto">Categoria:</label>
         <select id="categoria_produto" name="categoria_produto" required>
@@ -62,7 +71,8 @@
         </select><br><br>
 
         <input type="hidden" name="acao" value="<?php echo isset($produtoData['codigo']) ? "alterar" : "cadastrar"; ?>">
-        <input type="submit" value="<?php echo isset($produtoData['codigo']) ? "Alterar Produto" : "Cadastrar Produto"; ?>">
+        <input type="submit" value="<?php echo isset($produtoData['codigo']) ? "alterar" : "Cadastrar Produto";  ?>">
+            <?php var_dump($_POST); ?>
     </form>
 
 </body>

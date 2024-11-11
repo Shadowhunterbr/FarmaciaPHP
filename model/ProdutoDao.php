@@ -4,6 +4,8 @@ require_once __DIR__ . "/Conexao.php";
 
 class ProdutoDao{
 
+   
+
     public function buscarTodosProdutos(){
         //Conexão com o Banco de Dados
         $pdo = Conexao::obterConexao();
@@ -72,20 +74,28 @@ class ProdutoDao{
         return $stmt->fetch(\PDO::FETCH_ASSOC);
         
     }
-/*
-    public function alterar(){
+
+    public function alterar($objProduto){
         //Conexão com o Banco de Dados
         $pdo = Conexao::obterConexao();
         
-        $stmt = $pdo->prepare("UPDATE Produto SET produto=:produto, preco_unitario=:preco_unitario WHERE codigo=:codigo");
-        $stmt->bindParam(':produto',$this->produto);
-        $stmt->bindParam(':preco_unitario',$this->precoUnitario);
-        $stmt->bindParam(':codigo',$this->codigo);
-        
+        $stmt = $pdo->prepare("UPDATE Produtos SET nome = :nome, preco_custo = :preco_custo, preco = :preco, cod_fornecedor = :cod_fornecedor, cod_prescricao = :cod_prescricao,
+         cod_categoria = :cod_categoria, quantidade_estoque = :quantidade_estoque, data_F = :data_F, data_V = :data_V, descricao_produto = :descricao_produto WHERE codigo = :codigo");
+        $stmt->bindParam(':codigo',$objProduto->getCodigo());
+        $stmt->bindParam(':nome',$objProduto->getNomeProduto());
+        $stmt->bindParam(':preco_custo', $objProduto->getPrecoCusto());
+        $stmt->bindParam(':preco',$objProduto->getPreco());
+        $stmt->bindParam(':cod_fornecedor',$objProduto->getCodFornecedor());
+        $stmt->bindParam(':cod_prescricao',$objProduto->getCodPrescricao());
+        $stmt->bindParam(':cod_categoria',$objProduto->getCodCategoria());
+        $stmt->bindParam(':quantidade_estoque',$objProduto->getQuantidadeEstoque());
+        $stmt->bindParam(':data_F',$objProduto->getDataF());
+        $stmt->bindparam(':data_V',$objProduto->getDataV());
+        $stmt->bindParam(':descricao_produto', $objProduto->getDescricaoProduto());
         $stmt->execute();
 
     }
-*/
+
     public function cadastrarCategoria($objCategoria){
         $pdo = Conexao::obterConexao();
 

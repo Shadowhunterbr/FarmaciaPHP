@@ -27,7 +27,7 @@ class GerenteDao extends FuncionarioDao{
         $pdo = Conexao::obterConexao();
         
         $stmt = $pdo->prepare("DELETE FROM Funcionario WHERE codigo = :codigo");
-        $stmt->bindParam(':codigo',$objFuncionario->getCodigo());
+        $stmt->bindParam(':codigo',$objFuncionario->getCodigoFuncionario());
 
         $stmt->execute();
     }/*
