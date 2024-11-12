@@ -22,16 +22,31 @@ include('protect.php');
         <tr style="color: white;background-color: black;">
             <th>Código</th>
             <th>Produto</th>
-            <th>Preço Unitário</th>
+            <th>Preço custo</th>
+            <th>Preço Varejo</th>
             <th>QT estoque</th>
+            <th>data de Fabricação</th>
+            <th>data de Validade</th>
+            <th></th>
             <th colspan="2">Ação</th>
         </tr>
         <?php foreach($produtos as $produto): ?>
             <tr>
                 <td><?php echo $produto['codigo'] ?></td>
                 <td><?php echo $produto['nome'] ?></td>
+                <td><?php echo number_format($produto['preco_custo'],2,',','.'); ?></td>
                 <td><?php echo number_format($produto['preco'],2,',','.'); ?></td>
                 <td><?php echo $produto['quantidade_estoque'] ?></td>
+                <td><?php 
+                    $data_F = new DateTime($produto['data_f']);
+                    echo date_format($data_F, "d/m/Y"); 
+                    ?>
+                </td>
+                <td><?php 
+                    $data_V = new DateTime($produto['data_V']);
+                    echo date_format($data_V, "d/m/Y"); 
+                    ?>
+                </td>
                 <td><a href="index.php?acao=paginaalterar&codigo=<?php echo $produto['codigo'] ?>">ALTERAR</a></td>
                 <td><a href="index.php?acao=excluir&codigo=<?php echo $produto['codigo'] ?>">EXCLUIR</a></td>
             </tr>
