@@ -24,7 +24,15 @@ switch ($acao) {
         break;
     case 'excluirFuncionario':
         $funcionarioController->excluir();
-        break;        
+        break;
+    case 'paginacadastrarfuncionario':
+        $funcionarioController->mostrarPaginaCadastro();
+        break;
+    case 'cadastrarFuncionario':
+        $funcionarioController->cadastrarFuncionario();
+        break;   
+        
+         //produtos:   
     case 'listarProdutos':
         $produtoController->listarProdutos();
         break;
@@ -41,7 +49,14 @@ switch ($acao) {
         $produtoController->mostrarPaginaAlterar();
         break;  
     case 'alterar':
-        $produtoController->alterar();              
+        $produtoController->alterar();
+        break;
+    case 'paginacadastrarcategoria':
+        $produtoController->mostrarPaginaCadastroCategoria();
+        break;
+    case 'cadastrarCategoria':
+        $produtoController->cadastrarCategoria();
+        break;                      
     default:
     header("Location: index.php?acao=login");
         break;

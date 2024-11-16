@@ -1,6 +1,8 @@
 <?php
 
+include('protect.php');
 
+protegePaginaGerente();
 
 ?>
 
@@ -16,7 +18,9 @@
 
    <!-- <a href="index.php?acao=cadastrarFuncionario"></a> -->
     <a href="index.php?acao=listarProdutos"><button>Produtos</button></a>
+    <a href="index.php?acao=paginacadastrarfuncionario"><button>Cadastrar funcionario</button></a>
     <a href="index.php?acao=logout"><button>Logout</button></a><br><br>
+    
   <style>  
 .hidetext { -webkit-text-security: disc; /* Default */ }
 </style> 

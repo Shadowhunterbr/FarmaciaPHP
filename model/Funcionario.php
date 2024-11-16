@@ -61,6 +61,9 @@ class Funcionario{
     public function getCargoFuncionario() {
         return $this->cargoFuncionario;
     }
+    public function setCargoFuncionario($cargoFuncionario){
+        $this->cargoFuncionario = $cargoFuncionario;
+    }
 
     public function getCodGenero() {
         return $this->codGenero;

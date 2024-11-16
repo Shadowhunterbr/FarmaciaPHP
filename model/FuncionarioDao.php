@@ -36,11 +36,11 @@ class FuncionarioDao{
 
             if ($resultado = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 $funcionario = new Funcionario(null,null,null,$login,$senha,null,null,null,null);
-               /* $funcionario->setIdFuncionario($resultado['id_funcionario']);
-                $funcionario->setNome($resultado['nome_funcionario']);
-                $funcionario->setCargo($resultado['cargo_funcionario']);
-                $funcionario->setSalario($resultado['salario_funcionario']);
+               /* $funcionario->setCodigoFuncionario($resultado['codigo']);
+                $funcionario->setNomeFuncionario($resultado['nome']);
+                
                 */
+                $funcionario->setCargoFuncionario($resultado['cargo']);
                 $funcionario->setLoginFuncionario($resultado['login']);
                 $funcionario->setSenhaFuncionario($resultado['senha']);
             }
@@ -51,5 +51,14 @@ class FuncionarioDao{
         return $funcionario;
     }
 
+    public function generos(){
+        $pdo = Conexao::obterConexao();
+
+        $statement = $pdo->query("SELECT codigo, genero FROM genero");
+
+        return $statement->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
   
 }
+

@@ -3,6 +3,7 @@
 require_once __DIR__ ."/../model/ProdutoDao.php";
 require_once __DIR__ . "/../model/Produto.php";
 require_once __DIR__ . "/../model/FornecedorDao.php";
+require_once __DIR__ . "/../model/Categorias.php";
 
 use \model\Produto;
 
@@ -28,6 +29,37 @@ class ProdutoController{
         $prescricao = $prescricaoDao->arrayPrescricao();
         require_once __DIR__ . "/../view/cadastroproduto.php";
 
+    }
+    public function mostrarPaginaCadastroCategoria(){
+        
+        $categoriaDao = new ProdutoDao();
+        $categorias = $categoriaDao->buscarTodasCategorias();
+        require_once __DIR__ . "/../view/cadastrarcategoria.php";
+
+    }
+
+
+    public function mostrarPaginaAlterar(){
+
+        if(isset($_GET['codigo'])){
+
+            $codigo = $_GET['codigo'];
+
+            // Instancia o ProdutoDao
+            $produtoDao = new ProdutoDao();
+    
+            // Busca os dados do produto pelo código
+        $produtoData = $produtoDao->buscarProdutoPorCodigo($codigo);
+        $fornecedorDao = new FornecedorDao();
+        $fornecedores = $fornecedorDao->buscarTodosFornecedores();
+        $categoriaDao = new ProdutoDao();
+        $categorias = $categoriaDao->buscarTodasCategorias();
+        $prescricaoDao = new ProdutoDao();
+        $prescricao = $prescricaoDao->arrayPrescricao();
+
+            include __DIR__ . "/../view/cadastroproduto.php";
+
+        }
     }
 
     public function cadastrar(){
@@ -72,28 +104,7 @@ class ProdutoController{
 
     }
 
-    public function mostrarPaginaAlterar(){
-
-        if(isset($_GET['codigo'])){
-
-            $codigo = $_GET['codigo'];
-
-            // Instancia o ProdutoDao
-            $produtoDao = new ProdutoDao();
     
-            // Busca os dados do produto pelo código
-        $produtoData = $produtoDao->buscarProdutoPorCodigo($codigo);
-        $fornecedorDao = new FornecedorDao();
-        $fornecedores = $fornecedorDao->buscarTodosFornecedores();
-        $categoriaDao = new ProdutoDao();
-        $categorias = $categoriaDao->buscarTodasCategorias();
-        $prescricaoDao = new ProdutoDao();
-        $prescricao = $prescricaoDao->arrayPrescricao();
-
-            include __DIR__ . "/../view/cadastroproduto.php";
-
-        }
-    }
 
     public function alterar(){
         $codigo = $_POST['txtcodigo'];
@@ -112,6 +123,20 @@ class ProdutoController{
 
         $objProduto = new Produto($codigo,$nomeProduto,$precoCusto,$preco,$quantidade_estoque,$cod_categoria,$cod_forncedor,$cod_prescricao,$data_F,$data_V,$descricaoProduto);
         $produtoDao->alterar($objProduto);
+
+        header("Location: index.php?acao=listarProdutos");
+        exit();
+
+    }
+
+    public function cadastrarCategoria(){
+        $codigo = $_POST['txtcodigoCategoria'];
+        $categoria = $_POST['txtcategoria'];
+
+        $categoriaDao = new ProdutoDao();
+
+        $objCategoria = new Categorias($codigo,$categoria);
+        $categoriaDao->cadastrarCategoria($objCategoria);
 
         header("Location: index.php?acao=listarProdutos");
         exit();

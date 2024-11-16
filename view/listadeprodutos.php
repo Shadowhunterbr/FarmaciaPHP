@@ -14,10 +14,10 @@ include('protect.php');
 
     <h1>Lista de Produtos</h1>
 
-    <a href="index.php?acao=paginacadastrar"><button>Cadastrar Produto</button></a><br><br>
-    <a href="index.php?acao=listarFuncionarios"><button>Funcionarios</button></a>
-    <a href="index.php?acao=logout"><button>Logout</button></a><br><br>
-
+    <a href="index.php?acao=paginacadastrar"><button>Cadastrar Produtos</button></a><br><br>
+    <a href="index.php?acao=paginacadastrarcategoria"><button>Cadastrar Categorias</button></a>
+    <a href="index.php?acao=listarFuncionarios"><button>Funcionarios</button></a><br><br>
+    <a href="index.php?acao=logout"><button>Logout</button></a>
     <table border="1" style="width: 70%;">
         <tr style="color: white;background-color: black;">
             <th>Código</th>
