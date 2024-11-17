@@ -16,6 +16,7 @@ include('protect.php');
 
     <a href="index.php?acao=paginacadastrar"><button>Cadastrar Produtos</button></a><br><br>
     <a href="index.php?acao=paginacadastrarcategoria"><button>Cadastrar Categorias</button></a>
+    <a href="index.php?acao=paginaCadastrarFornecedor"><button>Cadastrar Fornecedor</button></a>
     <a href="index.php?acao=listarFuncionarios"><button>Funcionarios</button></a><br><br>
     <a href="index.php?acao=logout"><button>Logout</button></a>
     <table border="1" style="width: 70%;">

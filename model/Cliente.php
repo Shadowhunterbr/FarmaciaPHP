@@ -29,6 +29,10 @@ class Cliente{
         return $this->codigoCliente;
     }
 
+    public function setCodigoCliente($codigoCliente)  {
+        $this->codigoCliente = $codigoCliente;
+    }
+
     public function getNomeCliente() {
         return $this->nomeCliente;
     }
@@ -59,6 +63,38 @@ class Cliente{
 
     public function getDataNascimento() {
         return $this->dataNascimento;
+    }
+
+    public function setNomeCliente($nomeCliente) {
+        $this->nomeCliente = $nomeCliente;
+    }
+    
+    public function setCodEndereco($codEndereco) {
+        $this->codEndereco = $codEndereco;
+    }
+    
+    public function setEmailCliente($emailCliente) {
+        $this->emailCliente = $emailCliente;
+    }
+    
+    public function setSenhaCliente($senhaCliente) {
+        $this->senhaCliente = $senhaCliente;
+    }
+    
+    public function setTelefoneCliente($telefoneCliente) {
+        $this->telefoneCliente = $telefoneCliente;
+    }
+    
+    public function setCpfCliente($cpfCliente) {
+        $this->cpfCliente = $cpfCliente;
+    }
+    
+    public function setCodGenero($codGenero) {
+        $this->codGenero = $codGenero;
+    }
+    
+    public function setDataNascimento($dataNascimento) {
+        $this->dataNascimento = $dataNascimento;
     }
 
 }

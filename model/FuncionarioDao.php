@@ -10,6 +10,7 @@ class FuncionarioDao{
 
         return $statement->fetchAll(\PDO::FETCH_ASSOC);
     }
+    
 
     
     public function buscarFuncionarioPorCodigo($codigoFuncionario){
@@ -60,5 +61,19 @@ class FuncionarioDao{
     }
 
   
+}
+class FornecedorDao{
+
+    public function buscarTodosFornecedores(){
+
+        $pdo = Conexao::obterConexao();
+        //echo "Banco de Dados Conectado com Sucesso!!!" .PHP_EOL;
+
+        $statement = $pdo->query("SELECT codigo, nome_fantasia FROM fornecedor");
+
+        return $statement->fetchAll(\PDO::FETCH_ASSOC);
+       
+    }
+
 }
 

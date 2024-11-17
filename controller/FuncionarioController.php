@@ -1,9 +1,10 @@
 <?php
 
-require_once __DIR__ . "/../model/FornecedorDao.php";
+
 require_once __DIR__ . "/../model/Funcionario.php";
 require_once __DIR__ . "/../model/FuncionarioDao.php";
 
+require_once __DIR__ . "/../model/Forncedor.php";
 require_once __DIR__ ."/../model/ProdutoDao.php";
 require_once __DIR__ . "/../model/Produto.php";
 require_once __DIR__ . "/../model/GerenteDao.php";
@@ -45,7 +46,14 @@ class FuncionarioController{
         $funcionarios = $funcionarioDao->buscarTodosFuncionarios();
         $generos = $funcionarioDao->generos();
 
-        require_once __DIR__ . "/../view/cadastrafuncionario.php";
+        require_once __DIR__ . "/../view/cadastrarfuncionario.php";
+    }
+
+    public function mostrarPaginaCadastroFornecedor(){
+        $funcionarioDao = new FornecedorDao();
+        $fornecedores = $funcionarioDao->buscarTodosFornecedores();
+
+        require_once __DIR__ . "/../view/cadastrarFornecedor.php";
     }
 
     public function logout() {
@@ -108,9 +116,23 @@ class FuncionarioController{
 
     public function cadastrarFornecedor(){
 
-   
+        $codigo = null;
+        $razaoSocial = $_POST['txtrazaoSocial'];
+        $nomeFantasia = $_POST['txtnomeFantasia'];
+        $cnpj = $_POST['txtcnpj'];
+        $endereco = $_POST['txtendereco'];
+        $cidade = $_POST['txtcidade'];
+        $cep = $_POST['txtcep'];
+        $pessoaContato = $_POST['txtpessoaContato'];
+        $telefone = $_POST['txttelefone'];   
+        
+        $objFornecedor = new Fornecedor($codigo,$razaoSocial,$nomeFantasia,$cnpj,$endereco,$cidade,$cep,$pessoaContato,$telefone);
 
+        $forncedorDao = new GerenteDao();
+        $forncedorDao->cadastrarFornecedor($objFornecedor);
 
+        header("Location: index.php?acao=listarFuncionarios");
+        exit();
         
     }
 

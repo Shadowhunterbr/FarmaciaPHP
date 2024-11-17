@@ -23,4 +23,31 @@ class ClienteDao{
 
         $stmt->execute();
     }
+
+    public function autentica($email, $senha) {
+        $pdo = Conexao::obterConexao();
+        $cliente = null;
+
+        try {
+            $stmt = $pdo->prepare("SELECT * FROM Cliente WHERE email = :email AND senha = :senha");            
+            $stmt->bindParam(':email', $email);
+            $stmt->bindParam(':senha', $senha);
+            $stmt->execute();
+
+            if ($resultado = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $cliente = new Cliente(null,null,null,$email,$senha,null,null,null,null);
+               /*  
+                SALVAR AS INFORMAÇÕES DO CLIENTE NA SESSÃO
+                
+                */
+                $cliente->setEmailCliente($resultado['email']);
+                $cliente->setSenhaCliente($resultado['senha']);
+            }
+        } catch (PDOException $e) {
+            echo 'Erro ao consultar o banco de dados: ' . $e->getMessage();
+        }
+
+        return $cliente;
+    }
 }
+

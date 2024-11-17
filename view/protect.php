@@ -1,5 +1,7 @@
 <?php 
 
+// este arquivo contem as funções para protger as paginas de acordo com o nivel do usuario
+
 // Inicia a sessão, se ainda não estiver iniciada
 if(!isset($_SESSION)) {
     session_start();

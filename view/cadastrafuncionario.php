@@ -1,3 +1,11 @@
+<?php
+
+include('protect.php');
+
+protegePaginaGerente();
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>

@@ -2,7 +2,10 @@
 
 require_once __DIR__ . "/controller/FuncionarioController.php";
 require_once __DIR__ . "/controller/ProdutoController.php";
+require_once __DIR__ . "/controller/ClienteController.php";
 
+
+$clienteController = new ClienteController();
 $funcionarioController = new FuncionarioController();
 $produtoController = new ProdutoController();
 
@@ -31,8 +34,14 @@ switch ($acao) {
     case 'cadastrarFuncionario':
         $funcionarioController->cadastrarFuncionario();
         break;   
-        
-         //produtos:   
+    case 'paginaCadastrarFornecedor':
+        $funcionarioController->mostrarPaginaCadastroFornecedor();
+        break;
+    case 'cadastrarFornecedor':
+        $funcionarioController->cadastrarFornecedor();
+        break;       
+         
+        //produtos:   
     case 'listarProdutos':
         $produtoController->listarProdutos();
         break;
@@ -56,8 +65,21 @@ switch ($acao) {
         break;
     case 'cadastrarCategoria':
         $produtoController->cadastrarCategoria();
-        break;                      
+        break;
+    
+        //cliente    
+    
+    case 'loginCliente':
+        $clienteController->mostrarPaginaLogin();
+        break;
+    case 'autenticarCliente': 
+         $clienteController->login();
+        break;
+    case 'catalogoDeProdutos':
+        $clienteController->catalogoDeProdutos();
+        break;   
+
     default:
-    header("Location: index.php?acao=login");
+    header("Location: index.php?acao=loginCliente");
         break;
 }

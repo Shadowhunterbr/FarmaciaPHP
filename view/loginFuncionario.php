@@ -16,6 +16,8 @@
 <title>Login</title>
 </head>
 <body>
+
+<a href="index.php?acao=loginCliente"><button>Cliente</button></a>
 	<main id="container">
 		<form action="index.php?acao=autenticar" method="post" id="login_form">
 			<div id="form_header">
