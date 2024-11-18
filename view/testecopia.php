@@ -1,8 +1,8 @@
 <?php
-
+/*
 include('protect.php');
 
-?>
+
 
 
 <!DOCTYPE html>
@@ -213,3 +213,10 @@ function validateSearch() {
     return searchInput !== "";  // Permite pesquisa em branco para exibir todos os produtos
 }
 </script>
+
+
+
+
+
+
+ */?>

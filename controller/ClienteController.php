@@ -7,7 +7,7 @@ class ClienteController{
 
     public function mostrarPaginaLogin(){
 
-        require_once __DIR__ . "/../view/loginCliente.php";
+        require_once __DIR__ . "/../view/logins/loginCliente.php";
     }
 
     public function login() {

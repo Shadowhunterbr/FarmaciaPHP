@@ -9,7 +9,7 @@ $clienteController = new ClienteController();
 $funcionarioController = new FuncionarioController();
 $produtoController = new ProdutoController();
 
-$acao = $_GET['acao'] ?? 'autenticar';
+$acao = $_GET['acao'] ?? 'autenticarCliente';
 
 // Direciona para o controlador e ação corretos
 switch ($acao) {

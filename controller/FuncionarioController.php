@@ -14,7 +14,7 @@ class FuncionarioController{
 
 
     public function mostrarPaginaLogin() {
-        require_once __DIR__ . "/../view/loginFuncionario.php";
+        require_once __DIR__ . "/../view/logins/loginFuncionario.php";
     }
 
     public function login() {
