@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Cadastro</title>
+     <!-- font awesome icons -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- css stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container" id="container">
+        <div class="form-container sign-up-container">
+            <form action="#">
+                <h1>Criar Conta</h1>
+                <span>ou use seu e-mail para registro</span>
+                <div class="infield">
+                    <input type="text" placeholder="Nome" />
+                    <label></label>
+                </div>
+                <div class="infield">
+                    <input type="email" placeholder="Email" name="email"/>
+                    <label></label>
+                </div>
+                <div class="infield">
+                    <input type="password" placeholder="Senha" />
+                    <label></label>
+                </div> 
+                <div class="infield">
+                    <input type="text" placeholder="CPF" />
+                    <label></label>
+                </div>
+                <div class="infield">
+                    <input type="text" placeholder="Telefone" />
+                    <label></label>
+                </div>
+                <div class="infield">
+                    <input type="text" placeholder="Genero" />
+                    <label></label>
+                </div>
+                <div class="infield">
+                    <input type="int" placeholder="Data Nascimento" />
+                    <label></label>
+                </div>
+                <button class="btnCadastrar">cadastrar</button>
+            </form>
+        </div>
+        <div class="form-container sign-in-container">
+            <form action="#">
+                <h1>Entrar</h1>
+                <span>ou use sua conta</span>
+                <div class="infield">
+                    <input type="email" placeholder="Email" name="email"/>
+                    <label></label>
+                </div>
+                <div class="infield">
+                    <input type="password" placeholder="Senha" />
+                    <label></label>
+                </div>
+                <a href="#" class="forgot">Esqueceu sua senha?</a>
+                <button class="btnLogin">Fazer login</button> <br> <br>
+                <div>
+                    <br> <br> <br> <br>
+                    <a href="View/loginFuncionario.html" class="loginFunc">Login Funcionario</a>
+                    <!-- <button class="btnCadastrar" id="btnCadastrar2"><a href="View/loginFuncionario.html">Login Funcionario</a></button></a> -->
+                </div>
+            </form>
+        </div>
+        <div class="overlay-container" id="overlayCon">
+            <div class="overlay">
+                <div class="overlay-panel overlay-left">
+                    <img class="img "src="img/img-logo.png" alt=""><br>
+                    <h1>Bem Vindo!</h1>
+                    <p>Registre-se para conhecer o nosso site</p>
+                    <button class="btnLogin2">Fazer login</button>
+                </div>
+                <div class="overlay-panel overlay-right">
+                    <img class="img "src="img/img-logo.png" alt="">
+                    <h1>Cadastrar</h1>
+                    <p>Insira seus dados pessoais e comece sua jornada conosco</p><br>
+                    <button class="btnCadastrar">Criar Conta</button>
+                </div>
+            </div>
+            <button id="overlayBtn"></button>
+        </div>
+    </div>
+
+    
+    <!-- js code -->
+    <script>
+        const container = document.getElementById('container');
+        const overlayCon = document.getElementById('overlayCon');
+        const overlayBtn = document.getElementById('overlayBtn');
+
+        overlayBtn.addEventListener('click', ()=> {
+            container.classList.toggle('right-panel-active');
+
+            overlayBtn.classList.remove('btnScaled');
+            window.requestAnimationFrame( ()=> {
+                overlayBtn.classList.add('btnScaled');
+            })
+        });
+    </script>
+
+</body>
+</html>
