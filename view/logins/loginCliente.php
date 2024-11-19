@@ -13,39 +13,46 @@
 <body>
 
     <div class="container" id="container">
-        <div class="form-container sign-up-container" method="post">
-            <form action="index.php?acao=autenticarCliente"> <!-- mudar aqui -->
+        <div class="form-container sign-up-container">
+            <form action="index.php?acao=cadastrarCliente" method="POST"> <!-- mudar aqui -->
                 <h1>Criar Conta</h1>
                 <span>ou use seu e-mail para registro</span>
                 <div class="infield">
-                    <input type="text" placeholder="Nome" />
+                    <input type="text" placeholder="Nome" name="txtnome" required/>
                     <label></label>
                 </div>
                 <div class="infield">
-                    <input type="email" placeholder="Email" name="email"/>
+                    <input type="email" placeholder="Email" name="txtemail"  required/>
                     <label></label>
                 </div>
                 <div class="infield">
-                    <input type="password" placeholder="Senha" />
+                    <input type="password" placeholder="Senha" name="txtsenha"  required/>
                     <label></label>
                 </div> 
                 <div class="infield">
-                    <input type="text" placeholder="CPF" />
+                    <input type="text" placeholder="CPF" name="txtcpf"  required/>
                     <label></label>
                 </div>
                 <div class="infield">
-                    <input type="text" placeholder="Telefone" />
+                    <input type="text" placeholder="Telefone" name="txttelefone"  required/>
                     <label></label>
                 </div>
+				<div class="infield">
+    <select id="txtgenero" name="txtgenero" class="infield" required>
+        <?php 
+            foreach ($generos as $gr) { 
+                $selected = (isset($clienteData['cod_genero']) && $clienteData['cod_genero'] == $gr['codigo']) ? "selected" : "";
+                echo "<option value='" . $gr['codigo'] . "' $selected>" . $gr['genero'] . "</option>";
+            }
+        ?>
+    </select>
+    <label></label>
+</div>
                 <div class="infield">
-                    <input type="text" placeholder="Genero" />
+                    <input type="date" placeholder="Data Nascimento" name="txtdataNascimento"  required/>
                     <label></label>
                 </div>
-                <div class="infield">
-                    <input type="int" placeholder="Data Nascimento" />
-                    <label></label>
-                </div>
-                <button class="btnCadastrar">cadastrar</button>
+                <button type="submit" class="btnCadastrar">cadastrar</button>
             </form>
         </div>
         <div class="form-container sign-in-container">
@@ -84,7 +91,7 @@
                     <button class="btnCadastrar">Criar Conta</button>
                 </div>
             </div>
-            <button id="overlayBtn"></button>
+            <button id="overlayBtn"></button><!-- o problema esta aqui -->
         </div>
     </div>
 

@@ -75,6 +75,9 @@ switch ($acao) {
     case 'autenticarCliente': 
          $clienteController->login();
         break;
+    case 'cadastrarCliente':
+        $clienteController->cadastrarCliente();
+        break;    
     case 'catalogoDeProdutos':
         $clienteController->catalogoDeProdutos();
         break;   

@@ -75,8 +75,6 @@ class ProdutoController{
         $data_V = $_POST['txtdatavalidade'];
         $descricaoProduto = $_POST['txtdescricao_produto'];
         
-                
-
         $objProduto = new Produto($codigo,$nomeProduto,$precoCusto,$preco,$quantidade_estoque,$cod_categoria,$cod_forncedor,$cod_prescricao,$data_F,$data_V,$descricaoProduto);
         
         $produtoDao = new ProdutoDao();

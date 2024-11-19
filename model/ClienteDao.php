@@ -49,5 +49,37 @@ class ClienteDao{
 
         return $cliente;
     }
+
+    public function verificarEmailExistente($email) {
+        $pdo = Conexao::obterConexao();
+        $stmt = $pdo->prepare("SELECT COUNT(*) as total FROM cliente WHERE email = :email");
+        $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+        $stmt->execute();
+        $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $resultado['total'] > 0; // Retorna true se o email já existe
+    }
+
+    public function verificarCpfExistente($cpf) {
+        $pdo = Conexao::obterConexao();
+        $stmt = $pdo->prepare("SELECT COUNT(*) as total FROM cliente WHERE cpf = :cpf");
+        $stmt->bindParam(':cpf', $cpf, PDO::PARAM_STR);
+        $stmt->execute();
+        $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $resultado['total'] > 0; // Retorna true se o CPF já existe
+    }
+
+    public function generos(){
+        $pdo = Conexao::obterConexao();
+
+        $statement = $pdo->query("SELECT codigo, genero FROM genero");
+
+        
+        $generos = $statement->fetchAll(\PDO::FETCH_ASSOC);
+
+        return $generos;
+    }
+    
 }
 

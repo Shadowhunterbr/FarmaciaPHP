@@ -52,8 +52,8 @@ protegePaginaGerente();
         <select id="generofuncionario" name="generofuncionario" required>
             <?php 
             foreach ($generos as $gr) { 
-                $selected = (isset($produtoData['cod_genero']) && $produtoData['cod_genero'] == $gr['codigo']) ? "selected" : "";
-                echo "<option value='" . $gr['codigo'] . "' $selected>" .  $gr['genero'] . "</option>";
+              $selected = (isset($funcionarioData['cod_genero']) && $funcionarioData['cod_genero'] == $gr['codigo']) ? "selected" : "";
+              echo "<option value='" . $gr['codigo'] . "' $selected>" .  $gr['genero'] . "</option>";
             } 
             ?>
         </select><br><br>
