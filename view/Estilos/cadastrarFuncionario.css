@@ -13,6 +13,7 @@
     --grad-clr3: #6B7FED;
     --grad-clr4: #0a0202;
 }
+
 body {
     padding: 10px;
     background: var(--linear-grad);
@@ -58,7 +59,7 @@ input, select {
 
 .inputs {
     display: flex;
-    gap: 20px;
+    gap: 10px;
     flex-wrap: wrap;
     
 }
@@ -82,7 +83,7 @@ input, select {
     margin-top: 20px;
 }
 
-.submits input.submit {
+.submits button.submit {
     padding: 10px 20px;
     background-color: var(--grad-clr1);
     color: var(--grad-clr4);
