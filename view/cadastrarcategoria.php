@@ -19,7 +19,7 @@
        <div class="inputs">
               <div class="input_label">
                      <label for="txtcodigoCategoria">Código da Categoria:</label>
-                     <input type="number" id="txtcodigoCategoria" name="txtcodigoCategoria" value="<?php echo isset($categorias ['codigo']) ? $categorias ['codigo'] : ''; ?>" required><br><br>
+                     <input type="number" id="txtcodigoCategoria" name="txtcodigoCategoria" value="<?php echo isset($categorias ['codigo']) ? $categorias ['codigo'] : ''; ?>" required readonly><br><br>
               </div>
        </div>
        <div class="inputs">
