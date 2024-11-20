@@ -34,7 +34,7 @@
                     <label></label>
                 </div>
                 <div class="infield">
-                    <input type="text" placeholder="Telefone" name="txttelefone"  required/>
+                    <input type="number" placeholder="Telefone" name="txttelefone"  required/>
                     <label></label>
                 </div>
 				<div class="infield">

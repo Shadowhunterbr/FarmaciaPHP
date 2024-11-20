@@ -48,6 +48,7 @@ protegePaginaGerente();
             <td><?php echo $funcionario['cpf'] ?></td>
             <td><?php echo $funcionario['cargo'] ?></td>
             <td><a href="index.php?acao=excluirFuncionario&codigo=<?php echo $funcionario['codigo'] ?>">EXCLUIR</a></td>
+            <td><a href="index.php?acao= ARRUMA AQUI &codigo=<?php echo $funcionario['codigo'] ?>">ALTERAR</a></td>
         </tr>
         <?php endforeach; ?>   
     </table>

@@ -1,9 +1,13 @@
 <?php
 
+use model\Produto;
+
 require_once __DIR__ . "/../model/Cliente.php";
 require_once __DIR__ . "/../model/ClienteDao.php";
 
 class ClienteController{
+
+  
 
     public function mostrarPaginaLogin(){
         
@@ -35,8 +39,11 @@ class ClienteController{
 
     public function catalogoDeProdutos() {
         
-        $dao = new clienteDao();
+        $dao = new ClienteDao();
         $generos = $dao->generos();
+        $produtoDao = new ProdutoDao();
+        $categorias = $produtoDao->buscarTodasCategorias();
+        $produtos = $produtoDao->buscarTodosProdutos();
         
         require_once __DIR__ . "/../view/catalogoDeProdutos.php";
    }

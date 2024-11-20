@@ -79,7 +79,12 @@ switch ($acao) {
         $clienteController->cadastrarCliente();
         break;    
     case 'catalogoDeProdutos':
+        $codCategoria = $_GET['cod_categoria'] ?? null;
+        if($codCategoria){
+
         $clienteController->catalogoDeProdutos();
+        $produtoController->listarProdutosPorCategoria($codCategoria);
+    }
         break;   
 
     default:

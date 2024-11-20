@@ -71,8 +71,8 @@ include('protect.php');
         </select><br><br>
 
         <input type="hidden" name="acao" value="<?php echo isset($produtoData['codigo']) ? "alterar" : "cadastrar"; ?>">
-        <input type="submit" value="<?php echo isset($produtoData['codigo']) ? "alterar" : "Cadastrar Produto";  ?>">
-            <?php var_dump($_POST); ?>
+        <input type="submit"PO value="<?php echo isset($produtoData['codigo']) ? "alterar" : "Cadastrar Produto";  ?>">
+            
     </form>
 
 </body>

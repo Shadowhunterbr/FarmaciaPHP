@@ -26,6 +26,16 @@ class ProdutoDao{
 
     }
 
+    public function buscarPorCategoria($codCategoria) {
+
+        $pdo = Conexao::obterConexao();
+        
+        $stmt = $pdo->prepare("SELECT * FROM produtos WHERE cod_categoria = :cod_categoria");
+        $stmt->bindParam(':cod_categoria', $codCategoria, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public function arrayPrescricao(){
 
         $pdo = Conexao::obterConexao();

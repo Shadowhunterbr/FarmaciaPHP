@@ -14,7 +14,7 @@
             <header>Bem Vindo!</header>
         </div>
         <div class="input-box">
-            <input type="text" class="input-field" placeholder="Email" autocomplete="off" name="txtloginfuncionario" required>
+            <input type="text" class="input-field" placeholder="Login" autocomplete="off" name="txtloginfuncionario" required>
         </div>
         <div class="input-box">
             <input type="password" class="input-field" placeholder="Password" name="txtsenhafuncionario" autocomplete="off" required>

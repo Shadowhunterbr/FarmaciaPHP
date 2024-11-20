@@ -140,6 +140,24 @@ class ProdutoController{
         exit();
 
     }
+    public function listarProdutosPorCategoria($codCategoria) {
+        // Validação do ID da categoria
+        if (!is_numeric($codCategoria)) {
+            echo "Codigo de categoria inválido.";
+            return;
+        }
+
+        // Chamar o modelo para buscar os produtos
+        $produtoDao = new ProdutoDao();
+        $produtos = $produtoDao->buscarPorCategoria($codCategoria);
+        $dao = new ClienteDao();
+        $generos = $dao->generos();
+        $produtoDao = new ProdutoDao();
+        $categorias = $produtoDao->buscarTodasCategorias();
+
+        // Exibir os produtos (pode ser em uma view separada)
+        require_once __DIR__ . "/../view/catalogoDeProdutos.php";
+    }
 
 }
 
