@@ -27,7 +27,7 @@ class ProdutoController{
         $categorias = $categoriaDao->buscarTodasCategorias();
         $prescricaoDao = new ProdutoDao();
         $prescricao = $prescricaoDao->arrayPrescricao();
-        require_once __DIR__ . "/../view/cadastroproduto.php";
+        require_once __DIR__ . "/../view/cadastrarproduto.php";
 
     }
     public function mostrarPaginaCadastroCategoria(){
@@ -57,7 +57,7 @@ class ProdutoController{
         $prescricaoDao = new ProdutoDao();
         $prescricao = $prescricaoDao->arrayPrescricao();
 
-            include __DIR__ . "/../view/cadastroproduto.php";
+            include __DIR__ . "/../view/cadastrarproduto.php";
 
         }
     } /** DADASDASIDOJASDOASIHDFOASFJBASEDIKFJIKOHADSKFOLPASJHOLIKFSAIKLJASDFKLHAZX */

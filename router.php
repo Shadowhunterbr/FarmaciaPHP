@@ -79,13 +79,17 @@ switch ($acao) {
         $clienteController->cadastrarCliente();
         break;    
     case 'catalogoDeProdutos':
-        $codCategoria = $_GET['cod_categoria'] ?? null;
-        if($codCategoria){
-
         $clienteController->catalogoDeProdutos();
-        $produtoController->listarProdutosPorCategoria($codCategoria);
-    }
-        break;   
+        break;
+    case 'listarProdutosPorCategoria':
+            $codCategoria = $_GET['cod_categoria'] ?? null;
+        
+            if ($codCategoria) {
+                $produtoController->listarProdutosPorCategoria($codCategoria);
+            } else {
+                echo "Categoria não selecionada ou inválida.";
+            }
+    break;
 
     default:
     header("Location: index.php?acao=loginCliente");

@@ -295,15 +295,22 @@ p{
 }
 
 .btnCadastrar{
+    transform: translateY(-55%);
+    padding-left: 55px;
+   
+}
+.btnCadastrar2{
     transform: translateY(-20%);
 }
 
 .btnLogin{
     transform: translateY(0.5%);
+
 }
 
 .btnLogin2{
-    transform: translateY(-20%);
+    transform: translateY(-55%);
+    padding-left: 55px;
 }
 
 a.loginFunc:hover{

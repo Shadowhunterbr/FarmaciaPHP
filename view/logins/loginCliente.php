@@ -52,7 +52,7 @@
                     <input type="date" placeholder="Data Nascimento" name="txtdataNascimento"  required/>
                     <label></label>
                 </div>
-                <button type="submit" class="btnCadastrar">cadastrar</button>
+                <button type="submit" class="btnCadastrar2">cadastrar</button>
             </form>
         </div>
         <div class="form-container sign-in-container">
@@ -82,7 +82,7 @@
                     <img class="img "src="view\logins\img\img-logo.png" alt=""><br>
                     <h1>Bem Vindo!</h1>
                     <p>Registre-se para conhecer o nosso site</p>
-                    <button type class="btnLogin2">Fazer login</button>
+                    <button class="btnLogin2">Fazer login</button>
                 </div>
                 <div class="overlay-panel overlay-right">
                     <img class="img "src="view\logins\img\img-logo.png" alt="">

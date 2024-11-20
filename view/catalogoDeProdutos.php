@@ -112,9 +112,12 @@ if(!isset($_SESSION)) {
     <div class="container">
     <aside class="menu">
     <ul>
+        <li>
+            <a href="?acao=catalogoDeProdutos">Todos os Produtos</a>
+        </li>
         <?php foreach ($categorias as $categoria): ?>
             <li>
-                <a href="?category=<?= strtolower(str_replace(' ', '_', $categoria['categoria'])) ?>">
+                <a href="?acao=listarProdutosPorCategoria&cod_categoria=<?= strtolower(str_replace(' ', '_', $categoria['codigo'])) ?>">
                     <?= htmlspecialchars($categoria['categoria']) ?>
                 </a>
             </li>
@@ -134,6 +137,7 @@ if(!isset($_SESSION)) {
                 <h2><?= htmlspecialchars($produto['nome']) ?></h2>
                 <p>Preço: R$ <?= number_format($produto['preco'], 2, ',', '.') ?></p>
                 <p><?= htmlspecialchars($produto['descricao_produto']) ?></p>
+                <button>ADICIONAR</button>
                         </li>
                  <?php endforeach; ?>
                    <?php else: ?>
