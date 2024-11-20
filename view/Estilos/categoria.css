@@ -1,69 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 *{
     margin: 0;
     padding: 0;
-    background-color: whitesmoke;
+    font-family: 'Poppins', sans-serif;
 }
 
-.title{
+:root{
+    --linear-grad: linear-gradient(to right, #981D1D, #760d0d);
+    --grad-clr1: #981D1D;
+    --grad-clr2: #760d0d;
+    --grad-clr3: #6B7FED;
+    --grad-clr4: #0a0202;
+}
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: var(--grad-clr1);
+}
+
+form {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    padding: 20px;
-    color: rgba(255, 0, 0, 0.801);
+    gap: 10px;
 }
 
-.container{
-    display: flex;
-    justify-content: center;
+label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+    color: var(--grad-clr2);
 }
 
-.form{
-    width: 410px;
-    height: 200px;
-
-    border-style: solid;
-    border-color: rgba(255, 8, 8, 0.61);
-
-    margin: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.inputs{
-    font-size: 20px;
-    color: rgba(177, 35, 35, 0.788);
-}
-
-.inputs input{
-    height: 20px;
-    width: 200px;
-    border-color: white;
-    border-radius: 5px;
-    color: rgba(0, 0, 0, 0.712);
-    box-shadow: 1px 1px solid black;
+input, select {
+    width: 500px;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color: var(--grad-clr4);
     
 }
 
-.button{
+.inputs {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
     
 }
 
-.button button{
-    height: 30px;
-    width: 100px;
-    margin-top: 10px;
-    border-radius: 10px;
-    color: rgba(177, 35, 35, 0.788);
-    border-color: white;
+.input_label {
+    flex: 1 1 calc(50% - 20px);
+    display: flex;
+    flex-direction: column;
 }
 
-.button button:hover{
-    height: 40px;
-    width: 110px;
-    transition-duration: 1s;
-    font-size: 15px;
+.form-group-full {
+    flex: 1 1 100%;
+    display: flex;
+    flex-direction: column;
 }
+
+.submits {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.submits button.submit {
+    padding: 10px 20px;
+    background-color: var(--grad-clr1);
+    color: var(--grad-clr4);
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.submits button.submit:hover {
+    background-color: var(--grad-clr2);
+
+}
+
+
