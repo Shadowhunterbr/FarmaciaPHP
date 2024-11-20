@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+:root{
+    --linear-grad: linear-gradient(to right, #981D1D, #760d0d);
+    --grad-clr1: #981D1D;
+    --grad-clr2: #760d0d;
+    --grad-clr3: #6B7FED;
+    --grad-clr4: #0a0202;
+}
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: var(--grad-clr1);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+    color: var(--grad-clr2);
+}
+
+input, select {
+    width: 500px;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color: var(--grad-clr4);
+    
+}
+
+.inputs {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    
+}
+
+.input_label {
+    flex: 1 1 calc(50% - 20px);
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group-full {
+    flex: 1 1 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.submits {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.submits button.submit {
+    padding: 10px 20px;
+    background-color: var(--grad-clr1);
+    color: var(--grad-clr4);
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.submits button.submit:hover {
+    background-color: var(--grad-clr2);
+
+}
+
+
