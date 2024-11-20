@@ -60,7 +60,7 @@ class ProdutoController{
             include __DIR__ . "/../view/cadastroproduto.php";
 
         }
-    }
+    } /** DADASDASIDOJASDOASIHDFOASFJBASEDIKFJIKOHADSKFOLPASJHOLIKFSAIKLJASDFKLHAZX */
 
     public function cadastrar(){
         $codigo = null;
