@@ -36,6 +36,15 @@ class ProdutoDao{
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function buscarPorNome($search) {
+        $pdo = Conexao::obterConexao();
+
+        $stmt = $pdo->prepare("SELECT * FROM produtos WHERE nome LIKE :search");
+        $stmt->bindValue(':search', "%$search%", PDO::PARAM_STR);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public function arrayPrescricao(){
 
         $pdo = Conexao::obterConexao();

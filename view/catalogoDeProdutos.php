@@ -126,8 +126,11 @@ if(!isset($_SESSION)) {
 </aside>
         <main class="content">
         <div class="search-bar">
-                <input type="text" placeholder="Busque o item">
-                <button>🔍</button>
+        <form action="index.php" method="GET">
+    <input type="hidden" name="acao" value="catalogoDeProdutos">
+    <input type="text" name="search" id="search" placeholder="Busque o item">
+    <button type="submit">🔍</button>
+</form>    
             </div>
             <div class="products">
             <ul>

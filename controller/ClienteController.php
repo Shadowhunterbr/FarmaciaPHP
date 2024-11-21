@@ -37,16 +37,24 @@ class ClienteController{
         }
     }
 
-    public function catalogoDeProdutos() {
-        
+    public function catalogoDeProdutos($search = null) {
         $dao = new ClienteDao();
         $generos = $dao->generos();
         $produtoDao = new ProdutoDao();
+
+        /* PRecisso resolver isto aqui*/
+        if($search){
+            $produtos = $produtoDao->buscarPorNome($search);       
+        }else{
+            $produtos = $produtoDao->buscarTodosProdutos();
+        }
+        
         $categorias = $produtoDao->buscarTodasCategorias();
-        $produtos = $produtoDao->buscarTodosProdutos();
         
         require_once __DIR__ . "/../view/catalogoDeProdutos.php";
    }
+
+   
 
    public function cadastrarCliente(){
 
