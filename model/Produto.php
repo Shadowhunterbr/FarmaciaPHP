@@ -15,6 +15,8 @@ class Produto {
     private $descricaoProduto;
     private $precoCusto;
 // 9 variaveis
+    
+    //melancia
 
     // Construtor da classe Produto
     public function __construct( $codigo,$nomeProduto, $precoCusto, $preco, $quantidade_estoque, $cod_categoria, $cod_fornecedor, $cod_prescricao,$data_F,$data_V,$descricaoProduto) {
