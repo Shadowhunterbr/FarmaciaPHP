@@ -1,6 +1,6 @@
 <?php
 
-include('protect.php');
+include('view/protect.php');
 
 
 ?>
@@ -16,7 +16,7 @@ include('protect.php');
 
     <div class="container">
         <h1><?php echo isset($produtoData['codigo']) ? "Alteração do Produto" : "Cadastro do Produto"; ?></h1>
-        <form action="index.php?acao=<?php echo isset($produtoData['codigo']) ? 'alterar' : 'cadastrar'; ?>" method="POST">
+        <form action="index.php?acao=<?php echo isset($produtoData['codigo']) ? 'alterar' : 'cadastrar'; ?>" method="POST" enctype="multipart/form-data">
             <div class="inputs">
                 <div class="input_label">
                     <label for="txtcodigo">Código:</label>

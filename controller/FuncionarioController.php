@@ -46,14 +46,14 @@ class FuncionarioController{
         $funcionarios = $funcionarioDao->buscarTodosFuncionarios();
         $generos = $funcionarioDao->generos();
 
-        require_once __DIR__ . "/../view/cadastrarfuncionario.php";
+        require_once __DIR__ . "/../view/cadastrar/funcionario.php";
     }
 
     public function mostrarPaginaCadastroFornecedor(){
         $funcionarioDao = new FornecedorDao();
         $fornecedores = $funcionarioDao->buscarTodosFornecedores();
 
-        require_once __DIR__ . "/../view/cadastrarFornecedor.php";
+        require_once __DIR__ . "/../view/cadastrar/fornecedor.php";
     }
 
     public function logout() {

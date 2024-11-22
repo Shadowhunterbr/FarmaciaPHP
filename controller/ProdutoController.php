@@ -27,14 +27,14 @@ class ProdutoController{
         $categorias = $categoriaDao->buscarTodasCategorias();
         $prescricaoDao = new ProdutoDao();
         $prescricao = $prescricaoDao->arrayPrescricao();
-        require_once __DIR__ . "/../view/cadastrarproduto.php";
+        require_once __DIR__ . "/../view/cadastrar/produto.php";
 
     }
     public function mostrarPaginaCadastroCategoria(){
         
         $categoriaDao = new ProdutoDao();
         $categorias = $categoriaDao->buscarTodasCategorias();
-        require_once __DIR__ . "/../view/cadastrarcategoria.php";
+        require_once __DIR__ . "/../view/cadastrar/categoria.php";
 
     }
 
@@ -74,8 +74,9 @@ class ProdutoController{
         $data_F = $_POST['txtdatafabricacao'];
         $data_V = $_POST['txtdatavalidade'];
         $descricaoProduto = $_POST['txtdescricao_produto'];
+        $imagem = $_POST['imagem_produto'];
         
-        $objProduto = new Produto($codigo,$nomeProduto,$precoCusto,$preco,$quantidade_estoque,$cod_categoria,$cod_forncedor,$cod_prescricao,$data_F,$data_V,$descricaoProduto);
+        $objProduto = new Produto($codigo,$nomeProduto,$precoCusto,$preco,$quantidade_estoque,$cod_categoria,$cod_forncedor,$cod_prescricao,$data_F,$data_V,$descricaoProduto,$imagem);
         
         $produtoDao = new ProdutoDao();
         $produtoDao->cadastrar($objProduto);
@@ -90,7 +91,7 @@ class ProdutoController{
             
             $codigo = $_GET['codigo'];
             
-            $objProduto = new Produto($codigo,null,null,null,null,null,null,null,null,null,null);
+            $objProduto = new Produto($codigo,null,null,null,null,null,null,null,null,null,null,null);
 
             $produtoDao = new ProdutoDao();
             $produtoDao->excluir($objProduto);
@@ -116,10 +117,11 @@ class ProdutoController{
         $data_F = $_POST['txtdatafabricacao'];
         $data_V = $_POST['txtdatavalidade'];
         $descricaoProduto = $_POST['txtdescricao_produto'];
+        $imagem = $_POST['imagem_produto'];
 
         $produtoDao = new ProdutoDao();
 
-        $objProduto = new Produto($codigo,$nomeProduto,$precoCusto,$preco,$quantidade_estoque,$cod_categoria,$cod_forncedor,$cod_prescricao,$data_F,$data_V,$descricaoProduto);
+        $objProduto = new Produto($codigo,$nomeProduto,$precoCusto,$preco,$quantidade_estoque,$cod_categoria,$cod_forncedor,$cod_prescricao,$data_F,$data_V,$descricaoProduto, $imagem);
         $produtoDao->alterar($objProduto);
 
         header("Location: index.php?acao=listarProdutos");
