@@ -5,6 +5,26 @@ require_once __DIR__ . "/controller/ProdutoController.php";
 require_once __DIR__ . "/controller/ClienteController.php";
 
 
+$is_dev = true;
+
+function debug() {
+    global $is_dev;
+
+    if ($is_dev) {
+        $debug_arr = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
+        $line = $debug_arr[0]['line'];
+        $file = $debug_arr[0]['file'];
+    
+        header('Content-Type: text/plain');
+
+        echo "linha: $line\n";
+        echo "arquivo: $file\n\n";
+        print_r(array('GET' => $_GET, 'POST' => $_POST, 'SERVER' => $_SERVER));
+        exit;
+    }
+}
+
+
 $clienteController = new ClienteController();
 $funcionarioController = new FuncionarioController();
 $produtoController = new ProdutoController();
@@ -66,12 +86,19 @@ switch ($acao) {
     case 'cadastrarCategoria':
         $produtoController->cadastrarCategoria();
         break;
+    case 'uploadImagem':
+     $produtoController->salvarImagem();
+        break;    
     
         //cliente    
     
     case 'loginCliente':
         $clienteController->mostrarPaginaLogin();
         break;
+    case 'logoutCliente':
+        $clienteController->logout();
+        break;
+
     case 'autenticarCliente': 
          $clienteController->login();
         break;
@@ -92,6 +119,32 @@ switch ($acao) {
                 echo "Categoria não selecionada ou inválida.";
             }
     break;
+    case 'mostrarCarrinho':
+        $data = $_POST; // Ou $_GET, dependendo do caso
+        $clienteController->visualizarCarrinho($data);
+        break;
+    case 'adicionarAoCarrinho':
+        $codProd = $_POST['codProd'] ?? null; 
+        $quantidade = $_POST['quantidade'] ?? 1; 
+        $codCliente = $_SESSION['codCliente'] ?? null; // Certifique-se de que o cliente está autenticado    
+        if ($codCliente && $codProd) {
+            $clienteController->adicionarProduto($codCliente, $codProd, $quantidade);
+        }
+        header('Location: index.php?acao=catalogoDeProdutos');
+        break;
+    case 'removerProdutoCarrinho':
+         
+            $codProd = $_POST['codProd'] ?? null;
+            echo ($_POST['codProd']);
+            echo(isset($_POST['codProd']));
+            $codCliente = $_SESSION['codCliente'] ?? null;
+        
+            if ($codCliente && $codProd) {
+                $clienteController->removerProduto($codCliente, $codProd);
+            }
+            header("Location: index.php?acao=mostrarCarrinho");
+            break;
+                  
 
     default:
     header("Location: index.php?acao=loginCliente");

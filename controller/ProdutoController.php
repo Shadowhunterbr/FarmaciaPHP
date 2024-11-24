@@ -57,10 +57,10 @@ class ProdutoController{
         $prescricaoDao = new ProdutoDao();
         $prescricao = $prescricaoDao->arrayPrescricao();
 
-            include __DIR__ . "/../view/cadastrarproduto.php";
+        require_once __DIR__ . "/../view/cadastrar/produto.php";
 
         }
-    } /** DADASDASIDOJASDOASIHDFOASFJBASEDIKFJIKOHADSKFOLPASJHOLIKFSAIKLJASDFKLHAZX */
+    } 
 
     public function cadastrar(){
         $codigo = null;
@@ -159,7 +159,31 @@ class ProdutoController{
 
         // Exibir os produtos (pode ser em uma view separada)
         require_once __DIR__ . "/../view/catalogoDeProdutos.php";
+
     }
+   
+
+    public function salvarImagem() {
+        
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Verifica e processa o upload da imagem
+            if (isset($_FILES['IMAGEM']) && $_FILES['IMAGEM']['error'] === UPLOAD_ERR_OK) {
+                $uploadDir = 'view/imgs/';
+                $uploadFile = $uploadDir . basename($_FILES['IMAGEM']['name']);
+    
+                if (move_uploaded_file($_FILES['IMAGEM']['tmp_name'], $uploadFile)) {
+                    echo "Arquivo enviado com sucesso: " . $uploadFile;
+                } else {
+                    echo "Erro ao enviar o arquivo.";
+                }
+            } else {
+                echo "Nenhum arquivo enviado ou erro no upload.";
+            }
+            header("Location: index.php?acao=listarProdutos");
+            exit();
+           }   
+        } 
 
 }
 

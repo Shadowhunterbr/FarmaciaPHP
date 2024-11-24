@@ -29,7 +29,7 @@ class ClienteDao{
         $cliente = null;
 
         try {
-            $stmt = $pdo->prepare("SELECT * FROM Cliente WHERE email = :email AND senha = :senha");            
+            $stmt = $pdo->prepare("SELECT * FROM Cliente WHERE email = :email AND senha = :senha ");            
             $stmt->bindParam(':email', $email);
             $stmt->bindParam(':senha', $senha);
             $stmt->execute();
@@ -40,6 +40,7 @@ class ClienteDao{
                 SALVAR AS INFORMAÇÕES DO CLIENTE NA SESSÃO
                 
                 */
+                $cliente->setCodigoCliente($resultado['codigo']);
                 $cliente->setEmailCliente($resultado['email']);
                 $cliente->setSenhaCliente($resultado['senha']);
             }

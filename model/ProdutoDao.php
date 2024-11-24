@@ -57,7 +57,7 @@ class ProdutoDao{
         //Conexão com o Banco de Dados
         $pdo = Conexao::obterConexao();
 
-        $stmt = $pdo->prepare("INSERT INTO Produtos(nome, preco_custo ,preco, cod_fornecedor, cod_prescricao, cod_categoria,quantidade_estoque, data_F, data_V, descricao_produto) VALUES(:nome, :preco_custo, :preco, :cod_fornecedor, :cod_prescricao, :cod_categoria, :quantidade_estoque, :data_F, :data_V, :descricao_produto)");
+        $stmt = $pdo->prepare("INSERT INTO Produtos(nome, preco_custo ,preco, cod_fornecedor, cod_prescricao, cod_categoria,quantidade_estoque, data_F, data_V, descricao_produto, imagem) VALUES(:nome, :preco_custo, :preco, :cod_fornecedor, :cod_prescricao, :cod_categoria, :quantidade_estoque, :data_F, :data_V, :descricao_produto , :imagem)");
         $stmt->bindParam(':nome',$objProduto->getNomeProduto());
         $stmt->bindParam(':preco_custo', $objProduto->getPrecoCusto());
         $stmt->bindParam(':preco',$objProduto->getPreco());
@@ -68,6 +68,7 @@ class ProdutoDao{
         $stmt->bindParam(':data_F',$objProduto->getDataF());
         $stmt->bindparam(':data_V',$objProduto->getDataV());
         $stmt->bindParam(':descricao_produto', $objProduto->getDescricaoProduto());
+        $stmt->bindParam('imagem',$objProduto->getImagem());
 
         $stmt->execute();
     }
@@ -99,7 +100,7 @@ class ProdutoDao{
         $pdo = Conexao::obterConexao();
         
         $stmt = $pdo->prepare("UPDATE Produtos SET nome = :nome, preco_custo = :preco_custo, preco = :preco, cod_fornecedor = :cod_fornecedor, cod_prescricao = :cod_prescricao,
-         cod_categoria = :cod_categoria, quantidade_estoque = :quantidade_estoque, data_F = :data_F, data_V = :data_V, descricao_produto = :descricao_produto WHERE codigo = :codigo");
+         cod_categoria = :cod_categoria, quantidade_estoque = :quantidade_estoque, data_F = :data_F, data_V = :data_V, descricao_produto = :descricao_produto , imagem = :imagem WHERE codigo = :codigo");
         $stmt->bindParam(':codigo',$objProduto->getCodigo());
         $stmt->bindParam(':nome',$objProduto->getNomeProduto());
         $stmt->bindParam(':preco_custo', $objProduto->getPrecoCusto());
@@ -111,6 +112,7 @@ class ProdutoDao{
         $stmt->bindParam(':data_F',$objProduto->getDataF());
         $stmt->bindparam(':data_V',$objProduto->getDataV());
         $stmt->bindParam(':descricao_produto', $objProduto->getDescricaoProduto());
+        $stmt->bindParam('imagem',$objProduto->getImagem());
         $stmt->execute();
 
     }
