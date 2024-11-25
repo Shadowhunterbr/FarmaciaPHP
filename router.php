@@ -144,8 +144,16 @@ switch ($acao) {
             }
             header("Location: index.php?acao=mostrarCarrinho");
             break;
-                  
 
+        case 'paginaalterarfuncionario':
+            $funcionarioController->mostrarPaginaAlterar();
+            break;
+            
+        case 'alterarFuncionario':
+            $funcionarioController->alterarFuncionario();
+            break;
+            
+                 
     default:
     header("Location: index.php?acao=loginCliente");
         break;
