@@ -17,4 +17,7 @@ class Categorias{
         return $this->nomeCategoria;
     }
 }
+
+
+//teste
     
