@@ -150,7 +150,7 @@ class FuncionarioController{
             exit();
         }
     }
-    
+    //teste
     public function alterarFuncionario() {
         $codigo = $_POST['txtcodigofuncionario']; // Código é passado como hidden input no formulário
         $nome = $_POST['txtnomefuncionario'];
