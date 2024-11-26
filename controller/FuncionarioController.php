@@ -106,14 +106,8 @@ class FuncionarioController{
     
         // Instancia FuncionarioDao para salvar ou atualizar
         $funcionarioDao = new GerenteDao();
+        $funcionarioDao->cadastrarFuncionario($objFuncionario);
     
-        if ($codigo) {
-            // Se o código existe, é uma atualização
-            $funcionarioDao->alterarFuncionario($objFuncionario);
-        } else {
-            // Caso contrário, é um cadastro novo
-            $funcionarioDao->cadastrarFuncionario($objFuncionario);
-        }
     
         // Redireciona para a página de listagem de funcionários
         header("Location: index.php?acao=listarFuncionarios");
@@ -147,7 +141,8 @@ class FuncionarioController{
         if (isset($_GET['codigo'])) {
             $codigo = $_GET['codigo'];
             $funcionarioDao = new FuncionarioDao();
-            $funcionario = $funcionarioDao->buscarFuncionarioPorCodigo($codigo);
+            $generos = $funcionarioDao->generos();
+            $funcionarios = $funcionarioDao->buscarFuncionarioPorCodigo($codigo);
     
             require_once __DIR__ . '/../view/cadastrar/funcionario.php';
         } else {
@@ -157,7 +152,7 @@ class FuncionarioController{
     }
     
     public function alterarFuncionario() {
-        $codigo = $_POST['codigo']; // Código é passado como hidden input no formulário
+        $codigo = $_POST['txtcodigofuncionario']; // Código é passado como hidden input no formulário
         $nome = $_POST['txtnomefuncionario'];
         $email = $_POST['txtemailfuncionario'];
         $login = $_POST['txtloginfuncionario'];

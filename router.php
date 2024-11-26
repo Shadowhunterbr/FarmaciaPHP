@@ -29,7 +29,7 @@ $clienteController = new ClienteController();
 $funcionarioController = new FuncionarioController();
 $produtoController = new ProdutoController();
 
-$acao = $_GET['acao'] ?? 'autenticarCliente';
+$acao = $_GET['acao'] ?? 'loginCliente';
 
 // Direciona para o controlador e ação corretos
 switch ($acao) {
