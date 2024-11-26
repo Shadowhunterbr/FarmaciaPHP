@@ -145,10 +145,10 @@ INSERT INTO prescricao_medica (codigo, prescricao) VALUES
 (1, 'S'),
 (2, 'N');
 
-INSERT INTO fornecedor (codigo, razao_social, nome_fantasia, cnpj, endereco, bairro, cidade, cep, UF, pessoa_contato, telefone) VALUES 
-(1, 'Farmácias Unidas S/A', 'Farmácia União', '12345678000195', 'Rua das Flores, 123', 'Centro', 'São Paulo', '01001-000', 'SP', 'Maria Silva', 1122334455),
-(2, 'Distribuidora Saúde LTDA', 'Saúde Distribuidora', '98765432000167', 'Av. Brasil, 456', 'Jardim', 'Rio de Janeiro', '20040-010', 'RJ', 'João Souza', 2123456789),
-(3, 'BioPharma S.A.', 'BioPharma', '11223344000188', 'Rua da Paz, 789', 'Industrial', 'Belo Horizonte', '30030-040', 'MG', 'Ana Lima', 313332221);
+INSERT INTO fornecedor (codigo, razao_social, nome_fantasia, cnpj, endereco, cidade, cep,  pessoa_contato, telefone) VALUES 
+(1, 'Farmácias Unidas S/A', 'Farmácia União', '12345678000195', 'Rua das Flores, 123',  'São Paulo', '01001-000',  'Maria Silva', 1122334455),
+(2, 'Distribuidora Saúde LTDA', 'Saúde Distribuidora', '98765432000167', 'Av. Brasil, 456',  'Rio de Janeiro', '20040-010',  'João Souza', 2123456789),
+(3, 'BioPharma S.A.', 'BioPharma', '11223344000188', 'Rua da Paz, 789',  'Belo Horizonte', '30030-040',  'Ana Lima', 313332221);
 
 INSERT INTO funcionario (codigo, nome, email, login, senha, telefone, cpf, cargo, cod_genero) VALUES 
 (1, 'Carlos Mendes', 'carlos@empresa.com', 'carlosm', 'senha123', 119876543, '12345678901', 'Atendente', 1),
