@@ -149,7 +149,7 @@ class FuncionarioController{
             $funcionarioDao = new FuncionarioDao();
             $funcionario = $funcionarioDao->buscarFuncionarioPorCodigo($codigo);
     
-            require_once __DIR__ . '/../view/alterarfuncionario.php';
+            require_once __DIR__ . '/../view/cadastrar/funcionario.php';
         } else {
             header("Location: index.php?acao=listarFuncionarios");
             exit();
