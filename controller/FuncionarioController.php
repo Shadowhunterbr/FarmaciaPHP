@@ -91,7 +91,7 @@ class FuncionarioController{
     }
     public function cadastrarFuncionario() {
         // Captura os dados do formulário
-        $codigo = null;
+        $codigo = $_POST['txtcodigofuncionario'] ?? null; // Código será null para novos cadastros
         $nome = $_POST['txtnomefuncionario'];
         $email = $_POST['txtemailfuncionario'];
         $login = $_POST['txtloginfuncionario'];
@@ -100,19 +100,20 @@ class FuncionarioController{
         $cpf = $_POST['txtcpffuncionario'];
         $cargo = $_POST['txtcargofuncionario'];
         $cod_genero = $_POST['generofuncionario'];
-        
+    
         // Cria uma instância de Funcionario com os dados capturados
         $objFuncionario = new Funcionario($codigo, $nome, $email, $login, $senha, $telefone, $cpf, $cargo, $cod_genero);
     
-        // Instancia FuncionarioDao e cadastra o funcionário
+        // Instancia FuncionarioDao para salvar ou atualizar
         $funcionarioDao = new GerenteDao();
         $funcionarioDao->cadastrarFuncionario($objFuncionario);
+    
     
         // Redireciona para a página de listagem de funcionários
         header("Location: index.php?acao=listarFuncionarios");
         exit();
     }
-
+    
 
     public function cadastrarFornecedor(){
 
@@ -135,6 +136,41 @@ class FuncionarioController{
         exit();
         
     }
+
+    public function mostrarPaginaAlterar() {
+        if (isset($_GET['codigo'])) {
+            $codigo = $_GET['codigo'];
+            $funcionarioDao = new FuncionarioDao();
+            $generos = $funcionarioDao->generos();
+            $funcionarios = $funcionarioDao->buscarFuncionarioPorCodigo($codigo);
+    
+            require_once __DIR__ . '/../view/cadastrar/funcionario.php';
+        } else {
+            header("Location: index.php?acao=listarFuncionarios");
+            exit();
+        }
+    }
+    
+    public function alterarFuncionario() {
+        $codigo = $_POST['txtcodigofuncionario']; // Código é passado como hidden input no formulário
+        $nome = $_POST['txtnomefuncionario'];
+        $email = $_POST['txtemailfuncionario'];
+        $login = $_POST['txtloginfuncionario'];
+        $senha = $_POST['txtsenhafuncionario'];
+        $telefone = $_POST['txttelefonefuncionario'];
+        $cpf = $_POST['txtcpffuncionario'];
+        $cargo = $_POST['txtcargofuncionario'];
+        $cod_genero = $_POST['generofuncionario'];
+    
+        $objFuncionario = new Funcionario($codigo, $nome, $email, $login, $senha, $telefone, $cpf, $cargo, $cod_genero);
+    
+        $funcionarioDao = new GerenteDao();
+        $funcionarioDao->alterarFuncionario($objFuncionario);
+    
+        header("Location: index.php?acao=listarFuncionarios");
+        exit();
+    }
+    
 
    
 

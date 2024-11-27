@@ -14,12 +14,13 @@ class Produto {
     private $quantidade_estoque;
     private $descricaoProduto;
     private $precoCusto;
+    private $imagem;
 // 9 variaveis
     
     //melancia
 
     // Construtor da classe Produto
-    public function __construct( $codigo,$nomeProduto, $precoCusto, $preco, $quantidade_estoque, $cod_categoria, $cod_fornecedor, $cod_prescricao,$data_F,$data_V,$descricaoProduto) {
+    public function __construct( $codigo,$nomeProduto, $precoCusto, $preco, $quantidade_estoque, $cod_categoria, $cod_fornecedor, $cod_prescricao,$data_F,$data_V,$descricaoProduto,$imagem) {
         $this->codigo = $codigo;
         $this->nomeProduto = $nomeProduto;
         $this->precoCusto = $precoCusto;
@@ -31,6 +32,7 @@ class Produto {
         $this->data_F = $data_F;
         $this->data_V = $data_V;
         $this->descricaoProduto = $descricaoProduto;
+        $this->imagem = $imagem;
         
         
     }
@@ -111,5 +113,12 @@ class Produto {
 
     public function setQuantidadeEstoque($quantidade_estoque) {
         $this->quantidade_estoque = $quantidade_estoque;
+    }
+    public function getImagem(){
+        return $this->imagem;
+    }
+    public function setImagem($imagem) {
+        $this->imagem = $imagem;
+        
     }
 }

@@ -48,8 +48,13 @@ protegePaginaGerente();
             <td><?php echo $funcionario['telefone'] ?></td>
             <td><?php echo $funcionario['cpf'] ?></td>
             <td><?php echo $funcionario['cargo'] ?></td>
+<<<<<<< HEAD
             <td><a href="index.php?acao=excluirFuncionario&codigo=<?php echo $funcionario['codigo'] ?>" class="excluir">EXCLUIR</a></td>
             <td><a href="index.php?acao= ARRUMA AQUI &codigo=<?php echo $funcionario['codigo'] ?>" class="alterar">ALTERAR</a></td>
+=======
+            <td><a href="index.php?acao=excluirFuncionario&codigo=<?php echo $funcionario['codigo'] ?>">EXCLUIR</a></td>
+            <td><a href="index.php?acao=paginaalterarfuncionario&codigo=<?php echo $funcionario['codigo']; ?>">ALTERAR</a></td>
+>>>>>>> 61f1539645fb9b2f56dd37a546e43e0c4bf47b13
         </tr>
         <?php endforeach; ?>   
     </table>

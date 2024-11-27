@@ -55,7 +55,7 @@ include('view/protect.php');
             <div class="inputs">
                 <div class="input_label">
                     <label for="txtdescricao_produto">Descrição do produto:</label>
-                    <input type="text" id="txtdescricao_produto" name="txtdescricao_produto" value="<?php echo isset($produtoData['descricao_produto']) ? $produtoData['descricao_produto'] : ''; ?>" required><br><br>
+                    <input type="text" id="txtdescricao_produto" name="txtdescricao_produto" value="<?php echo isset($produtoData['descricao_produto']) ? $produtoData['descricao_produto'] : ''; ?>" ><br><br>
                 </div>
             </div>
             <div class="inputs">
@@ -112,13 +112,49 @@ include('view/protect.php');
                     </select><br><br>
                 </div>
             </div>
+            <div class="inputs">
+    <div class="input_label">
+        <label for="imagem_produto">Imagem do Produto:</label>
+        <select id="imagem_produto" name="imagem_produto" required>
+            <?php
+            // Diretório onde estão as imagens
+            $diretorioImagens = "view/imgs";
+
+            // Lista os arquivos da pasta imgs
+            if (is_dir($diretorioImagens)) {
+                $imagens = scandir($diretorioImagens);
+                foreach ($imagens as $imagem) {
+                    // Ignora os diretórios especiais '.' e '..'
+                    if ($imagem !== '.' && $imagem !== '..') {
+                        $selected = (isset($produtoData['IMAGEM']) && $produtoData['IMAGEM'] === $imagem) ? "selected" : "";
+                        echo "<option value='$imagem' $selected>$imagem</option>";
+                    }
+                }
+            } else {
+                echo "<option value=''>Nenhuma imagem encontrada</option>";
+            }
+            ?>
+        </select><br><br>
+    </div>
             <div class="submits">
                 <input type="hidden" name="acao" value="<?php echo isset($produtoData['codigo']) ? "alterar" : "cadastrar"; ?>">
                 <input type="submit" class="submit" value="<?php echo isset($produtoData['codigo']) ? "alterar" : "Cadastrar Produto";  ?>">
-                    <?php var_dump($_POST); ?>
+                    
+
             </div>
+
+</div>
         </form>
     </div>
+    <div class="inputs">
+    <div class="input_label">
+    <form action="index.php?acao=uploadImagem" method="POST" enctype="multipart/form-data">
+    <label for="IMAGEM">Escolha uma imagem:</label>
+    <input type="file" name="IMAGEM" id="IMAGEM" required>
+    <button type="submit">Enviar</button>
+</form>
+    </div>
+</div>
 
 </body>
 </html>

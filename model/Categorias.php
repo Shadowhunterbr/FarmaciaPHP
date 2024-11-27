@@ -17,4 +17,3 @@ class Categorias{
         return $this->nomeCategoria;
     }
 }
-    

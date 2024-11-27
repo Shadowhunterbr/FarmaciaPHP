@@ -4,10 +4,16 @@ use model\Produto;
 
 require_once __DIR__ . "/../model/Cliente.php";
 require_once __DIR__ . "/../model/ClienteDao.php";
+require_once __DIR__ . "/../model/CarrinhoDao.php";
+
+
+
 
 class ClienteController{
 
-  
+    
+
+    
 
     public function mostrarPaginaLogin(){
         
@@ -27,6 +33,7 @@ class ClienteController{
         if ($cliente !== null) {
             session_start();
             $_SESSION['clienteAutenticado'] = $cliente;
+            $_SESSION['codCliente'] = $cliente->getCodigoCliente(); 
            
     
             header("Location: index.php?acao=catalogoDeProdutos");
@@ -37,12 +44,21 @@ class ClienteController{
         }
     }
 
+    public function logout() {
+        session_start();
+        session_unset();
+        session_destroy();
+        header("Location:  index.php?acao=loginCliente"); // podemos redirecionar para outra pagina antes do login
+        exit();
+    }
+
+
     public function catalogoDeProdutos($search = null) {
         $dao = new ClienteDao();
         $generos = $dao->generos();
         $produtoDao = new ProdutoDao();
 
-        /* PRecisso resolver isto aqui*/
+       
         if($search){
             $produtos = $produtoDao->buscarPorNome($search);       
         }else{
@@ -52,6 +68,13 @@ class ClienteController{
         $categorias = $produtoDao->buscarTodasCategorias();
         
         require_once __DIR__ . "/../view/catalogoDeProdutos.php";
+   }
+
+   public function mostrarPaginaCarrinho(){
+    $dao = new ClienteDao();
+    $produtoDao = new ProdutoDao();
+    $carrinhoDao = new CarrinhoDao();
+    require_once __DIR__ . "/../view/CarrinhoDeCompras.php";
    }
 
    
@@ -85,4 +108,65 @@ class ClienteController{
 
     exit();
    }
+
+   public function adicionarProduto($codCliente, $codProd, $quantidade) {
+    $carrinhoDao = new CarrinhoDao();
+
+    $carrinho =  $carrinhoDao->buscarCarrinho($codCliente);
+
+    if (!$carrinho) {
+        $codCarrinho =  $carrinhoDao->criarCarrinho($codCliente);
+    } else {
+        $codCarrinho = $carrinho['codigo'];
+    }
+    
+
+    // Buscar preço do produto (substitua por um ProdutoModel para isso)
+    $produtoDao = new ProdutoDao();
+    $produtos =  $produtoDao->buscarProdutoPorCodigo($codProd);
+
+    if ($produtos) {
+        $subtotal = $produtos['preco'] * $quantidade;
+        $carrinhoDao->adicionarItem($codCarrinho, $codProd, $quantidade, $subtotal);
+    }
+}
+
+
+public function visualizarCarrinho() {
+    // Verificar se a sessão já foi iniciada
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();  // Iniciar a sessão apenas se não estiver ativa
+    }
+    
+    $codCliente = $_SESSION['codCliente'] ?? null;
+
+    if (!$codCliente) {
+        header("Location: index.php?acao=loginCliente");
+        exit();
+    }
+
+    $carrinhoDao = new CarrinhoDao();
+    $carrinho = $carrinhoDao->buscarCarrinho($codCliente);
+
+    if ($carrinho) {
+        $produtos = $carrinhoDao->buscarItensCarrinho($carrinho['codigo']);
+        print_r($produtos);
+    } else {
+        $produtos = [];
+    }
+
+    require_once __DIR__ . "/../view/CarrinhoDeCompras.php";
+}
+
+
+public function removerProduto($codCliente, $codProd) {
+    $carrinhoDao = new CarrinhoDao();
+
+    $carrinho = $carrinhoDao->buscarCarrinho($codCliente);
+    if ($carrinho) {
+        $carrinhoDao->removerItem($carrinho['codigo'], $codProd);
+    }
+}
+
+
 }

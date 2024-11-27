@@ -31,6 +31,27 @@ class GerenteDao extends FuncionarioDao{
 
         $stmt->execute();
     }
+
+    public function alterarFuncionario($objFuncionario) {
+        // Conexão com o Banco de Dados
+        $pdo = Conexao::obterConexao();
+    
+        $stmt = $pdo->prepare("UPDATE Funcionario SET nome = :nome, email = :email, login = :login, senha = :senha, telefone = :telefone, cpf = :cpf, cargo = :cargo, cod_genero = :cod_genero WHERE codigo = :codigo");
+    
+        $stmt->bindParam(':codigo', $objFuncionario->getCodigoFuncionario());
+        $stmt->bindParam(':nome', $objFuncionario->getNomeFuncionario());
+        $stmt->bindParam(':email', $objFuncionario->getEmailFuncionario());
+        $stmt->bindParam(':login', $objFuncionario->getLoginFuncionario());
+        $stmt->bindParam(':senha', $objFuncionario->getSenhaFuncionario());
+        $stmt->bindParam(':telefone', $objFuncionario->getTelefoneFunc());
+        $stmt->bindParam(':cpf', $objFuncionario->getCpfFuncionario());
+        $stmt->bindParam(':cargo', $objFuncionario->getCargoFuncionario());
+        $stmt->bindParam(':cod_genero', $objFuncionario->getCodGenero());
+    
+        $stmt->execute();
+    }
+
+
    public function cadastrarFornecedor($objFornecedor) {
     // Conexão com o Banco de Dados
     $pdo = Conexao::obterConexao();
