@@ -36,7 +36,8 @@ class PedidoDao
         $pdo = Conexao::obterConexao();
         $sql = "SELECT 
                     p.codigo AS cod_ped, 
-                    c.nome AS nome_cliente, 
+                    c.nome AS nome_cliente,
+                    p.data_pedidos as data_pedidos, 
                     p.total, 
                     ec.rua, 
                     ec.numero, 

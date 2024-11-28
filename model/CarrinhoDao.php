@@ -91,5 +91,21 @@ public function removerItem($codCarrinho, $codProd) {
         $stmt->bindParam(':cod_carrinho', $codCarrinho, PDO::PARAM_INT);
         $stmt->execute();
     }
+    public function atualizarEstoque($produtos) {
+        $pdo = Conexao::obterConexao();
+        
+        // Preparar a query para atualizar o estoque
+        $sql = "UPDATE produtos SET quantidade_estoque = quantidade_estoque - :quantidade 
+                WHERE codigo = :codProd";
+        $stmt = $pdo->prepare($sql);
+    
+        foreach ($produtos as $produto) {
+            // Executar a atualização para cada produto
+            $stmt->execute([
+                ':quantidade' => $produto['quantidade'],
+                ':codProd' => $produto['cod_prod']
+            ]);
+        }
+    }
     
 }

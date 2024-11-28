@@ -15,6 +15,9 @@ class ProdutoController{
         $produtoDao = new ProdutoDao();
         $produtos = $produtoDao->buscarTodosProdutos();
 
+        $totalVendas = $produtoDao->calcularTotalVendas();
+        $totalPrecoCusto = $produtoDao->calcularTotalPrecoCustoVendidos();
+
         require_once __DIR__ . "/../view/listadeprodutos.php";
     }
 

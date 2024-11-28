@@ -150,7 +150,7 @@ include('view/protect.php');
     <div class="input_label">
     <form action="index.php?acao=uploadImagem" method="POST" enctype="multipart/form-data">
     <label for="IMAGEM">Escolha uma imagem:</label>
-    <input type="file" name="IMAGEM" id="IMAGEM" required>
+    <input type="file" name="IMAGEM" id="IMAGEM">
     <button type="submit">Enviar</button>
 </form>
     </div>

@@ -153,7 +153,7 @@ public function visualizarCarrinho() {
     $carrinho = $carrinhoDao->buscarCarrinho($codCliente);
 
     // Verificar o conteúdo do carrinho retornado
-    var_dump($carrinho); // Verifique o formato dos dados retornados
+   // Verifique o formato dos dados retornados
 
     if ($carrinho) {
         // Certifique-se de que a chave 'codigo' existe no array retornado
@@ -216,12 +216,14 @@ public function finalizarPedido($codCliente) {
         // Salvar o pedido
         $pedidoDao = new PedidoDao();
         $pedidoDao->salvarPedido($codCliente, $total, $produtos);
+        $carrinhoDao->atualizarEstoque($produtos);
 
         // Limpar o carrinho após finalizar o pedido
         $carrinhoDao->limparCarrinho($carrinho['codigo']);
 
+    
         // Redirecionar para a página de sucesso
-        header("Location: index.php?acao=sucessoPedido");
+        header("Location: index.php?acao=mostrarPedidos");
         exit();
     }
 
