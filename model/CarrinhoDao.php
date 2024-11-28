@@ -16,12 +16,16 @@ public function criarCarrinho($codCliente) {
 }
 
 public function buscarCarrinho($codCliente) {
+    // Supondo que sua tabela de carrinho tenha o campo 'codigo' como identificador
     $pdo = Conexao::obterConexao();
-    $stmt = $pdo->prepare("SELECT * FROM carrinho WHERE cod_cliente = :cod_cliente");
-    $stmt->execute([':cod_cliente' => $codCliente]);
-    return $stmt->fetch(PDO::FETCH_ASSOC);
+    $sql = "SELECT * FROM carrinho WHERE cod_cliente = :cod_cliente LIMIT 1";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':cod_cliente', $codCliente, PDO::PARAM_INT);
+    $stmt->execute();
+    
+    // Retorna o resultado ou false se não encontrar
+    return $stmt->fetch(PDO::FETCH_ASSOC); // Retorna um array associativo
 }
-
 public function adicionarItem($codCarrinho, $codProd, $quantidade, $subtotal) {
     
     $pdo = Conexao::obterConexao();
@@ -63,4 +67,29 @@ public function removerItem($codCarrinho, $codProd) {
     $stmt->execute([':cod_carrinho' => $codCarrinho, ':cod_prod' => $codProd]);
     
     }
+
+    public function calcularTotalCarrinho($codCarrinho) {
+        $pdo = Conexao::obterConexao();
+    
+        $stmt = $pdo->prepare("
+            SELECT SUM(i.quantidade * p.preco) AS total 
+            FROM itens_carrinho i
+            JOIN produtos p ON i.cod_prod = p.codigo
+            WHERE i.cod_carrinho = :cod_carrinho
+        ");
+    
+        $stmt->execute([':cod_carrinho' => $codCarrinho]);
+    
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['total'] ?? 0; 
+    }
+
+    public function limparCarrinho($codCarrinho) {
+        $pdo = Conexao::obterConexao();
+        $sql = "DELETE FROM itens_carrinho WHERE cod_carrinho = :cod_carrinho";
+        $stmt =  $pdo->prepare($sql);
+        $stmt->bindParam(':cod_carrinho', $codCarrinho, PDO::PARAM_INT);
+        $stmt->execute();
+    }
+    
 }
