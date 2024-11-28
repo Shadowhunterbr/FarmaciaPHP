@@ -87,7 +87,7 @@ body{
 
 
 .submit_button button{
-    background-color: var(--grad-clr2);
+    background-color: var(--grad-clr3);
     color: var(--grad-clr4);
     border: none;
     padding: 5px 10px;
@@ -97,5 +97,5 @@ body{
 }
 
 .submit_button button:hover{
-    background-color: var(--grad-clr3);
+    background-color: var(--grad-clr2);
 }
