@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="Estilos/carrinho.css">
+    <link rel="stylesheet" href="view\Estilos\carrinho.css">
     <title>Carrinho de Compras</title>
 </head>
 <body>
@@ -23,6 +23,7 @@
                 <div class="catalogoProduto">
                     <a href="?acao=catalogoDeProdutos">Voltar ao Catálogo</a>
                 </div>
+            </div>
             </div>
         <?php else: ?>
             <div class="table">
@@ -54,9 +55,18 @@
                     </tbody>
                 </table>
             </div>
+      
             <div class="containerButton">
-                <div class="catalogoProduto"><a href="?acao=catalogoDeProdutos">Continuar Comprando</a></div>
+            <div class="catalogoProduto">
+            <a href="?acao=finalizarPedido">Finalizar Pedido</a>
+            
             </div>
+            </div>
+            <div class="containerButton">
+        <div class="catalogoProduto">
+        <a href="?acao=catalogoDeProdutos">Continuar Comprando</a>
+         </div>
+         </div>
     
     <?php endif; ?>
 </body>
