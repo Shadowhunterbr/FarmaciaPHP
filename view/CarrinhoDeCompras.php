@@ -2,6 +2,15 @@
 
 ?>
 
+<style>
+    table img {
+    max-width: 100px; /* Limita a largura máxima da imagem */
+    max-height: 100px; /* Limita a altura máxima da imagem */
+    object-fit: cover; /* Garante que a imagem seja ajustada sem distorção */
+    border-radius: 5px; /* Opcional: adiciona bordas arredondadas */
+}
+</style>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -30,9 +39,11 @@
                 <table border="1">
                     <thead>
                         <tr>
+                            <th>*</th>
                             <th>Produto</th>
                             <th>Preço Unitário</th>
                             <th>Quantidade</th>
+                            <th>Contem Receita?</th>
                             <th>Subtotal</th>
                             <th>Ações</th>
                         </tr>
@@ -40,24 +51,51 @@
                     <tbody>
                         <?php foreach ($produtos as $produto): ?>
                             <tr>
+                            <td>
+            <?php if (!empty($produto['IMAGEM'])): ?>
+                <img src="view/imgs/<?= htmlspecialchars($produto['IMAGEM']) ?>" >
+            <?php else: ?>
+                Sem imagem
+            <?php endif; ?>
+        </td>
                                 <td><?= ($produto['nome']) ?></td>
                                 <td>R$ <?= number_format($produto['preco'], 2, ',', '.') ?></td>
                                 <td><?= $produto['quantidade'] ?></td>
+                                <td>
+                                <?php
+    $prescricaoExibida = "Não contém prescrição"; 
+    if (isset($produto['cod_prescricao'])) { 
+        foreach ($prescricao as $rc) {
+            if ($produto['cod_prescricao'] == $rc['codigo']) {
+                $prescricaoExibida = htmlspecialchars($rc['prescricao']); 
+                break; 
+            }
+        }
+    }
+    echo $prescricaoExibida; 
+    ?>
+</td>
+ 
+                 
                                 <td>R$ <?= number_format($produto['subtotal'], 2, ',', '.') ?></td>
+
                                 <td>
                                     <form method="post" action="?acao=removerProdutoCarrinho">
                                         <input type="hidden" name="codProd" value="<?= $produto['cod_prod'] ?>">
                                         <div class="submit_button"><button type="submit">Remover</button></div>
                                     </form>
                                 </td>
+
                             </tr>
                         <?php endforeach; ?>
+                        
                     </tbody>
                 </table>
             </div>
-      
             <div class="containerButton">
             <div class="catalogoProduto">
+                 Total: R$ <?php echo($total); ?> <br>
+
             <a href="?acao=finalizarPedido">Finalizar Pedido</a>
             
             </div>
