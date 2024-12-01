@@ -58,6 +58,10 @@ tbody{
     background-color: var(--grad-clr2);
 }
 
+.tituloLista{
+    color:white;
+}
+
 .table{
     width: 90%;
     margin: 20px auto;
@@ -92,8 +96,7 @@ tbody{
 
 
 .submit_button button{
-    background-color: var(--grad-clr2);
-    /* color: var(--grad-clr4); */
+    background-color: var(--grad-clr3);
     color:white;
     border: none;
     padding: 5px 10px;
@@ -103,9 +106,12 @@ tbody{
 }
 
 .submit_button button:hover{
-    background-color: var(--grad-clr3);
+    background-color: var(--grad-clr2);
 }
 
-.tituloLista{
-    color: white;
+table img {
+    max-width: 100px; 
+    max-height: 100px; 
+    object-fit: cover; 
+    border-radius: 5px; 
 }

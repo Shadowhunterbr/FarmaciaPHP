@@ -8,8 +8,13 @@ include('protect.php');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="listadeprodutosEstilo.css">
+
+ 
+    
+
+    <link rel="stylesheet" href="view\Estilos\listadeProdutos.css">
     <title class="titulo">Lista de Produtos</title>
+
 </head>
 <body>
 
@@ -22,15 +27,31 @@ include('protect.php');
     <a href="index.php?acao=logout"><button class="btnSair">Sair</button></a>
     <br><br>
     <table border="5%" style="width: 70%; border-color:rgb(149, 149, 234);">
+    <tr style="color: white;background-color: #760d0d;">
+        <th>Total Preço Custo</th>   
+        <th>Total Vendas</th>
+        <Th>Lucro Liquido</Th>
+    </tr>
+    <tr>
+        <td><?php echo  number_format($totalPrecoCusto, 2, ',', '.');?></td>
+        <td><?php echo number_format($totalVendas, 2, ',', '.'); ?></td>
+        <td><?php echo number_format($totalLiquido, 2, ',','.'); ?></td>
+    </tr>
+    </table>
+
+    <table border="5%" style="width: 70%; border-color:rgb(149, 149, 234);">
 
         <tr style="color: white;background-color: #760d0d;">
             <th>Código</th>
-            <th>Produto</th>
+            <th>Nome do Produto</th>
             <th>Preço custo</th>
             <th>Preço Varejo</th>
             <th>QT estoque</th>
-            <th>data de Fabricação</th>
-            <th>data de Validade</th>
+            <th>Categoria</th>
+            <th>Fornecedor</th>
+            <th>Receita?</th>
+            <th>Data de Fabricação</th>
+            <th>Data de Validade</th>
             <th></th>
             <th colspan="2">Ação</th>
         </tr>
@@ -38,9 +59,30 @@ include('protect.php');
             <tr>
                 <td><?php echo $produto['codigo'] ?></td>
                 <td><?php echo $produto['nome'] ?></td>
+                
                 <td><?php echo number_format($produto['preco_custo'],2,',','.'); ?></td>
                 <td><?php echo number_format($produto['preco'],2,',','.'); ?></td>
                 <td><?php echo $produto['quantidade_estoque'] ?></td>
+                <td><?php  foreach($categorias as $ct){
+                if (isset($produto['cod_categoria']) && $produto['cod_categoria'] == $ct['codigo']) {
+                    echo $ct['categoria']; 
+                }
+            }?></td>
+              
+                <td><?php foreach($fornecedores as $fr){
+                 if (isset($produto['cod_fornecedor']) && $produto['cod_fornecedor'] == $fr['codigo']) {
+                echo $fr['nome_fantasia'];
+            }
+                }?></td>
+                <td>
+                <?php  foreach($prescricao as $rc){
+                if (isset($produto['cod_prescricao']) && $produto['cod_prescricao'] == $rc['codigo']) {
+                    echo $rc['prescricao']; 
+                }
+            }?>
+                </td>
+                 
+                
                 <td><?php 
                     $data_F = new DateTime($produto['data_f']);
                     echo date_format($data_F, "d/m/Y"); 

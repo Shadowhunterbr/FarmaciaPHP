@@ -144,6 +144,17 @@ switch ($acao) {
             }
             header("Location: index.php?acao=mostrarCarrinho");
             break;
+            case 'finalizarPedido':
+                // Garantir que o codCliente esteja na sessão
+                $codCliente = $_SESSION['codCliente'] ?? null;
+                if ($codCliente) {
+                    $clienteController->finalizarPedido($codCliente); // Passar o codCliente como argumento
+                } else {
+                    // Caso o cliente não esteja logado, redirecionar para o login
+                    header("Location: index.php?acao=loginCliente");
+                    exit();
+                }
+                break;      
 
         case 'paginaalterarfuncionario':
             $funcionarioController->mostrarPaginaAlterar();
@@ -152,6 +163,10 @@ switch ($acao) {
         case 'alterarFuncionario':
             $funcionarioController->alterarFuncionario();
             break;
+        case 'mostrarPedidos':
+            $clienteController->mostrarPedidos();
+            break; 
+       
             
                  
     default:

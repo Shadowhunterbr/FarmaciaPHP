@@ -1,7 +1,8 @@
 <?php
 if(!isset($_SESSION)) {
     session_start();
-}
+}   
+include('view/protect.php');
 ?>
 
 
@@ -133,6 +134,9 @@ header {
     <div class="container">
     <a href="index.php?acao=logoutCliente"><Button>Sair</Button></a>
     <a href="index.php?acao=mostrarCarrinho"><Button>Carrinho</Button></a>
+    <a href="index.php?acao"><i class="fa-solid fa-user"><button></button></i></a>
+    <a href="index.php?acao=mostrarPedidos"><button>Pedidos</button></a>
+    
     <aside class="menu">
     <ul>
         <li>
@@ -153,6 +157,7 @@ header {
     <input type="hidden" name="acao" value="catalogoDeProdutos">
     <input type="text" name="search" id="search" placeholder="Busque o item">
     <button type="submit">🔍</button>
+    
 </form>    
             </div>
             <div class="products">
@@ -160,7 +165,7 @@ header {
         <?php if (!empty($produtos)): ?>
             <?php foreach ($produtos as $produto): ?>
                 <li class="product">
-                    <h2><?= htmlspecialchars($produto['nome']) ?></h2>
+                <i class="fa-solid fa-circle-user"></i><h2><?= htmlspecialchars($produto['nome']) ?></h2>
                     <img src="view/imgs/<?= htmlspecialchars($produto['IMAGEM']) ?>" alt="<?= htmlspecialchars($produto['nome']) ?>">
                     <p>Preço: R$ <?= number_format($produto['preco'], 2, ',', '.') ?></p>
                     <p><?= htmlspecialchars($produto['descricao_produto']) ?></p>
