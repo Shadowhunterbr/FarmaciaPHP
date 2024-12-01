@@ -28,7 +28,7 @@
             <div class="table">
                 <table border="1">
                     <thead>
-                        <tr>
+                        <tr class="tituloLista">
                             <th>Produto</th>
                             <th>Preço Unitário</th>
                             <th>Quantidade</th>

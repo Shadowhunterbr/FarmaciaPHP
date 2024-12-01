@@ -18,6 +18,10 @@ body{
     background-color: white;
 }
 
+tbody{
+    color: white;
+}
+
 .container{
     display: flex;
     justify-content: center;
@@ -41,7 +45,8 @@ body{
 .catalogoProduto a{
     display: inline-block;
     text-decoration: none;
-    color: var(--grad-clr4);
+    /* color: var(--grad-clr4); */
+    color: white;
     background-color: var(--grad-clr3);
     padding: 10px 15px;
     border-radius: 5px;
@@ -88,7 +93,8 @@ body{
 
 .submit_button button{
     background-color: var(--grad-clr2);
-    color: var(--grad-clr4);
+    /* color: var(--grad-clr4); */
+    color:white;
     border: none;
     padding: 5px 10px;
     border-radius: 5px;
@@ -98,4 +104,8 @@ body{
 
 .submit_button button:hover{
     background-color: var(--grad-clr3);
+}
+
+.tituloLista{
+    color: white;
 }
