@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+
+.titulo{
+    color:#981D1D;
+}
+
+.alterar{
+    color:#3c56ed;
+}
+
+.excluir{
+    color:#3c56ed;
+}
+
+.btnCadastrarProd{
+    background-color: #981D1D;
+    color:#FFF;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 12px 45px;
+    border: 0ch;
+    border-radius:5%;
+}
+
+.btnCadastrarCategoria{
+    background-color: #981D1D;
+    color:#FFF;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 12px 45px;
+    border: 0ch;
+    border-radius:5%;
+    
+}
+
+.btnListarFuncionarios{
+    background-color: #981D1D;
+    color:#FFF;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 12px 45px;
+    border: 0ch;
+    border-radius:5%;
+}
+
+.btnCadastrarFornecedor{
+    background-color: #981D1D;
+    color:#FFF;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 12px 45px;
+    border-radius: 5%;
+    border: 0ch;
+    border-radius:5%;
+}
+
+.btnSair{
+    background-color: #981D1D;
+    color:#FFF;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 12px 45px;
+    border: 0ch;
+    border-radius:5%;
+}
+
+.btnCadastrarFornecedor:hover{
+    background-color:#6B7FED;
+}
+
+.btnCadastrarCategoria:hover{
+    background-color:#6B7FED;
+}
+
+.btnCadastrarProd:hover{
+    background-color:#6B7FED;
+}
+
+.btnListarFuncionarios:hover{
+    background-color:#6B7FED;
+}
+
+.btnSair:hover{
+    background-color:#600707;
+    ;
+}
+
+
+.titulo1{
+    color:#5d73f0;
+    text-align: center;
+}
+

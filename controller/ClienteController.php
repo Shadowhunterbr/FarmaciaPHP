@@ -5,7 +5,7 @@ use model\Produto;
 require_once __DIR__ . "/../model/Cliente.php";
 require_once __DIR__ . "/../model/ClienteDao.php";
 require_once __DIR__ . "/../model/CarrinhoDao.php";
-
+require_once __DIR__ . "/../model/PedidoDao.php";
 
 
 
@@ -76,6 +76,13 @@ class ClienteController{
     $carrinhoDao = new CarrinhoDao();
     require_once __DIR__ . "/../view/CarrinhoDeCompras.php";
    }
+   public function mostrarPedidos(){
+    $dao = new ClienteDao();
+    $produtoDao = new ProdutoDao();
+    $carrinhoDao = new CarrinhoDao();
+    $pedidos = new PedidoDao();
+    require_once __DIR__ . "/../view/pedidos.php";
+   }
 
    
 
@@ -119,9 +126,6 @@ class ClienteController{
     } else {
         $codCarrinho = $carrinho['codigo'];
     }
-    
-
-    // Buscar preço do produto (substitua por um ProdutoModel para isso)
     $produtoDao = new ProdutoDao();
     $produtos =  $produtoDao->buscarProdutoPorCodigo($codProd);
 
@@ -148,16 +152,26 @@ public function visualizarCarrinho() {
     $carrinhoDao = new CarrinhoDao();
     $carrinho = $carrinhoDao->buscarCarrinho($codCliente);
 
+    // Verificar o conteúdo do carrinho retornado
+   // Verifique o formato dos dados retornados
+
     if ($carrinho) {
-        $produtos = $carrinhoDao->buscarItensCarrinho($carrinho['codigo']);
-        print_r($produtos);
+        // Certifique-se de que a chave 'codigo' existe no array retornado
+        if (isset($carrinho['codigo'])) {
+            $produtos = $carrinhoDao->buscarItensCarrinho($carrinho['codigo']);
+            $total = $carrinhoDao->calcularTotalCarrinho($carrinho['codigo']);
+        } else {
+            // Caso a chave não exista
+            $produtos = [];
+            $total = 0;
+        }
     } else {
         $produtos = [];
+        $total = 0;
     }
 
     require_once __DIR__ . "/../view/CarrinhoDeCompras.php";
 }
-
 
 public function removerProduto($codCliente, $codProd) {
     $carrinhoDao = new CarrinhoDao();
@@ -166,6 +180,56 @@ public function removerProduto($codCliente, $codProd) {
     if ($carrinho) {
         $carrinhoDao->removerItem($carrinho['codigo'], $codProd);
     }
+}
+
+public function obterTotalCarrinho($codCliente) {
+    $carrinhoDao = new CarrinhoDao();
+    
+    // Buscar o carrinho do cliente
+    $carrinho = $carrinhoDao->buscarCarrinho($codCliente);
+
+    if ($carrinho) {
+        // Corrigir para passar o código do carrinho
+        return $carrinhoDao->calcularTotalCarrinho($carrinho['codigo']); // 'codigo' é o campo do carrinho
+    }
+
+    return 0; // Retorna 0 se o carrinho não existir
+}
+
+
+
+
+
+public function finalizarPedido($codCliente) {
+    // Buscar o carrinho do cliente
+    $carrinhoDao = new CarrinhoDao();
+    $carrinho = $carrinhoDao->buscarCarrinho($codCliente);
+
+    if ($carrinho) {
+        // Calcular o total do pedido
+        $produtos = $carrinhoDao->buscarItensCarrinho($carrinho['codigo']);
+        $total = 0;
+        foreach ($produtos as $produto) {
+            $total += $produto['subtotal'];
+        }
+
+        // Salvar o pedido
+        $pedidoDao = new PedidoDao();
+        $pedidoDao->salvarPedido($codCliente, $total, $produtos);
+        $carrinhoDao->atualizarEstoque($produtos);
+
+        // Limpar o carrinho após finalizar o pedido
+        $carrinhoDao->limparCarrinho($carrinho['codigo']);
+
+    
+        // Redirecionar para a página de sucesso
+        header("Location: index.php?acao=mostrarPedidos");
+        exit();
+    }
+
+    // Caso o carrinho não exista ou algo tenha dado errado, redirecionar de volta para o carrinho
+    header("Location: index.php?acao=visualizarCarrinho");
+    exit();
 }
 
 

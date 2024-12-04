@@ -12,8 +12,16 @@ class ProdutoController{
     
     public function listarProdutos(){
         
+        $fornecedorDao = new FornecedorDao();
         $produtoDao = new ProdutoDao();
         $produtos = $produtoDao->buscarTodosProdutos();
+        $categorias = $produtoDao->buscarTodasCategorias();
+        $fornecedores = $fornecedorDao->buscarTodosFornecedores();
+        $prescricao = $produtoDao->arrayPrescricao();
+
+        $totalVendas = $produtoDao->calcularTotalVendas();
+        $totalPrecoCusto = $produtoDao->calcularTotalPrecoCustoVendidos();
+        $totalLiquido =  $totalVendas- $totalPrecoCusto; 
 
         require_once __DIR__ . "/../view/listadeprodutos.php";
     }

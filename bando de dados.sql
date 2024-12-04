@@ -62,13 +62,15 @@ CREATE TABLE cliente(
     cod_endereco integer, -- fk endereço
     email varchar(50) not null UNIQUE,
     senha varchar(50) not null,
-    telefone integer,
+    telefone varchar(18),
     cpf VARCHAR(14) NOT NULL UNIQUE,
     cod_genero integer, -- fk genero
 	data_nascimento DATE not null,
     foreign key (cod_endereco) references endereco_cliente(codigo),
     foreign key (cod_genero) references genero(codigo)
 );
+
+ALTER TABLE cliente MODIFY COLUMN telefone varchar(18);
 
 CREATE TABLE produtos(
     codigo INTEGER PRIMARY KEY AUTO_INCREMENT,
@@ -94,6 +96,7 @@ CREATE TABLE pedidos(
     cod_cliente INTEGER, -- FK para Clientes
     data_pedidos DATE NOT NULL,
     total decimal NOT NULL,
+    imagem_receita text,
     FOREIGN KEY (cod_cliente) REFERENCES cliente(codigo)
 );
 
@@ -156,11 +159,11 @@ INSERT INTO funcionario (codigo, nome, email, login, senha, telefone, cpf, cargo
 (3, 'Julio Santana', 'julio@empresa.com', 'julios', 'senha789', 31987654, '34567890123', 'Gerente', 1);
 
 
-INSERT INTO produtos (codigo, nome, cod_categoria, cod_fornecedor, cod_prescricao, data_F, data_V, preco) VALUES 
-(1, 'Paracetamol 500mg', 1, 1, 1, '2024-01-15', '2025-01-15', 5.99),
-(2, 'Shampoo Anticaspa', 2, 2, 2, '2023-11-20', '2025-11-20', 15.49),
-(3, 'Protetor Solar FPS 50', 3, 2, 2, '2023-08-10', '2024-08-10', 22.99),
-(4, 'Vitamina C 1000mg', 4, 3, 2, '2024-02-05', '2025-02-05', 12.89),
-(5, 'Termômetro Digital', 5, 1, 2, '2023-07-25', '2026-07-25', 29.99);
-
-
+INSERT INTO produtos (nome, cod_categoria, cod_fornecedor, cod_prescricao, data_F, data_V, preco_custo, preco, quantidade_estoque, descricao_produto, imagem)
+VALUES 
+('Paracetamol 500mg', 1, 1, NULL, '2024-11-01', '2025-11-01', 2.50, 5.00, 100, 'Analgésico e antipirético.', 'dramin.png'),
+('Vitamina C 1000mg', 2, 2, NULL, '2024-10-15', '2025-10-15', 3.00, 6.50, 200, 'Suplemento de vitamina C efervescente.', 'dramin.png'),
+('Amoxicilina 500mg', 3, 3, 1, '2024-09-10', '2025-09-10', 10.00, 20.00, 50, 'Antibiótico de amplo espectro.', 'dramin.png'),
+('Insulina Regular', 4, 4, 2, '2024-08-20', '2025-08-20', 25.00, 50.00, 30, 'Medicamento essencial para diabetes.', 'dramin.png'),
+('Shampoo Anticaspa', 5, 5, NULL, '2024-11-05', '2026-11-05', 8.00, 15.00, 150, 'Shampoo para controle da caspa.', 'dramin.png'),
+('Protetor Solar FPS 50', 6, 6, NULL, '2024-12-01', '2026-12-01', 12.00, 25.00, 120, 'Protetor solar para todos os tipos de pele.', 'dramin.png');

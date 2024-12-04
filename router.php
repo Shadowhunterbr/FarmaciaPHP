@@ -148,12 +148,53 @@ switch ($acao) {
         header('Location: index.php?acao=catalogoDeProdutos');
         break;
     case 'removerProdutoCarrinho':
+<<<<<<< HEAD
         $codProd = $_POST['codProd'] ?? null;
         $codCliente = $_SESSION['codCliente'] ?? null;
         if ($codCliente && $codProd) {
             $clienteController->removerProduto($codCliente, $codProd);
         }
         header("Location: index.php?acao=mostrarCarrinho");
+=======
+         
+            $codProd = $_POST['codProd'] ?? null;
+            echo ($_POST['codProd']);
+            echo(isset($_POST['codProd']));
+            $codCliente = $_SESSION['codCliente'] ?? null;
+        
+            if ($codCliente && $codProd) {
+                $clienteController->removerProduto($codCliente, $codProd);
+            }
+            header("Location: index.php?acao=mostrarCarrinho");
+            break;
+            case 'finalizarPedido':
+                // Garantir que o codCliente esteja na sessão
+                $codCliente = $_SESSION['codCliente'] ?? null;
+                if ($codCliente) {
+                    $clienteController->finalizarPedido($codCliente); // Passar o codCliente como argumento
+                } else {
+                    // Caso o cliente não esteja logado, redirecionar para o login
+                    header("Location: index.php?acao=loginCliente");
+                    exit();
+                }
+                break;      
+
+        case 'paginaalterarfuncionario':
+            $funcionarioController->mostrarPaginaAlterar();
+            break;
+            
+        case 'alterarFuncionario':
+            $funcionarioController->alterarFuncionario();
+            break;
+        case 'mostrarPedidos':
+            $clienteController->mostrarPedidos();
+            break; 
+       
+            
+                 
+    default:
+    header("Location: index.php?acao=loginCliente");
+>>>>>>> f3984aabb414b29b157c4d97e55ba216e2ab6aaf
         break;
 
     // Ações para Funcionário

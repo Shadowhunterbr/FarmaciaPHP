@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+:root{
+    --linear-grad: linear-gradient(to right, #981D1D, #760d0d);
+    --grad-clr1: #981D1D;
+    --grad-clr2: #760d0d;
+    --grad-clr3: #6B7FED;
+    --grad-clr4: #0a0202;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+body{
+    background-color: white;
+}
+
+tbody{
+    color: white;
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.title{
+    text-align: center;
+    color: white;
+    background-color: var(--grad-clr2);
+    margin: 0;
+    padding: 15px 0;
+}
+
+.carrinhoVazio{
+    font-size: 16px;
+    text-align: center;
+    color: var(--grad-clr4);
+}
+
+.catalogoProduto a{
+    display: inline-block;
+    text-decoration: none;
+    /* color: var(--grad-clr4); */
+    color: white;
+    background-color: var(--grad-clr3);
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-align: center;
+    margin: 20px auto;
+}
+
+.catalogoProduto a:hover{
+    background-color: var(--grad-clr2);
+}
+
+.tituloLista{
+    color:white;
+}
+
+.table{
+    width: 90%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background-color: var(--grad-clr1);
+    border-radius: 5px;
+    overflow: hidden;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.table table{
+    border: none;
+}
+.table table td,th{
+    border: none;
+    padding: 10px;
+}
+.containerButton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.table table thead tr{
+    padding: 10px;
+    text-align: center;
+    border: 1px solid var(--grad-clr4);
+
+}
+
+
+.submit_button button{
+    background-color: var(--grad-clr3);
+    color:white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.submit_button button:hover{
+    background-color: var(--grad-clr2);
+}
+
+table img {
+    max-width: 100px; 
+    max-height: 100px; 
+    object-fit: cover; 
+    border-radius: 5px; 
+}
+
+.total{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+
+    background-color: var(--grad-clr3);
+    border-radius: 5px;
+    color: white;
+}

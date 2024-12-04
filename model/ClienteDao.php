@@ -3,6 +3,7 @@
 require_once __DIR__ . "/Conexao.php";
 
 class ClienteDao{
+    //teste
 
     public function cadastrarCliente($objCliente) {
     // Conexão com o Banco de Dados

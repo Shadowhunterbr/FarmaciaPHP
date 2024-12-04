@@ -134,6 +134,7 @@ class ProdutoDao{
     
     
 
+<<<<<<< HEAD
     public function salvarOuAtualizarCategoria($objCategoria)
     {
         $pdo = Conexao::obterConexao();
@@ -192,6 +193,35 @@ class ProdutoDao{
         }
     }
     
+=======
+    public function calcularTotalVendas() {
+        $pdo = Conexao::obterConexao();
+        $sql = "SELECT SUM(total) AS total_vendas FROM pedidos";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+        return $result['total_vendas'] ?? 0; // Retorna 0 caso não existam vendas
+    }
+
+    public function calcularTotalPrecoCustoVendidos() {
+        $pdo = Conexao::obterConexao();
+        
+        // SQL para calcular o total de preço de custo com base na quantidade vendida
+        $sql = "
+            SELECT SUM(p.preco_custo * i.quantidade) AS total_preco_custo
+            FROM itens_pedido i
+            JOIN produtos p ON i.cod_prod = p.codigo
+        ";
+        
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['total_preco_custo'] ?? 0; // Retorna 0 caso não existam vendas
+    }
+
+>>>>>>> f3984aabb414b29b157c4d97e55ba216e2ab6aaf
 
     public function excluirCategoria($categoria) {
         try {

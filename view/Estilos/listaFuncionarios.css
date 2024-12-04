@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+
+.titulo{
+    color:#981D1D;
+}
+
+.alterar{
+    color:#3c56ed;
+}
+
+.excluir{
+    color:#3c56ed;
+}
+
+.btnProdutos{
+    background-color: #981D1D;
+    color:#FFF;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 12px 45px;
+    border: 0ch;
+    border-radius:5%;
+}
+
+.btnCadastrarFuncionario{
+    background-color: #981D1D;
+    color:#FFF;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 12px 45px;
+    border: 0ch;
+    border-radius:5%;
+    
+}
+
+.btnSair{
+    background-color: #981D1D;
+    color:#FFF;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 12px 45px;
+    border: 0ch;
+    border-radius:5%;
+}
+
+.btnCadastrarFuncionario:hover{
+    background-color:#6B7FED;
+}
+
+.btnProdutos:hover{
+    background-color:#6B7FED;
+}
+
+
+
+.btnSair:hover{
+    background-color:#600707;
+    ;
+}
+
+
+.titulo1{
+    color:#5d73f0;
+    text-align: center;
+}
+
+button{
+    background-color: #981D1D;
+    border: none;
+    color: #FFF;
+}
+
+button:hover{
+    background-color:#6B7FED;
+}
+
