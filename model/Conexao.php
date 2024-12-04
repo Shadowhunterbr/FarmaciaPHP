@@ -3,9 +3,13 @@
 
 class Conexao{
 
-    public static function obterConexao(){
-        return new \PDO('mysql:host=localhost;dbname=farmacia','root','*******');
+    public static function obterConexao() {
+        try {
+          
+            $pdo = new PDO('mysql:host=localhost;dbname=farmacia', 'root', 'senha');
+            return $pdo;
+        } catch (Exception $e) {
+            echo "Connection failed: " . $e->getMessage();
+        }
     }
-
-
 }

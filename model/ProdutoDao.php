@@ -117,20 +117,116 @@ class ProdutoDao{
 
     }
 
-    public function cadastrarCategoria($objCategoria){
-        $pdo = Conexao::obterConexao();
 
-        $stmt = $pdo->prepare("INSERT INTO Categoria(codigo,categoria) VALUES (:codigo,:categoria)");
-
-        $stmt->bindParam(':codigo',$objCategoria->getCriarCategoria());
-        $stmt->bindParam(':categoria',$objCategoria->getNomeCategoria());
-
-        $stmt->execute();
-        
-        
+    public function cadastrarCategoria($objCategoria) {
+        try {
+            $pdo = Conexao::obterConexao();
+    
+            $stmt = $pdo->prepare("INSERT INTO categoria (categoria) VALUES (:categoria)");
+            $stmt->bindParam(':categoria', $objCategoria->getNomeCategoria());
+            $stmt->execute();
+    
+            echo "Categoria cadastrada com sucesso!";
+        } catch (PDOException $e) {
+            echo "Erro ao cadastrar categoria: " . $e->getMessage();
+        }
     }
+    
+    
 
+    public function salvarOuAtualizarCategoria($objCategoria)
+    {
+        $pdo = Conexao::obterConexao();
+        $codigo = $objCategoria->getCriarCategoria();
+        $nomeCategoria = $objCategoria->getNomeCategoria();
+    
+        // Verifica se a categoria já existe no banco
+        $stmt = $pdo->prepare("SELECT COUNT(*) FROM categoria WHERE codigo = :codigo");
+        $stmt->bindParam(':codigo', $codigo, PDO::PARAM_INT);
+        $stmt->execute();
+    
+        // Se a categoria já existe, atualiza. Caso contrário, insere uma nova
+        if ($stmt->fetchColumn() > 0) {
+            // Categoria já existe, realiza a atualização
+            $stmt = $pdo->prepare("UPDATE categoria SET categoria = :categoria WHERE codigo = :codigo");
+            $stmt->bindParam(':codigo', $codigo, PDO::PARAM_INT);
+            $stmt->bindParam(':categoria', $nomeCategoria, PDO::PARAM_STR);
+            $stmt->execute();
+    
+            echo "Categoria atualizada com sucesso!";
+        } else {
+            // Categoria não existe, insere uma nova
+            $stmt = $pdo->prepare("INSERT INTO categoria (codigo, categoria) VALUES (:codigo, :categoria)");
+            $stmt->bindParam(':codigo', $codigo, PDO::PARAM_INT);
+            $stmt->bindParam(':categoria', $nomeCategoria, PDO::PARAM_STR);
+            $stmt->execute();
+    
+            echo "Categoria cadastrada com sucesso!";
+        }
+    }
+    
+    
+    public function verificarCategoriaExistente($codigo)
+    {
+        $pdo = Conexao::obterConexao();
+    
+        $stmt = $pdo->prepare("SELECT COUNT(*) FROM categoria WHERE codigo = :codigo");
+        $stmt->bindParam(':codigo', $codigo);
+        $stmt->execute();
+    
+        return $stmt->fetchColumn() > 0; // Retorna true se já existir
+    }
+    
+    public function alterarCategoria($objCategoria) {
+        try {
+            $pdo = Conexao::obterConexao();
+    
+            $stmt = $pdo->prepare("UPDATE categoria SET categoria = :categoria WHERE codigo = :codigo");
+            $stmt->bindParam(':codigo', $objCategoria->getCriarCategoria(), PDO::PARAM_INT);
+            $stmt->bindParam(':categoria', $objCategoria->getNomeCategoria(), PDO::PARAM_STR);
+            $stmt->execute();
+    
+            echo "Categoria atualizada com sucesso!";
+        } catch (PDOException $e) {
+            echo "Erro ao atualizar categoria: " . $e->getMessage();
+        }
+    }
+    
 
+    public function excluirCategoria($categoria) {
+        try {
+            // Obter conexão com o banco de dados
+            $pdo = Conexao::obterConexao();
+    
+            // Preparar a query de exclusão
+            $sql = "DELETE FROM categoria WHERE codigo = :codigo";
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindParam(':codigo', $categoria->getCriarCategoria(), PDO::PARAM_INT);
+    
+            // Executar a query
+            if (!$stmt->execute()) {
+                throw new Exception("Erro ao excluir a categoria no banco de dados.");
+            }
+        } catch (Exception $e) {
+            throw new Exception("Erro no método excluirCategoria: " . $e->getMessage());
+        }
+    }
+    
 
+    public function buscarCategoriaPorCodigo($codigo)
+    {
+        $pdo = Conexao::obterConexao();
+    
+        // Busque a categoria com o código fornecido
+        $stmt = $pdo->prepare("SELECT * FROM categoria WHERE codigo = :codigo");
+        $stmt->bindParam(':codigo', $codigo);
+        $stmt->execute();
+    
+        // Retorna a categoria encontrada ou falso se não houver categoria
+        return $stmt->fetch(PDO::FETCH_ASSOC);  // Retorna o array ou false se não encontrar
+    }
+    
+    
 
 }
+
