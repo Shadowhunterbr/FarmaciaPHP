@@ -148,14 +148,14 @@ switch ($acao) {
         header('Location: index.php?acao=catalogoDeProdutos');
         break;
     case 'removerProdutoCarrinho':
-<<<<<<< HEAD
+/*<<<<<<< HEAD
         $codProd = $_POST['codProd'] ?? null;
         $codCliente = $_SESSION['codCliente'] ?? null;
         if ($codCliente && $codProd) {
             $clienteController->removerProduto($codCliente, $codProd);
         }
         header("Location: index.php?acao=mostrarCarrinho");
-=======
+=======*/
          
             $codProd = $_POST['codProd'] ?? null;
             echo ($_POST['codProd']);
@@ -192,9 +192,9 @@ switch ($acao) {
        
             
                  
-    default:
-    header("Location: index.php?acao=loginCliente");
->>>>>>> f3984aabb414b29b157c4d97e55ba216e2ab6aaf
+//    default:
+//    header("Location: index.php?acao=loginCliente");
+//>>>>>>> f3984aabb414b29b157c4d97e55ba216e2ab6aaf
         break;
 
     // Ações para Funcionário

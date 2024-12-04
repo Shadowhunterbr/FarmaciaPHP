@@ -134,7 +134,7 @@ class ProdutoDao{
     
     
 
-<<<<<<< HEAD
+//<<<<<<< HEAD
     public function salvarOuAtualizarCategoria($objCategoria)
     {
         $pdo = Conexao::obterConexao();
@@ -193,7 +193,7 @@ class ProdutoDao{
         }
     }
     
-=======
+//=======
     public function calcularTotalVendas() {
         $pdo = Conexao::obterConexao();
         $sql = "SELECT SUM(total) AS total_vendas FROM pedidos";
@@ -221,7 +221,7 @@ class ProdutoDao{
         return $result['total_preco_custo'] ?? 0; // Retorna 0 caso não existam vendas
     }
 
->>>>>>> f3984aabb414b29b157c4d97e55ba216e2ab6aaf
+//>>>>>>> f3984aabb414b29b157c4d97e55ba216e2ab6aaf
 
     public function excluirCategoria($categoria) {
         try {
