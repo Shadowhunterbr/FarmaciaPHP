@@ -53,8 +53,8 @@ if (isset($_GET['codigo'])) {
         </form>
 
         <h2>Lista de Categorias</h2>
-        <table border="1" style="width: 70%;">
-            <tr style="color: white; background-color: black;">
+        <table border="5%" style="width: 70%; border-color:rgb(149, 149, 234);">
+            <tr style="color: white;background-color: #760d0d;">
                 <th>Código</th>
                 <th>Nome da Categoria</th>
                 <th colspan="2">Ação</th>
