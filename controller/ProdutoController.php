@@ -4,6 +4,7 @@ require_once __DIR__ ."/../model/ProdutoDao.php";
 require_once __DIR__ . "/../model/Produto.php";
 require_once __DIR__ . "/../model/FuncionarioDao.php";
 require_once __DIR__ . "/../model/Categorias.php";
+require_once __DIR__ . "/../model/PedidoDao.php";
 
 use \model\Produto;
 
@@ -12,12 +13,15 @@ class ProdutoController{
     
     public function listarProdutos(){
         
+        $pedidoDao = new PedidoDao();
         $fornecedorDao = new FornecedorDao();
         $produtoDao = new ProdutoDao();
         $produtos = $produtoDao->buscarTodosProdutos();
         $categorias = $produtoDao->buscarTodasCategorias();
         $fornecedores = $fornecedorDao->buscarTodosFornecedores();
         $prescricao = $produtoDao->arrayPrescricao();
+        $quantPedidos = $pedidoDao->contarPedidos(); 
+       
 
         $totalVendas = $produtoDao->calcularTotalVendas();
         $totalPrecoCusto = $produtoDao->calcularTotalPrecoCustoVendidos();
@@ -182,9 +186,7 @@ class ProdutoController{
     
                 if (move_uploaded_file($_FILES['IMAGEM']['tmp_name'], $uploadFile)) {
                     echo "Arquivo enviado com sucesso: " . $uploadFile;
-                } else {
-                    echo "Erro ao enviar o arquivo.";
-                }
+                } 
             } else {
                 echo "Nenhum arquivo enviado ou erro no upload.";
             }

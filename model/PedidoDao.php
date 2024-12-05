@@ -56,4 +56,13 @@ class PedidoDao
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function contarPedidos(){
+        $pdo = Conexao::obterConexao();
+        $sql = "SELECT COUNT(*) FROM PEDIDOS";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
 }  

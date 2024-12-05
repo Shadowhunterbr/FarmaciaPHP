@@ -2,6 +2,8 @@
 
 include('protect.php');
 
+protegePagina()
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,16 +28,19 @@ include('protect.php');
     <a href="index.php?acao=listarFuncionarios"><button class="btnListarFuncionarios">Funcionarios</button></a> <br><br>
     <a href="index.php?acao=logout"><button class="btnSair">Sair</button></a>
     <br><br>
+   
     <table border="5%" style="width: 70%; border-color:rgb(149, 149, 234);">
     <tr style="color: white;background-color: #760d0d;">
         <th>Total Preço Custo</th>   
         <th>Total Vendas</th>
         <Th>Lucro Liquido</Th>
+        <th>Pedidos Concluidos</th>
     </tr>
     <tr>
         <td><?php echo  number_format($totalPrecoCusto, 2, ',', '.');?></td>
         <td><?php echo number_format($totalVendas, 2, ',', '.'); ?></td>
         <td><?php echo number_format($totalLiquido, 2, ',','.'); ?></td>
+        <td><?php echo ($quantPedidos [0]["COUNT(*)"]); ?></td>
     </tr>
     </table>
 
@@ -52,7 +57,7 @@ include('protect.php');
             <th>Receita?</th>
             <th>Data de Fabricação</th>
             <th>Data de Validade</th>
-            <th></th>
+           
             <th colspan="2">Ação</th>
         </tr>
         <?php foreach($produtos as $produto): ?>

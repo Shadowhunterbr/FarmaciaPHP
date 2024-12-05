@@ -1,5 +1,5 @@
 <?php
-
+include('view/protect.php');
 ?>
 
 <style>
@@ -92,11 +92,21 @@
                     </tbody>
                 </table>
             </div>
+            <form action="?acao=finalizarPedido" method="POST" enctype="multipart/form-data">
             <div class="containerButton">
             <div class="catalogoProduto">
                  Total: R$ <?php echo($total); ?> <br>
+                 <div class="inputs">
+    <div class="input_label">
+   
+    <label for="IMAGEM">Escolha uma imagem:</label>
+    <input type="file" name="IMAGEM" id="IMAGEM" >
+    <button type="submit">Finalizar Pedido</button>
+</form>
+    </div>
+</div>
 
-            <a href="?acao=finalizarPedido">Finalizar Pedido</a>
+            <a type="submit">Finalizar Pedido</a>
             
             </div>
             </div>
@@ -107,5 +117,10 @@
          </div>
     
     <?php endif; ?>
+
+ 
+
 </body>
+
+
 </html>

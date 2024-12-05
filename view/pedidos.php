@@ -34,6 +34,7 @@ $pedidos = $pedidoDao->buscarPedidos($codCliente);
                     <th>Total da Compra</th>
                     <th>Data do Pedido</th>
                     <th>Código do Endereço</th>
+                    <th>Status</th>
                 </tr>
             </thead>
             <tbody>
@@ -44,6 +45,7 @@ $pedidos = $pedidoDao->buscarPedidos($codCliente);
                         <td>R$ <?= number_format($pedido['total'], 2, ',', '.') ?></td>
                         <td><?php echo date_format(new DateTime($pedido['data_pedidos']), "d/m/Y"); ?></td>
                         <td><?= htmlspecialchars($pedido['cod_endereco'] ?? 'N/A') ?></td>
+                        <td>Concluido</td>
                     </tr>
                 <?php endforeach; ?>
                 <a href="?acao=catalogoDeProdutos"><Button>Catalago de Produtos</Button></a>

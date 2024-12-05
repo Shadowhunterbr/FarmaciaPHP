@@ -1,7 +1,7 @@
 <?php
 
 include('view/protect.php');
-
+protegePagina()
 
 ?>
 <!DOCTYPE html>

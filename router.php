@@ -166,8 +166,25 @@ switch ($acao) {
         case 'mostrarPedidos':
             $clienteController->mostrarPedidos();
             break; 
-       
-            
+            case 'processarUploadReceita':
+                echo "Processando upload de receita..."; // Para depuração
+                $codCliente = $_POST['codCliente'] ?? null;
+                if ($codCliente && isset($_FILES['receita'])) {
+                    $uploadDir = 'view/receitas/';
+                    $uploadFile = $uploadDir . basename($_FILES['receita']['name']);
+                    
+                    if (move_uploaded_file($_FILES['receita']['tmp_name'], $uploadFile)) {
+                        echo "<script>alert('Receita enviada com sucesso!');</script>";
+                        header("Location: index.php?acao=finalizarPedido");
+                        exit; // Importante
+                    } else {
+                        echo "<script>alert('Erro ao enviar a receita. Tente novamente.');</script>";
+                        header("Location: index.php?acao=mostrarCarrinho");
+                        exit; // Importante
+                    }
+                }
+                break;
+                
                  
     default:
     header("Location: index.php?acao=loginCliente");

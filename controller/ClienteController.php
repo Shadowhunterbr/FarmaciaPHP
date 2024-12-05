@@ -6,6 +6,7 @@ require_once __DIR__ . "/../model/Cliente.php";
 require_once __DIR__ . "/../model/ClienteDao.php";
 require_once __DIR__ . "/../model/CarrinhoDao.php";
 require_once __DIR__ . "/../model/PedidoDao.php";
+require_once __DIR__ . '/../model/ProdutoDao.php';
 
 
 
@@ -74,6 +75,7 @@ class ClienteController{
     $dao = new ClienteDao();
     $produtoDao = new ProdutoDao();
     $carrinhoDao = new CarrinhoDao();
+    $prescricao = $produtoDao->arrayPrescricao();
     require_once __DIR__ . "/../view/CarrinhoDeCompras.php";
    }
    public function mostrarPedidos(){
@@ -151,7 +153,7 @@ public function visualizarCarrinho() {
 
     $carrinhoDao = new CarrinhoDao();
     $carrinho = $carrinhoDao->buscarCarrinho($codCliente);
-
+    
     // Verificar o conteúdo do carrinho retornado
    // Verifique o formato dos dados retornados
 
@@ -160,6 +162,9 @@ public function visualizarCarrinho() {
         if (isset($carrinho['codigo'])) {
             $produtos = $carrinhoDao->buscarItensCarrinho($carrinho['codigo']);
             $total = $carrinhoDao->calcularTotalCarrinho($carrinho['codigo']);
+            $produtoDao = new ProdutoDao();
+            $prescricao = $produtoDao->arrayPrescricao();
+
         } else {
             // Caso a chave não exista
             $produtos = [];
@@ -201,33 +206,52 @@ public function obterTotalCarrinho($codCliente) {
 
 
 public function finalizarPedido($codCliente) {
-    // Buscar o carrinho do cliente
     $carrinhoDao = new CarrinhoDao();
     $carrinho = $carrinhoDao->buscarCarrinho($codCliente);
 
     if ($carrinho) {
-        // Calcular o total do pedido
         $produtos = $carrinhoDao->buscarItensCarrinho($carrinho['codigo']);
         $total = 0;
+        $necessitaPrescricao = false;
+
         foreach ($produtos as $produto) {
             $total += $produto['subtotal'];
+            if ($produto['cod_prescricao'] == 1) {
+                $necessitaPrescricao = true;
+            }
         }
 
-        // Salvar o pedido
+        if ($necessitaPrescricao) {
+            // Verifica se há imagem enviada
+            if (!isset($_FILES['IMAGEM']) || $_FILES['IMAGEM']['error'] != UPLOAD_ERR_OK) {
+                echo "<script>
+                        alert('Um ou mais produtos exigem prescrição médica. Por favor, envie a receita antes de finalizar o pedido.');
+                        window.history.back();
+                      </script>";
+                return;
+            }
+
+            // Valida o tipo do arquivo enviado (opcional, para aceitar apenas imagens)
+            $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+            if (!in_array($_FILES['IMAGEM']['type'], $allowedTypes)) {
+                echo "<script>
+                        alert('Arquivo enviado não é uma imagem válida. Por favor, envie uma imagem no formato JPEG, PNG ou GIF.');
+                        window.history.back();
+                      </script>";
+                return;
+            }
+        }
+
+        // Continua com a finalização do pedido
         $pedidoDao = new PedidoDao();
         $pedidoDao->salvarPedido($codCliente, $total, $produtos);
         $carrinhoDao->atualizarEstoque($produtos);
-
-        // Limpar o carrinho após finalizar o pedido
         $carrinhoDao->limparCarrinho($carrinho['codigo']);
 
-    
-        // Redirecionar para a página de sucesso
         header("Location: index.php?acao=mostrarPedidos");
         exit();
     }
 
-    // Caso o carrinho não exista ou algo tenha dado errado, redirecionar de volta para o carrinho
     header("Location: index.php?acao=visualizarCarrinho");
     exit();
 }
