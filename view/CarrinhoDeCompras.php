@@ -16,7 +16,7 @@ include('view/protect.php');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="view\Estilos\carrinho.css">
+    <link rel="stylesheet" href="Estilos/carrinho.css">
     <title>Carrinho de Compras</title>
 </head>
 <body>
@@ -95,7 +95,8 @@ include('view/protect.php');
             <form action="?acao=finalizarPedido" method="POST" enctype="multipart/form-data">
             <div class="containerButton">
             <div class="catalogoProduto">
-                 Total: R$ <?php echo($total); ?> <br>
+
+                 T <br>
                  <div class="inputs">
     <div class="input_label">
    
@@ -105,6 +106,8 @@ include('view/protect.php');
 </form>
     </div>
 </div>
+               <div class="total">Total: R$ <?php echo($total); ?><br></div>
+
 
             <a type="submit">Finalizar Pedido</a>
             

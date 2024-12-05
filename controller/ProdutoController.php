@@ -115,7 +115,6 @@ class ProdutoController{
 
     }
 
-    
 
     public function alterar(){
         $codigo = $_POST['txtcodigo'];
@@ -154,6 +153,89 @@ class ProdutoController{
         exit();
 
     }
+    
+
+    public function salvarOuAtualizarCategoria() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Captura os dados do formulário
+            $codigoCategoria = $_POST['txtcodigoCategoria'] ?? null;
+            $nomeCategoria = $_POST['txtcategoria'] ?? null;
+    
+            // Valida os dados
+            if (!$nomeCategoria) {
+                echo "O nome da categoria é obrigatório!";
+                exit;
+            }
+    
+            $produtoDao = new ProdutoDao();
+    
+            if ($codigoCategoria) {
+                // Atualizar categoria
+                try {
+                    $produtoDao->alterarCategoria(new Categorias($codigoCategoria, $nomeCategoria));
+                    header("Location: index.php?acao=listarCategorias");
+                    exit();
+                } catch (Exception $e) {
+                    echo "Erro ao atualizar categoria: " . $e->getMessage();
+                    exit();
+                }
+            } else {
+                // Cadastrar nova categoria
+                try {
+                    $produtoDao->cadastrarCategoria(new Categorias(null, $nomeCategoria));
+                    header("Location: index.php?acao=listarCategorias");
+                    exit();
+                } catch (Exception $e) {
+                    echo "Erro ao cadastrar categoria: " . $e->getMessage();
+                    exit();
+                }
+            }
+        }
+    } 
+    
+    
+    public function listarCategorias() {
+        $categoriaDao = new ProdutoDao();
+        $categorias = $categoriaDao->buscarTodasCategorias();
+    
+        require_once __DIR__ . "/../view/listadecategoria.php";
+    }
+    
+    
+    public function alterarCategoria() {
+        $codigo = $_POST['txtcodigoCategoria'];
+        $categoria = $_POST['txtcategoria'];
+    
+        $categoriaDao = new ProdutoDao();
+        $categoriaDao->alterarCategoria(new Categorias($codigo, $categoria));
+    
+        //header("Location: index.php?acao=listarCategorias");
+        header("Location: index.php?acao=listarProdutos");
+        exit();
+    }
+    
+
+    public function excluirCategoria() {
+        if (isset($_GET['codigoCategoria'])) {
+            $codigo = $_GET['codigoCategoria'];
+    
+            $categoriaDao = new ProdutoDao();
+            try {
+                // Passando um nome vazio como segundo argumento
+                $categoriaDao->excluirCategoria(new Categorias($codigo, ''));
+                //header("Location: index.php?acao=listarCategorias");
+                header("Location: index.php?acao=listarProdutos");
+                exit();
+            } catch (Exception $e) {
+                echo "Erro ao excluir a categoria: " . $e->getMessage();
+            }
+        } else {
+            echo "Código da categoria não foi fornecido.";
+        }
+        
+    }
+    
+
     public function listarProdutosPorCategoria($codCategoria) {
         // Validação do ID da categoria
         if (!is_numeric($codCategoria)) {
@@ -173,8 +255,29 @@ class ProdutoController{
         require_once __DIR__ . "/../view/catalogoDeProdutos.php";
 
     }
-   
 
+    public function mostrarPaginaAlterarCategoria()
+    {
+        if (isset($_GET['codigo'])) {
+            $codigo = $_GET['codigo'];
+            // Instancia o ProdutoDao
+            $categoriaDao = new ProdutoDao();  
+            // Busca os dados da categoria pelo código
+            $categoria = $categoriaDao->buscarCategoriaPorCodigo($codigo);     
+            // Verifica se a categoria foi encontrada
+            if (!$categoria) {
+                echo "Categoria não encontrada.";
+                exit;
+            }
+    
+            // Inclui a página de alteração com os dados da categoria
+            require_once __DIR__ . '/../view/cadastrar/categoria.php';
+        } else {
+            echo "Código da categoria não fornecido.";
+            exit;
+        }
+    }
+    
     public function salvarImagem() {
         
 
@@ -194,7 +297,7 @@ class ProdutoController{
             exit();
            }   
         } 
-
+    
 }
 
 
