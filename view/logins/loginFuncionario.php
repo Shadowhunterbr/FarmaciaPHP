@@ -20,13 +20,7 @@
             <input type="password" class="input-field" placeholder="Password" name="txtsenhafuncionario" autocomplete="off" required>
         </div>
         <div>
-        <section>
-            <input type="checkbox" id="check">
-            <label for="check">Lembre-me</label>
-        </section>
-        <section>
-            <a href="#">Esqueceu a Senha?</a>
-        </section>
+     
         </div>
         <div class="input-submit">
             <button class="submit-btn"></button>

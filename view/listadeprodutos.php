@@ -5,6 +5,14 @@ include('protect.php');
 protegePagina()
 
 ?>
+<style>
+.product img {
+
+max-height: 44px; /* Altura fixa */
+object-fit: cover; /* Assegura que a imagem cubra o espaço disponível sem distorcer */
+border-radius: 3px; /* Bordas arredondadas para as imagens */
+}
+</style>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -48,6 +56,7 @@ protegePagina()
 
         <tr style="color: white;background-color: #760d0d;">
             <th>Código</th>
+            <th>*</th>
             <th>Nome do Produto</th>
             <th>Preço custo</th>
             <th>Preço Varejo</th>
@@ -63,6 +72,7 @@ protegePagina()
         <?php foreach($produtos as $produto): ?>
             <tr>
                 <td><?php echo $produto['codigo'] ?></td>
+                <td class="product"><img src="view/imgs/<?= htmlspecialchars($produto['imagem']) ?>" alt="<?= htmlspecialchars($produto['nome']) ?>"></td>
                 <td><?php echo $produto['nome'] ?></td>
                 
                 <td><?php echo number_format($produto['preco_custo'],2,',','.'); ?></td>
@@ -89,7 +99,7 @@ protegePagina()
                  
                 
                 <td><?php 
-                    $data_F = new DateTime($produto['data_f']);
+                    $data_F = new DateTime($produto['data_F']);
                     echo date_format($data_F, "d/m/Y"); 
                     ?>
                 </td>
@@ -99,7 +109,7 @@ protegePagina()
                     ?>
                 </td>
                 <td><a href="index.php?acao=paginaalterar&codigo=<?php echo $produto['codigo'] ?>" class="alterar"><i class="fa-regular fa-pen-to-square"></i>ALTERAR</a></td>
-                <td><a href="index.php?acao=excluir&codigo=<?php echo $produto['codigo'] ?>" class="excluir">EXCLUIR</a></td>
+                <td><a href="index.php?acao=excluir&codigo=<?php echo $produto['codigo'] ?>" class="excluir" onclick="return confirm('Tem certeza que deseja excluir este Produto?');">EXCLUIR</a></td>
             </tr>
         <?php endforeach; ?>
     </table> <br>

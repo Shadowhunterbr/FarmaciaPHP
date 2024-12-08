@@ -6,22 +6,7 @@ require_once __DIR__ . "/controller/ClienteController.php";
 
 $is_dev = true;
 
-function debug() {
-    global $is_dev;
 
-    if ($is_dev) {
-        $debug_arr = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
-        $line = $debug_arr[0]['line'];
-        $file = $debug_arr[0]['file'];
-
-        header('Content-Type: text/plain');
-
-        echo "linha: $line\n";
-        echo "arquivo: $file\n\n";
-        print_r(array('GET' => $_GET, 'POST' => $_POST, 'SERVER' => $_SERVER));
-        exit;
-    }
-}
 
 $clienteController = new ClienteController();
 $funcionarioController = new FuncionarioController();
@@ -90,18 +75,14 @@ switch ($acao) {
     case 'cadastrarCategoria':  // Ação para cadastrar ou atualizar a categoria
         $produtoController->cadastrarCategoria();
         break;
-    //case 'cadastrarCategoria':  // Ação para cadastrar ou atualizar a categoria
-    //    $produtoController->salvarOuAtualizarCategoria();
-    //    break;
+ 
     case 'listarCategorias': // Listar categorias
         $produtoController->listarCategorias();
         break;
     case 'paginaalterarcategoria': // Página para alterar categoria
         $produtoController->mostrarPaginaAlterarCategoria();
         break;
-    //case 'alterarCategoria': // Ação para alterar a categoria
-        //$produtoController->salvarOuAtualizarCategoria();  // Usando o método para salvar ou atualizar
-        //break;
+
     case 'alterarCategoria':
         $produtoController->alterarCategoria();  // Método exclusivo para alterar
         break;
@@ -119,6 +100,15 @@ switch ($acao) {
     case 'autenticarCliente': 
         $clienteController->login();
         break;
+    case 'mostrarInfoCliente':
+        $clienteController->mostrarPaginaAlterar();
+        break;
+    case 'alterarCliente':
+        $clienteController->alterarCliente();    
+        break;
+    case 'alterarEndereco':
+        $clienteController->alterarEndereco();    
+        break;         
     case 'cadastrarCliente':
         $clienteController->cadastrarCliente();
         break;    
@@ -148,15 +138,6 @@ switch ($acao) {
         header('Location: index.php?acao=catalogoDeProdutos');
         break;
     case 'removerProdutoCarrinho':
-/*<<<<<<< HEAD
-        $codProd = $_POST['codProd'] ?? null;
-        $codCliente = $_SESSION['codCliente'] ?? null;
-        if ($codCliente && $codProd) {
-            $clienteController->removerProduto($codCliente, $codProd);
-        }
-        header("Location: index.php?acao=mostrarCarrinho");
-=======*/
-         
             $codProd = $_POST['codProd'] ?? null;
             echo ($_POST['codProd']);
             echo(isset($_POST['codProd']));

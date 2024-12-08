@@ -48,7 +48,7 @@ public function buscarItensCarrinho($codCarrinho) {
     $pdo = Conexao::obterConexao();
 
     $stmt = $pdo->prepare("
-        SELECT p.nome, p.preco, i.quantidade, i.subtotal , i.cod_prod, p.cod_prescricao, p.IMAGEM
+        SELECT p.nome, p.preco, i.quantidade, i.subtotal , i.cod_prod, p.cod_prescricao, p.imagem
         FROM itens_carrinho i
         INNER JOIN produtos p ON i.cod_prod = p.codigo
         WHERE i.cod_carrinho = :cod_carrinho

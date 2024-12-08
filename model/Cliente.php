@@ -3,7 +3,7 @@
 class Cliente{
     private $codigoCliente;
     private $nomeCliente;
-    private $codEndereco;
+  
     private $emailCliente;
     private $senhaCliente;
     private $telefoneCliente;
@@ -11,11 +11,11 @@ class Cliente{
     private $codGenero;
     private $dataNascimento;
 
-    public function __construct($codigoCliente,$nomeCliente,$codEndereco,$emailCliente,$senhaCliente,$telefoneCliente,$cpfCliente,$codGenero,$dataNascimento)
+    public function __construct($codigoCliente,$nomeCliente,$emailCliente,$senhaCliente,$telefoneCliente,$cpfCliente,$codGenero,$dataNascimento)
     {
         $this->codigoCliente = $codigoCliente;
         $this->nomeCliente = $nomeCliente;
-        $this->codEndereco = $codEndereco;
+       
         $this->emailCliente = $emailCliente;
         $this->senhaCliente = $senhaCliente;
         $this->telefoneCliente = $telefoneCliente;
@@ -37,9 +37,6 @@ class Cliente{
         return $this->nomeCliente;
     }
 
-    public function getCodEndereco() {
-        return $this->codEndereco;
-    }
 
     public function getEmailCliente() {
         return $this->emailCliente;
@@ -69,10 +66,6 @@ class Cliente{
         $this->nomeCliente = $nomeCliente;
     }
     
-    public function setCodEndereco($codEndereco) {
-        $this->codEndereco = $codEndereco;
-    }
-    
     public function setEmailCliente($emailCliente) {
         $this->emailCliente = $emailCliente;
     }
@@ -97,4 +90,89 @@ class Cliente{
         $this->dataNascimento = $dataNascimento;
     }
 
+}
+class EnderecoCliente {
+    private $codigo;
+    private $codCliente;
+    private $rua;
+    private $numero;
+    private $bairro;
+    private $cidade;
+    private $cep;
+    private $uf;
+
+    public function __construct($codigo, $codCliente ,$rua, $numero, $bairro, $cidade, $cep, $uf) {
+        $this->codigo = $codigo;
+        $this->codCliente = $codCliente;
+        $this->rua = $rua;
+        $this->numero = $numero;
+        $this->bairro = $bairro;
+        $this->cidade = $cidade;
+        $this->cep = $cep;
+        $this->uf = $uf;
+    }
+
+    public function getCodigo() {
+        return $this->codigo;
+    }
+
+    public function setCodigo($codigo) {
+        $this->codigo = $codigo;
+    }
+
+    public function getCodCliente(){
+        return $this->codCliente;
+    }
+
+    public function setCodCliente($codCliente){
+        $this->codCliente = $codCliente;
+    }
+
+    public function getRua() {
+        return $this->rua;
+    }
+
+    public function setRua($rua) {
+        $this->rua = $rua;
+    }
+
+    public function getNumero() {
+        return $this->numero;
+    }
+
+    public function setNumero($numero) {
+        $this->numero = $numero;
+    }
+
+    public function getBairro() {
+        return $this->bairro;
+    }
+
+    public function setBairro($bairro) {
+        $this->bairro = $bairro;
+    }
+
+    public function getCidade() {
+        return $this->cidade;
+    }
+
+    public function setCidade($cidade) {
+        $this->cidade = $cidade;
+    }
+
+    public function getCep() {
+        return $this->cep;
+    }
+
+    public function setCep($cep) {
+        $this->cep = $cep;
+    }
+
+    public function getUf() {
+        return $this->uf;
+    }
+
+    public function setUf($uf) {
+        $this->uf = $uf;
+    }
 }

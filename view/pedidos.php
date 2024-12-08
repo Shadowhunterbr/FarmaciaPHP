@@ -25,6 +25,7 @@ $pedidos = $pedidoDao->buscarPedidos($codCliente);
     <h1>Meus Pedidos</h1>
     <?php if (empty($pedidos)): ?>
         <p>Você ainda não realizou nenhum pedido.</p>
+        <a href="?acao=catalogoDeProdutos"><Button>Catalago de Produtos</Button></a>
     <?php else: ?>
         <table border="1">
             <thead>
@@ -33,7 +34,7 @@ $pedidos = $pedidoDao->buscarPedidos($codCliente);
                     <th>Nome do Cliente</th>
                     <th>Total da Compra</th>
                     <th>Data do Pedido</th>
-                    <th>Código do Endereço</th>
+                    <th>CEP</th>
                     <th>Status</th>
                 </tr>
             </thead>
@@ -44,7 +45,7 @@ $pedidos = $pedidoDao->buscarPedidos($codCliente);
                         <td><?= htmlspecialchars($pedido['nome_cliente']) ?></td>
                         <td>R$ <?= number_format($pedido['total'], 2, ',', '.') ?></td>
                         <td><?php echo date_format(new DateTime($pedido['data_pedidos']), "d/m/Y"); ?></td>
-                        <td><?= htmlspecialchars($pedido['cod_endereco'] ?? 'N/A') ?></td>
+                        <td><?= htmlspecialchars($pedido['cep'] ?? 'N/A') ?></td>
                         <td>Concluido</td>
                     </tr>
                 <?php endforeach; ?>

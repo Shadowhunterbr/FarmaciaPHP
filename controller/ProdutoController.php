@@ -114,8 +114,7 @@ class ProdutoController{
         }
 
     }
-
-
+    
     public function alterar(){
         $codigo = $_POST['txtcodigo'];
         $nomeProduto = $_POST['txtproduto'];
@@ -283,11 +282,11 @@ class ProdutoController{
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Verifica e processa o upload da imagem
-            if (isset($_FILES['IMAGEM']) && $_FILES['IMAGEM']['error'] === UPLOAD_ERR_OK) {
+            if (isset($_FILES['imagem']) && $_FILES['imagem']['error'] === UPLOAD_ERR_OK) {
                 $uploadDir = 'view/imgs/';
-                $uploadFile = $uploadDir . basename($_FILES['IMAGEM']['name']);
+                $uploadFile = $uploadDir . basename($_FILES['imagem']['name']);
     
-                if (move_uploaded_file($_FILES['IMAGEM']['tmp_name'], $uploadFile)) {
+                if (move_uploaded_file($_FILES['imagem']['tmp_name'], $uploadFile)) {
                     echo "Arquivo enviado com sucesso: " . $uploadFile;
                 } 
             } else {

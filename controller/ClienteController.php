@@ -53,11 +53,65 @@ class ClienteController{
         exit();
     }
 
+    public function mostrarPaginaAlterar() {
+        if (isset($_GET['codCliente'])) {
+            $codigo = $_GET['codCliente'];
+            echo "Código recebido: " . $codigo; // Debug
+            $dao = new clienteDao();
+            $generos = $dao->generos();
+            $cliente = $dao->buscarClientePorCodigo($codigo);
+            $endereco = $dao->buscarEnderecoPorCodigo($codigo);
+    
+            require_once __DIR__ . "/../view/infoCliente.php";
+        } else {
+            echo "Código do cliente não recebido."; // Debug
+        }
+    }
+
+    public function alterarEndereco(){
+        $codigo = isset($_POST['codCliente']) ? $_POST['codCliente'] : $_SESSION['codCliente'];
+        $codCliente = isset($_POST['codCliente']) ? $_POST['codCliente'] : $_SESSION['codCliente'];
+        $rua = $_POST['txtrua'];
+        $numero = $_POST['txtnumero'];
+        $bairro = $_POST['txtbairro'];
+        $cidade = $_POST['txtcidade'];
+        $cep = $_POST['txtcep'];
+        $uf = $_POST['txtuf'];
+    
+        $enderecoDao = new ClienteDao();
+    
+        $objEndereco = new EnderecoCliente($codigo, $codCliente, $rua, $numero, $bairro, $cidade, $cep, $uf);
+        $enderecoDao->alterarEndereco($objEndereco);
+    
+        header("Location: index.php?acao=mostrarInfoCliente&codCliente=" . $_SESSION['codCliente'] );
+        exit();
+    }
+    public function alterarCliente(){
+        $codigo = isset($_POST['codCliente']) ? $_POST['codCliente'] : $_SESSION['codCliente'];
+        $nome = $_POST['txtnome'];
+        $email = $_POST['txtemail'];
+        $senha = $_POST['txtsenha'];
+        $telefone = $_POST['txttelefone'];
+        $cpf = $_POST['txtcpf'];
+        $codGenero = $_POST['txtcodGenero'];
+        $dataNascimento = $_POST['txtdataNascimento'];
+        
+    
+        $clienteDao = new ClienteDao();
+    
+        $objCliente = new Cliente($codigo, $nome, $email, $senha, $telefone, $cpf, $codGenero, $dataNascimento);
+        $clienteDao->alterarCliente($objCliente);
+    
+        header("Location: index.php?acao=mostrarInfoCliente&codCliente=" . $_SESSION['codCliente'] );
+        exit();
+    }
+    
 
     public function catalogoDeProdutos($search = null) {
         $dao = new ClienteDao();
         $generos = $dao->generos();
         $produtoDao = new ProdutoDao();
+        $codCliente = $_SESSION['codCliente'] ?? null;
 
        
         if($search){
@@ -92,7 +146,6 @@ class ClienteController{
 
     $codigo = null;
     $nome = $_POST['txtnome'];
-    $cod_endereco = null;
     $email = $_POST['txtemail'];
     $senha = $_POST['txtsenha'];
     $telefone  = $_POST['txttelefone'];
@@ -110,8 +163,9 @@ class ClienteController{
     }else if($clienteDao->verificarCpfExistente($cpf)){
         echo "<script>alert('O CPF já está cadastrado. Tente outro.'); window.location.href = 'index.php?acao=cadastroCliente';</script>";
     }else{
-        $objCliente = new Cliente($codigo,$nome,$cod_endereco,$email,$senha,$telefone,$cpf,$cod_genero,$data_nascimento);
-        $clienteDao->cadastrarCliente($objCliente);
+        $objCliente = new Cliente($codigo,$nome,$email,$senha,$telefone,$cpf,$cod_genero,$data_nascimento);
+        $codigoGerado = $clienteDao->cadastrarCliente($objCliente);
+        $clienteDao->criarEndereco($codigoGerado);
         echo "<script>alert('Cliente cadastrado com sucesso!'); window.location.href = 'index.php?acao=loginCliente';</script>";    
     }
 
@@ -136,6 +190,8 @@ class ClienteController{
         $carrinhoDao->adicionarItem($codCarrinho, $codProd, $quantidade, $subtotal);
     }
 }
+
+
 
 
 public function visualizarCarrinho() {
@@ -223,7 +279,7 @@ public function finalizarPedido($codCliente) {
 
         if ($necessitaPrescricao) {
             // Verifica se há imagem enviada
-            if (!isset($_FILES['IMAGEM']) || $_FILES['IMAGEM']['error'] != UPLOAD_ERR_OK) {
+            if (!isset($_FILES['imagem']) || $_FILES['imagem']['error'] != UPLOAD_ERR_OK) {
                 echo "<script>
                         alert('Um ou mais produtos exigem prescrição médica. Por favor, envie a receita antes de finalizar o pedido.');
                         window.history.back();
@@ -233,7 +289,7 @@ public function finalizarPedido($codCliente) {
 
             // Valida o tipo do arquivo enviado (opcional, para aceitar apenas imagens)
             $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
-            if (!in_array($_FILES['IMAGEM']['type'], $allowedTypes)) {
+            if (!in_array($_FILES['imagem']['type'], $allowedTypes)) {
                 echo "<script>
                         alert('Arquivo enviado não é uma imagem válida. Por favor, envie uma imagem no formato JPEG, PNG ou GIF.');
                         window.history.back();
