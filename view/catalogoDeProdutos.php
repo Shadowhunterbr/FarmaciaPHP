@@ -14,7 +14,8 @@ include('view/protect.php');
     <title>Farmácia Online</title>
     
     <style>
-       body {
+        
+body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
@@ -132,10 +133,10 @@ header {
 <body>
     <header>FARMÁCIA</header>
     <div class="container">
-    <a href="index.php?acao=logoutCliente"><Button>Sair</Button></a>
-    <a href="index.php?acao=mostrarCarrinho"><Button>Carrinho</Button></a>
+    <a href="index.php?acao=logoutCliente" class="btnSair"><Button>Sair</Button></a>
+    <a href="index.php?acao=mostrarCarrinho" class="btnCarrinho"><Button>Carrinho</Button></a>
     <a href="index.php?acao"><i class="fa-solid fa-user"><button></button></i></a>
-    <a href="index.php?acao=mostrarPedidos"><button>Pedidos</button></a>
+    <a href="index.php?acao=mostrarPedidos" class="btnPedidos"><button>Pedidos</button></a>
     
     <aside class="menu">
     <ul>
