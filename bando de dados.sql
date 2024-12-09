@@ -62,13 +62,15 @@ CREATE TABLE cliente(
     cod_endereco integer, -- fk endereço
     email varchar(50) not null UNIQUE,
     senha varchar(50) not null,
-    telefone integer,
+    telefone varchar(18),
     cpf VARCHAR(14) NOT NULL UNIQUE,
     cod_genero integer, -- fk genero
 	data_nascimento DATE not null,
     foreign key (cod_endereco) references endereco_cliente(codigo),
     foreign key (cod_genero) references genero(codigo)
 );
+
+ALTER TABLE cliente MODIFY COLUMN telefone varchar(18);
 
 CREATE TABLE produtos(
     codigo INTEGER PRIMARY KEY AUTO_INCREMENT,
@@ -94,6 +96,7 @@ CREATE TABLE pedidos(
     cod_cliente INTEGER, -- FK para Clientes
     data_pedidos DATE NOT NULL,
     total decimal NOT NULL,
+    imagem_receita text,
     FOREIGN KEY (cod_cliente) REFERENCES cliente(codigo)
 );
 

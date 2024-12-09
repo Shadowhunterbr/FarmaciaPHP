@@ -43,16 +43,25 @@ class PedidoDao
                     ec.numero, 
                     ec.bairro, 
                     ec.cidade, 
-                    ec.cep, 
+                    ec.cep as cep, 
                     ec.UF
                 FROM pedidos p
                 JOIN cliente c ON p.cod_cliente = c.codigo
-                LEFT JOIN endereco_cliente ec ON c.cod_endereco = ec.codigo
+                LEFT JOIN endereco_cliente ec ON c.codigo = ec.codigo
                 WHERE p.cod_cliente = :codCliente";
     
         $stmt = $pdo->prepare($sql);
         $stmt->execute([':codCliente' => $codCliente]);
     
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function contarPedidos(){
+        $pdo = Conexao::obterConexao();
+        $sql = "SELECT COUNT(*) FROM PEDIDOS";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 

@@ -127,6 +127,68 @@ header {
     font-size: 14px;
 }
 
+.btnSair{
+    background-color: #981D1D;
+    color:#FFF;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 10px 30px;
+    border-radius:5%;
+    border: none;
+}
+
+.btnSair:hover{
+    background-color:#600707;
+}
+
+
+.btnCarrinho {
+        background-color: #981D1D;
+        color: #FFF;
+        font-size: 12px;
+        font-weight: bold;
+        padding: 10px 30px;
+        border-radius: 5%;
+        border: none;
+        margin-bottom: 10px; /*Cria um espaço de 10px abaixo*/
+    }
+
+    .btnCarrinho:hover{
+        background-color:#6B7FED;
+    }
+
+
+.btnPedidos{
+    background-color: #981D1D;
+    color: #FFF;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 10px 30px;
+    border-radius: 5%;
+    border: none;
+    margin-top: 100px;
+    margin-bottom: 10px;
+    left:0;
+    position: absolute;
+}
+
+.btnPedidos:hover{
+    background-color:#6B7FED;
+}
+
+#btnAdicionar{
+    background-color: #981D1D;
+    color:#FFF;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 10px 30px;
+    border-radius:5%;
+    border: none;
+}
+
+#btnAdicionar:hover{
+    background-color:#6B7FED;
+}
 
     </style>
 </head>
@@ -173,7 +235,7 @@ header {
                 <form method="POST" action="?acao=adicionarAoCarrinho">
                     <input type="hidden" name="codProd" value="<?= htmlspecialchars($produto['codigo']) ?>">
                     <input type="number" name="quantidade" value="1" min="1" style="width: 50px;">
-                    <button type="submit" class="add-to-cart">ADICIONAR</button>
+                    <button type="submit" class="add-to-cart" id="btnAdicionar">ADICIONAR</button>
                 </form>
                 </li>
             <?php endforeach; ?>

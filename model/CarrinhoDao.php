@@ -16,7 +16,7 @@ public function criarCarrinho($codCliente) {
 }
 
 public function buscarCarrinho($codCliente) {
-    // Supondo que sua tabela de carrinho tenha o campo 'codigo' como identificador
+   
     $pdo = Conexao::obterConexao();
     $sql = "SELECT * FROM carrinho WHERE cod_cliente = :cod_cliente LIMIT 1";
     $stmt = $pdo->prepare($sql);
@@ -48,7 +48,7 @@ public function buscarItensCarrinho($codCarrinho) {
     $pdo = Conexao::obterConexao();
 
     $stmt = $pdo->prepare("
-        SELECT p.nome, p.preco, i.quantidade, i.subtotal , i.cod_prod
+        SELECT p.nome, p.preco, i.quantidade, i.subtotal , i.cod_prod, p.cod_prescricao, p.imagem
         FROM itens_carrinho i
         INNER JOIN produtos p ON i.cod_prod = p.codigo
         WHERE i.cod_carrinho = :cod_carrinho

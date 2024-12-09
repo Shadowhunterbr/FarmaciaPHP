@@ -18,4 +18,10 @@ function protegePaginaGerente() {
         die("Acesso restrito a gerentes.<p><a href=\"index.php\">Entrar como gerente</a></p>");
     }
 }
+function protegePagina() {
+    if(!isset($_SESSION['gerenteAutenticado']) &&(!isset($_SESSION['funcionarioAutenticado']))) {
+        die("Acesso restrito a Funcionarios.<p><a href=\"index.php\">Entrar</a></p>");
+    }
+}
+
 ?>

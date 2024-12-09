@@ -1,5 +1,5 @@
 <?php
-
+include('view/protect.php');
 ?>
 
 <style>
@@ -52,31 +52,29 @@
                         <?php foreach ($produtos as $produto): ?>
                             <tr>
                             <td>
-            <?php if (!empty($produto['IMAGEM'])): ?>
-                <img src="view/imgs/<?= htmlspecialchars($produto['IMAGEM']) ?>" >
+            <?php if (!empty($produto['imagem'])): ?>
+                <img src="view/imgs/<?= htmlspecialchars($produto['imagem']) ?>" >
             <?php else: ?>
                 Sem imagem
             <?php endif; ?>
-        </td>
-                                <td><?= ($produto['nome']) ?></td>
-                                <td>R$ <?= number_format($produto['preco'], 2, ',', '.') ?></td>
-                                <td><?= $produto['quantidade'] ?></td>
-                                <td>
-                                <?php
-    $prescricaoExibida = "Não contém prescrição"; 
-    if (isset($produto['cod_prescricao'])) { 
-        foreach ($prescricao as $rc) {
-            if ($produto['cod_prescricao'] == $rc['codigo']) {
-                $prescricaoExibida = htmlspecialchars($rc['prescricao']); 
-                break; 
-            }
-        }
-    }
-    echo $prescricaoExibida; 
-    ?>
-</td>
- 
-                 
+                            </td>
+                <td><?= ($produto['nome']) ?></td>
+                        <td>R$ <?= number_format($produto['preco'], 2, ',', '.') ?></td>
+                        <td><?= $produto['quantidade'] ?></td>
+                        <td>
+                        <?php
+                        $prescricaoExibida = "Não contém prescrição"; 
+                        if (isset($produto['cod_prescricao'])) { 
+                            foreach ($prescricao as $rc) {
+                                if ($produto['cod_prescricao'] == $rc['codigo']) {
+                                    $prescricaoExibida = htmlspecialchars($rc['prescricao']); 
+                                    break; 
+                                }
+                            }
+                        }
+                        echo $prescricaoExibida; 
+                        ?>
+                    </td>
                                 <td>R$ <?= number_format($produto['subtotal'], 2, ',', '.') ?></td>
 
                                 <td>
@@ -92,12 +90,30 @@
                     </tbody>
                 </table>
             </div>
+            <form action="?acao=finalizarPedido" method="POST" enctype="multipart/form-data">
             <div class="containerButton">
             <div class="catalogoProduto">
-                 Total: R$ <?php echo($total); ?> <br>
+                 <br>
+                 <div class="inputs">
+                 <div class="total">Total: R$ <?php echo($total); ?><br></div>
+                 <div class="input_label">
+   
+    <label for="imagem">Selecione a imagem da receita médica:</label>
+    <input type="file" name="imagem" id="imagem" >
+    <br>
+    <div class="containerButton">
+    <br>
+    <br>
+    <div class="submit_button">
+    <button type="submit">Finalizar Pedido</button>
+</div>
+ 
+    </div>
+</form>
 
-            <a href="?acao=finalizarPedido">Finalizar Pedido</a>
-            
+
+    </div>
+</div>
             </div>
             </div>
             <div class="containerButton">
@@ -107,5 +123,10 @@
          </div>
     
     <?php endif; ?>
+
+ 
+
 </body>
+
+
 </html>

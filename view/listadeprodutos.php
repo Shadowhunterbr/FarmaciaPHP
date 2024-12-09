@@ -2,7 +2,17 @@
 
 include('protect.php');
 
+protegePagina()
+
 ?>
+<style>
+.product img {
+
+max-height: 44px; /* Altura fixa */
+object-fit: cover; /* Assegura que a imagem cubra o espaço disponível sem distorcer */
+border-radius: 3px; /* Bordas arredondadas para as imagens */
+}
+</style>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,16 +36,19 @@ include('protect.php');
     <a href="index.php?acao=listarFuncionarios"><button class="btnListarFuncionarios">Funcionarios</button></a> <br><br>
     <a href="index.php?acao=logout"><button class="btnSair">Sair</button></a>
     <br><br>
+   
     <table border="5%" style="width: 70%; border-color:rgb(149, 149, 234);">
     <tr style="color: white;background-color: #760d0d;">
         <th>Total Preço Custo</th>   
         <th>Total Vendas</th>
         <Th>Lucro Liquido</Th>
+        <th>Pedidos Concluidos</th>
     </tr>
     <tr>
         <td><?php echo  number_format($totalPrecoCusto, 2, ',', '.');?></td>
         <td><?php echo number_format($totalVendas, 2, ',', '.'); ?></td>
         <td><?php echo number_format($totalLiquido, 2, ',','.'); ?></td>
+        <td><?php echo ($quantPedidos [0]["COUNT(*)"]); ?></td>
     </tr>
     </table>
 
@@ -43,6 +56,7 @@ include('protect.php');
 
         <tr style="color: white;background-color: #760d0d;">
             <th>Código</th>
+            <th>*</th>
             <th>Nome do Produto</th>
             <th>Preço custo</th>
             <th>Preço Varejo</th>
@@ -52,12 +66,13 @@ include('protect.php');
             <th>Receita?</th>
             <th>Data de Fabricação</th>
             <th>Data de Validade</th>
-            <th></th>
+           
             <th colspan="2">Ação</th>
         </tr>
         <?php foreach($produtos as $produto): ?>
             <tr>
                 <td><?php echo $produto['codigo'] ?></td>
+                <td class="product"><img src="view/imgs/<?= htmlspecialchars($produto['imagem']) ?>" alt="<?= htmlspecialchars($produto['nome']) ?>"></td>
                 <td><?php echo $produto['nome'] ?></td>
                 
                 <td><?php echo number_format($produto['preco_custo'],2,',','.'); ?></td>
@@ -84,7 +99,7 @@ include('protect.php');
                  
                 
                 <td><?php 
-                    $data_F = new DateTime($produto['data_f']);
+                    $data_F = new DateTime($produto['data_F']);
                     echo date_format($data_F, "d/m/Y"); 
                     ?>
                 </td>
@@ -94,7 +109,7 @@ include('protect.php');
                     ?>
                 </td>
                 <td><a href="index.php?acao=paginaalterar&codigo=<?php echo $produto['codigo'] ?>" class="alterar"><i class="fa-regular fa-pen-to-square"></i>ALTERAR</a></td>
-                <td><a href="index.php?acao=excluir&codigo=<?php echo $produto['codigo'] ?>" class="excluir">EXCLUIR</a></td>
+                <td><a href="index.php?acao=excluir&codigo=<?php echo $produto['codigo'] ?>" class="excluir" onclick="return confirm('Tem certeza que deseja excluir este Produto?');">EXCLUIR</a></td>
             </tr>
         <?php endforeach; ?>
     </table> <br>

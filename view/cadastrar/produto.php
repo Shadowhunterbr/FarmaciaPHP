@@ -1,7 +1,7 @@
 <?php
 
 include('view/protect.php');
-
+protegePagina()
 
 ?>
 <!DOCTYPE html>
@@ -61,7 +61,7 @@ include('view/protect.php');
             <div class="inputs">
                 <div class="input_label">
                     <label for="txtdatafabricacao"> Data de Fabricação: </label>
-                    <input type="date" name="txtdatafabricacao" value="<?php echo isset($produtoData['data_f'])?$produtoData['data_f']:'' ?>" required><br><br>
+                    <input type="date" name="txtdatafabricacao" value="<?php echo isset($produtoData['data_F'])?$produtoData['data_F']:'' ?>" required><br><br>
                 </div>
             </div>
         
@@ -126,7 +126,7 @@ include('view/protect.php');
                 foreach ($imagens as $imagem) {
                     // Ignora os diretórios especiais '.' e '..'
                     if ($imagem !== '.' && $imagem !== '..') {
-                        $selected = (isset($produtoData['IMAGEM']) && $produtoData['IMAGEM'] === $imagem) ? "selected" : "";
+                        $selected = (isset($produtoData['imagem']) && $produtoData['imagem'] === $imagem) ? "selected" : "";
                         echo "<option value='$imagem' $selected>$imagem</option>";
                     }
                 }
@@ -149,8 +149,8 @@ include('view/protect.php');
     <div class="inputs">
     <div class="input_label">
     <form action="index.php?acao=uploadImagem" method="POST" enctype="multipart/form-data">
-    <label for="IMAGEM">Escolha uma imagem:</label>
-    <input type="file" name="IMAGEM" id="IMAGEM">
+    <label for="imagem">Escolha uma imagem:</label>
+    <input type="file" name="imagem" id="imagem">
     <button type="submit">Enviar</button>
 </form>
     </div>

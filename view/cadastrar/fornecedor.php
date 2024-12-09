@@ -1,6 +1,7 @@
 <?php
 
 include('view/protect.php');
+protegePagina()
 
 ?>
 

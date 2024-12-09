@@ -4,6 +4,7 @@ require_once __DIR__ ."/../model/ProdutoDao.php";
 require_once __DIR__ . "/../model/Produto.php";
 require_once __DIR__ . "/../model/FuncionarioDao.php";
 require_once __DIR__ . "/../model/Categorias.php";
+require_once __DIR__ . "/../model/PedidoDao.php";
 
 use \model\Produto;
 
@@ -12,12 +13,15 @@ class ProdutoController{
     
     public function listarProdutos(){
         
+        $pedidoDao = new PedidoDao();
         $fornecedorDao = new FornecedorDao();
         $produtoDao = new ProdutoDao();
         $produtos = $produtoDao->buscarTodosProdutos();
         $categorias = $produtoDao->buscarTodasCategorias();
         $fornecedores = $fornecedorDao->buscarTodosFornecedores();
         $prescricao = $produtoDao->arrayPrescricao();
+        $quantPedidos = $pedidoDao->contarPedidos(); 
+       
 
         $totalVendas = $produtoDao->calcularTotalVendas();
         $totalPrecoCusto = $produtoDao->calcularTotalPrecoCustoVendidos();
@@ -110,9 +114,7 @@ class ProdutoController{
         }
 
     }
-
     
-
     public function alterar(){
         $codigo = $_POST['txtcodigo'];
         $nomeProduto = $_POST['txtproduto'];
@@ -150,6 +152,89 @@ class ProdutoController{
         exit();
 
     }
+    
+
+    public function salvarOuAtualizarCategoria() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Captura os dados do formulário
+            $codigoCategoria = $_POST['txtcodigoCategoria'] ?? null;
+            $nomeCategoria = $_POST['txtcategoria'] ?? null;
+    
+            // Valida os dados
+            if (!$nomeCategoria) {
+                echo "O nome da categoria é obrigatório!";
+                exit;
+            }
+    
+            $produtoDao = new ProdutoDao();
+    
+            if ($codigoCategoria) {
+                // Atualizar categoria
+                try {
+                    $produtoDao->alterarCategoria(new Categorias($codigoCategoria, $nomeCategoria));
+                    header("Location: index.php?acao=listarCategorias");
+                    exit();
+                } catch (Exception $e) {
+                    echo "Erro ao atualizar categoria: " . $e->getMessage();
+                    exit();
+                }
+            } else {
+                // Cadastrar nova categoria
+                try {
+                    $produtoDao->cadastrarCategoria(new Categorias(null, $nomeCategoria));
+                    header("Location: index.php?acao=listarCategorias");
+                    exit();
+                } catch (Exception $e) {
+                    echo "Erro ao cadastrar categoria: " . $e->getMessage();
+                    exit();
+                }
+            }
+        }
+    } 
+    
+    
+    public function listarCategorias() {
+        $categoriaDao = new ProdutoDao();
+        $categorias = $categoriaDao->buscarTodasCategorias();
+    
+        require_once __DIR__ . "/../view/listadecategoria.php";
+    }
+    
+    
+    public function alterarCategoria() {
+        $codigo = $_POST['txtcodigoCategoria'];
+        $categoria = $_POST['txtcategoria'];
+    
+        $categoriaDao = new ProdutoDao();
+        $categoriaDao->alterarCategoria(new Categorias($codigo, $categoria));
+    
+        //header("Location: index.php?acao=listarCategorias");
+        header("Location: index.php?acao=listarProdutos");
+        exit();
+    }
+    
+
+    public function excluirCategoria() {
+        if (isset($_GET['codigoCategoria'])) {
+            $codigo = $_GET['codigoCategoria'];
+    
+            $categoriaDao = new ProdutoDao();
+            try {
+                // Passando um nome vazio como segundo argumento
+                $categoriaDao->excluirCategoria(new Categorias($codigo, ''));
+                //header("Location: index.php?acao=listarCategorias");
+                header("Location: index.php?acao=listarProdutos");
+                exit();
+            } catch (Exception $e) {
+                echo "Erro ao excluir a categoria: " . $e->getMessage();
+            }
+        } else {
+            echo "Código da categoria não foi fornecido.";
+        }
+        
+    }
+    
+
     public function listarProdutosPorCategoria($codCategoria) {
         // Validação do ID da categoria
         if (!is_numeric($codCategoria)) {
@@ -169,22 +254,41 @@ class ProdutoController{
         require_once __DIR__ . "/../view/catalogoDeProdutos.php";
 
     }
-   
 
+    public function mostrarPaginaAlterarCategoria()
+    {
+        if (isset($_GET['codigo'])) {
+            $codigo = $_GET['codigo'];
+            // Instancia o ProdutoDao
+            $categoriaDao = new ProdutoDao();  
+            // Busca os dados da categoria pelo código
+            $categoria = $categoriaDao->buscarCategoriaPorCodigo($codigo);     
+            // Verifica se a categoria foi encontrada
+            if (!$categoria) {
+                echo "Categoria não encontrada.";
+                exit;
+            }
+    
+            // Inclui a página de alteração com os dados da categoria
+            require_once __DIR__ . '/../view/cadastrar/categoria.php';
+        } else {
+            echo "Código da categoria não fornecido.";
+            exit;
+        }
+    }
+    
     public function salvarImagem() {
         
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Verifica e processa o upload da imagem
-            if (isset($_FILES['IMAGEM']) && $_FILES['IMAGEM']['error'] === UPLOAD_ERR_OK) {
+            if (isset($_FILES['imagem']) && $_FILES['imagem']['error'] === UPLOAD_ERR_OK) {
                 $uploadDir = 'view/imgs/';
-                $uploadFile = $uploadDir . basename($_FILES['IMAGEM']['name']);
+                $uploadFile = $uploadDir . basename($_FILES['imagem']['name']);
     
-                if (move_uploaded_file($_FILES['IMAGEM']['tmp_name'], $uploadFile)) {
+                if (move_uploaded_file($_FILES['imagem']['tmp_name'], $uploadFile)) {
                     echo "Arquivo enviado com sucesso: " . $uploadFile;
-                } else {
-                    echo "Erro ao enviar o arquivo.";
-                }
+                } 
             } else {
                 echo "Nenhum arquivo enviado ou erro no upload.";
             }
@@ -192,7 +296,7 @@ class ProdutoController{
             exit();
            }   
         } 
-
+    
 }
 
 
