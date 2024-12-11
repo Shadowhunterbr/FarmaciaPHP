@@ -38,12 +38,30 @@ switch ($acao) {
     case 'cadastrarFuncionario':
         $funcionarioController->cadastrarFuncionario();
         break;
+   case 'paginaalterarfuncionario':
+        $funcionarioController->mostrarPaginaAlterar();
+        break;
+    case 'alterarFuncionario':
+        $funcionarioController->alterarFuncionario();
+        break;    
     case 'paginaCadastrarFornecedor':
         $funcionarioController->mostrarPaginaCadastroFornecedor();
         break;
     case 'cadastrarFornecedor':
         $funcionarioController->cadastrarFornecedor();
         break;
+    case 'excluirFornecedor':
+        $funcionarioController->excluirFornecedor();
+        break;
+    case 'listarFornecedores':
+        $funcionarioController->listarFornecedores();
+        break;
+    case 'paginaalterarfornecedor':
+        $funcionarioController->mostrarPaginaAlterarFornecedor();
+        break;
+    case 'alterarFornecedor':
+        $funcionarioController->alterarFornecedor();
+        break;               
 
     // Ações para Produtos
     case 'listarProdutos':
@@ -67,8 +85,6 @@ switch ($acao) {
     case 'uploadImagem':
         $produtoController->salvarImagem();
         break;    
-
-    // Ações para Categorias
     case 'paginacadastrarcategoria':
         $produtoController->mostrarPaginaCadastroCategoria();
         break;
@@ -89,8 +105,6 @@ switch ($acao) {
     case 'excluircategoria': // Excluir categoria
         $produtoController->excluirCategoria();
         break;
-
-    // Ações para Clientes
     case 'loginCliente':
         $clienteController->mostrarPaginaLogin();
         break;
@@ -131,7 +145,7 @@ switch ($acao) {
     case 'adicionarAoCarrinho':
         $codProd = $_POST['codProd'] ?? null; 
         $quantidade = $_POST['quantidade'] ?? 1; 
-        $codCliente = $_SESSION['codCliente'] ?? null; // Certifique-se de que o cliente está autenticado    
+        $codCliente = $_SESSION['codCliente'] ?? null;    
         if ($codCliente && $codProd) {
             $clienteController->adicionarProduto($codCliente, $codProd, $quantidade);
         }
@@ -188,20 +202,9 @@ switch ($acao) {
                     }
                 }
                 break;
-                
-                 
-//    default:
-//    header("Location: index.php?acao=loginCliente");
-//>>>>>>> f3984aabb414b29b157c4d97e55ba216e2ab6aaf
-        break;
 
-    // Ações para Funcionário
-    case 'paginaalterarfuncionario':
-        $funcionarioController->mostrarPaginaAlterar();
-        break;
-    case 'alterarFuncionario':
-        $funcionarioController->alterarFuncionario();
-        break;
+
+ 
     
     default:
         header("Location: index.php?acao=loginCliente");

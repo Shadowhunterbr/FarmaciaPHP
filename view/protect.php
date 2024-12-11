@@ -6,22 +6,20 @@
 if(!isset($_SESSION)) {
     session_start();
 }
-
-// Verifica se o usuário é um funcionário autenticado
+// Verifica se o usuário é autenticado
 if(!isset($_SESSION['funcionarioAutenticado']) && !isset($_SESSION['gerenteAutenticado']) && !isset($_SESSION['clienteAutenticado'])) {
     die("Você não pode acessar esta página porque não está logado.<p><a href=\"index.php\">Entrar</a></p>");
-}
-
-
-function protegePaginaGerente() {
-    if(!isset($_SESSION['gerenteAutenticado'])) {
-        die("Acesso restrito a gerentes.<p><a href=\"index.php\">Entrar como gerente</a></p>");
-    }
 }
 function protegePagina() {
     if(!isset($_SESSION['gerenteAutenticado']) &&(!isset($_SESSION['funcionarioAutenticado']))) {
         die("Acesso restrito a Funcionarios.<p><a href=\"index.php\">Entrar</a></p>");
     }
 }
+function protegePaginaGerente() {
+    if(!isset($_SESSION['gerenteAutenticado'])) {
+        die("Acesso restrito a gerentes.<p><a href=\"index.php\">Entrar como gerente</a></p>");
+    }
+}
+
 
 ?>

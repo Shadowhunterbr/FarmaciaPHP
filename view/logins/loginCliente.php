@@ -67,7 +67,7 @@
                     <input type="password" placeholder="Senha" name="txtsenhaCliente" />
                     <label></label>
                 </div>
-                <a href="#" class="forgot">Esqueceu sua senha?</a>
+                
                 <button type="submit" class="btnLogin">Fazer login</button> <br> <br>
                 <div>
                     <br> <br> <br> <br>

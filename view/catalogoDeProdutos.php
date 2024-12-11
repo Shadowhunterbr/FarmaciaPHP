@@ -5,7 +5,6 @@ if(!isset($_SESSION)) {
 include('view/protect.php');
 ?>
 
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -14,236 +13,200 @@ include('view/protect.php');
     <title>Farmácia Online</title>
     
     <style>
-        
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f5f5f5;
-}
+       body {
+           font-family: Arial, sans-serif;
+           margin: 0;
+           padding: 0;
+           background-color: #f5f5f5;
+       }
 
-header {
-    background-color: #a50000;
-    color: white;
-    padding: 10px;
-    text-align: center;
-    font-size: 24px;
-}
+       header {
+           background-color: #a50000;
+           color: white;
+           padding: 10px;
+           text-align: center;
+           font-size: 24px;
+           position: relative;
+       }
 
-.container {
-    display: flex;
-}
+       .header-buttons {
+           position: absolute;
+           top: 50%;
+           right: 20px;
+           transform: translateY(-50%);
+       }
 
-.menu {
-    width: 20%;
-    background-color: #f0f0f0;
-    padding: 20px;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-}
+       .header-buttons a button {
+           background-color: #ffffff;
+           color: #a50000;
+           border: none;
+           border-radius: 4px;
+           padding: 8px 12px;
+           cursor: pointer;
+           font-size: 14px;
+           margin-left: 10px;
+       }
 
-.menu ul {
-    list-style: none;
-    padding: 0;
-}
+       .header-buttons a button:hover {
+           background-color: #d9d9d9;
+       }
 
-.menu li {
-    margin: 10px 0;
-}
+       .container {
+           display: flex;
+       }
 
-.menu li a {
-    text-decoration: none;
-    color: #333;
-    font-weight: bold;
-}
+       .menu {
+           width: 20%;
+           background-color: #f0f0f0;
+           padding: 20px;
+           box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+       }
 
-.menu li a.active {
-    color: #a50000;
-    border-left: 4px solid #a50000;
-    padding-left: 5px;
-}
+       .menu ul {
+           list-style: none;
+           padding: 0;
+       }
 
-.content {
-    width: 80%;
-    padding: 20px;
-}
+       .menu li {
+           margin: 10px 0;
+       }
 
-.search-bar {
-    display: flex;
-    margin-bottom: 20px;
-}
+       .menu li a {
+           text-decoration: none;
+           color: #333;
+           font-weight: bold;
+           font-size: 30px;
+           transition: color 0.3s ease;
+       }
 
-.search-bar input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
+       .menu li a:hover {
+        color: #6b7fed; /* Cor ao passar o mouse */
+        }
 
-.search-bar button {
-    padding: 10px 20px;
-    margin-left: 10px;
-    background-color: #a50000;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
+       .menu li a.active {
+           color: #a50000;
+           border-left: 4px solid #a50000;
+           padding-left: 5px;
+       }
 
-.product {
-    display: inline-block;
-    width: 30%;
-    margin: 1%;
-    text-align: center;
-    background: white;
-    padding: 15px;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
-    border-radius: 8px;
-}
+       .content {
+           width: 80%;
+           padding: 20px;
+       }
 
-.product img {
+       .search-bar {
+           display: flex;
+           margin-bottom: 20px;
+           width: 500px;
+       }
 
-    max-height: 200px; /* Altura fixa */
-    object-fit: cover; /* Assegura que a imagem cubra o espaço disponível sem distorcer */
-    border-radius: 5px; /* Bordas arredondadas para as imagens */
-}
+       .search-bar input {
+           width: 200%;
+           padding: 10px;
+           border: 1px solid #ccc;
+           border-radius: 4px;
+       }
 
-.product .price {
-    font-size: 18px;
-    color: #333;
-}
+       .search-bar button {
+           padding: 10px 20px;
+           margin-left: 10px;
+           background-color: #a50000;
+           color: white;
+           border: none;
+           border-radius: 4px;
+           cursor: pointer;
+       }
 
-.product .add-to-cart {
-    display: block;
-    background-color: #a50000;
-    color: white;
-    padding: 10px;
-    text-decoration: none;
-    border-radius: 4px;
-    margin-top: 10px;
-}
+       .product {
+           display: inline-block;
+           width: 30%;
+           margin: 1%;
+           text-align: center;
+           background: white;
+           padding: 15px;
+           box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+           border-radius: 8px;
+       }
 
-.product .discount {
-    color: green;
-    font-size: 14px;
-}
+       .product img {
+           max-height: 200px;
+           object-fit: cover;
+           border-radius: 5px;
+       }
 
-.btnSair{
-    background-color: #981D1D;
-    color:#FFF;
-    font-size: 12px;
-    font-weight: bold;
-    padding: 10px 30px;
-    border-radius:5%;
-    border: none;
-}
+       .product .price {
+           font-size: 18px;
+           color: #333;
+       }
 
-.btnSair:hover{
-    background-color:#600707;
-}
+       .product .add-to-cart {
+           display: block;
+           background-color: #a50000;
+           color: white;
+           padding: 10px;
+           text-decoration: none;
+           border-radius: 4px;
+           margin-top: 10px;
+       }
 
-
-.btnCarrinho {
-        background-color: #981D1D;
-        color: #FFF;
-        font-size: 12px;
-        font-weight: bold;
-        padding: 10px 30px;
-        border-radius: 5%;
-        border: none;
-        margin-bottom: 10px; /*Cria um espaço de 10px abaixo*/
-    }
-
-    .btnCarrinho:hover{
-        background-color:#6B7FED;
-    }
-
-
-.btnPedidos{
-    background-color: #981D1D;
-    color: #FFF;
-    font-size: 12px;
-    font-weight: bold;
-    padding: 10px 30px;
-    border-radius: 5%;
-    border: none;
-    margin-top: 100px;
-    margin-bottom: 10px;
-    left:0;
-    position: absolute;
-}
-
-.btnPedidos:hover{
-    background-color:#6B7FED;
-}
-
-#btnAdicionar{
-    background-color: #981D1D;
-    color:#FFF;
-    font-size: 12px;
-    font-weight: bold;
-    padding: 10px 30px;
-    border-radius:5%;
-    border: none;
-}
-
-#btnAdicionar:hover{
-    background-color:#6B7FED;
-}
-
+       .product .discount {
+           color: green;
+           font-size: 14px;
+       }
     </style>
 </head>
 <body>
-    <header>FARMÁCIA</header>
+    <header>
+        FARMÁCIA
+        <div class="header-buttons">
+            <a href="index.php?acao=logoutCliente"><button>Sair</button></a>
+            <a href="index.php?acao=mostrarCarrinho"><button>Carrinho</button></a>
+            <a href="index.php?acao=mostrarInfoCliente&codCliente=<?php echo $codCliente ?>"><button>Minha Conta</button></a>
+            <a href="index.php?acao=mostrarPedidos"><button>Pedidos</button></a>
+        </div>
+    </header>
     <div class="container">
-    <a href="index.php?acao=logoutCliente" class="btnSair"><Button>Sair</Button></a>
-    <a href="index.php?acao=mostrarCarrinho" class="btnCarrinho"><Button>Carrinho</Button></a>
-    <a href="index.php?acao"><i class="fa-solid fa-user"><button></button></i></a>
-    <a href="index.php?acao=mostrarPedidos" class="btnPedidos"><button>Pedidos</button></a>
-    
-    <aside class="menu">
-    <ul>
-        <li>
-            <a href="?acao=catalogoDeProdutos">Todos os Produtos</a>
-        </li>
-        <?php foreach ($categorias as $categoria): ?>
-            <li>
-                <a href="?acao=listarProdutosPorCategoria&cod_categoria=<?= strtolower(str_replace(' ', '_', $categoria['codigo'])) ?>">
-                    <?= htmlspecialchars($categoria['categoria']) ?>
-                </a>
-            </li>
-        <?php endforeach; ?>
-    </ul>
-</aside>
+        <aside class="menu">
+            <ul>
+                <li><a href="?acao=catalogoDeProdutos">Todos os Produtos</a></li>
+                <?php foreach ($categorias as $categoria): ?>
+                    <li>
+                        <a href="?acao=listarProdutosPorCategoria&cod_categoria=<?= strtolower(str_replace(' ', '_', $categoria['codigo'])) ?>">
+                            <?= htmlspecialchars($categoria['categoria']) ?>
+                        </a>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        </aside>
         <main class="content">
-        <div class="search-bar">
-        <form action="index.php" method="GET">
-    <input type="hidden" name="acao" value="catalogoDeProdutos">
-    <input type="text" name="search" id="search" placeholder="Busque o item">
-    <button type="submit">🔍</button>
-    
-</form>    
+            <div class="search-bar">
+                <form action="index.php" method="GET">
+                    <input type="hidden" name="acao" value="catalogoDeProdutos">
+                    <input type="text" name="search" id="search" placeholder="Busque o item">
+                    <button type="submit">🔍</button>
+                </form>    
             </div>
             <div class="products">
-    <ul>
-        <?php if (!empty($produtos)): ?>
-            <?php foreach ($produtos as $produto): ?>
-                <li class="product">
-                <i class="fa-solid fa-circle-user"></i><h2><?= htmlspecialchars($produto['nome']) ?></h2>
-                    <img src="view/imgs/<?= htmlspecialchars($produto['IMAGEM']) ?>" alt="<?= htmlspecialchars($produto['nome']) ?>">
-                    <p>Preço: R$ <?= number_format($produto['preco'], 2, ',', '.') ?></p>
-                    <p><?= htmlspecialchars($produto['descricao_produto']) ?></p>
-                <form method="POST" action="?acao=adicionarAoCarrinho">
-                    <input type="hidden" name="codProd" value="<?= htmlspecialchars($produto['codigo']) ?>">
-                    <input type="number" name="quantidade" value="1" min="1" style="width: 50px;">
-                    <button type="submit" class="add-to-cart" id="btnAdicionar">ADICIONAR</button>
-                </form>
-                </li>
-            <?php endforeach; ?>
-        <?php else: ?>
-            <p>Nenhum produto encontrado para esta categoria.</p>
-        <?php endif; ?>
-    </ul>
-</div>
+                <ul>
+                    <?php if (!empty($produtos)): ?>
+                        <?php foreach ($produtos as $produto): ?>
+                            <li class="product">
+                                <h2><?= htmlspecialchars($produto['nome']) ?></h2>
+                                <img src="view/imgs/<?= htmlspecialchars($produto['imagem']) ?>" alt="<?= htmlspecialchars($produto['nome']) ?>">
+                                <p>Preço: R$ <?= number_format($produto['preco'], 2, ',', '.') ?></p>
+                                <p><?= htmlspecialchars($produto['descricao_produto']) ?></p>
+                                <form method="POST" action="?acao=adicionarAoCarrinho">
+                                    <input type="hidden" name="codProd" value="<?= htmlspecialchars($produto['codigo']) ?>">
+                                    <input type="number" name="quantidade" value="1" min="1" style="width: 50px;">
+                                    <button type="submit" class="add-to-cart">ADICIONAR</button>
+                                </form>
+                            </li>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <p>Nenhum produto encontrado para esta categoria.</p>
+                    <?php endif; ?>
+                </ul>
+            </div>
         </main>
     </div>
 </body>

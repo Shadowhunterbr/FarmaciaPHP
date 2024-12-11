@@ -72,6 +72,15 @@ class FuncionarioController{
         require_once __DIR__ . "/../view/listadefuncionarios.php";
     }
 
+    public function listarFornecedores(){
+        $forncedorDao = new FornecedorDao();
+        $fornecedores = $forncedorDao->buscarTodosFornecedores();
+
+        require_once __DIR__ . "/../view/listadefornecedores.php";
+    }
+
+
+
     public function excluir(){
 
         if(isset($_GET['codigo'])){
@@ -88,6 +97,36 @@ class FuncionarioController{
 
         }
 
+
+        
+    }
+
+    public function excluirFornecedor() {
+        if (isset($_GET['codigo'])) {
+            $codigo = $_GET['codigo'];
+            
+            // Criar o objeto fornecedor
+            $objFornecedor = new Fornecedor($codigo, null, null, null, null, null, null, null, null);
+    
+            // Instanciar o DAO
+            $FornecedorDao = new GerenteDao();
+    
+            try {
+                // Tentar excluir o fornecedor
+                $FornecedorDao->excluirFornecedor($objFornecedor);
+    
+                // Redirecionar para a lista de fornecedores em caso de sucesso
+                header("Location: index.php?acao=listarFornecedores");
+                exit();
+            } catch (Exception $e) {
+                // Exibir mensagem de erro usando JavaScript
+                echo "<script>
+                        alert('Não é possível excluir este fornecedor, pois ele está vinculado a um ou mais produtos.');
+                        window.location.href = 'index.php?acao=listarFornecedores';
+                      </script>";
+                exit();
+            }
+        }
     }
     public function cadastrarFuncionario() {
         // Captura os dados do formulário
@@ -132,7 +171,7 @@ class FuncionarioController{
         $forncedorDao = new GerenteDao();
         $forncedorDao->cadastrarFornecedor($objFornecedor);
 
-        header("Location: index.php?acao=listarFuncionarios");
+        header("Location: index.php?acao=listarFornecedores");
         exit();
         
     }
@@ -149,6 +188,20 @@ class FuncionarioController{
             header("Location: index.php?acao=listarFuncionarios");
             exit();
         }
+    }
+
+    public function mostrarPaginaAlterarFornecedor(){
+        if (isset($_GET['codigo'])) {
+            $codigo = $_GET['codigo'];
+            $fornecedorDao = new FornecedorDao();
+            $fornecedor = $fornecedorDao->buscarFornecedorPorCodigo($codigo);
+    
+            require_once __DIR__ . '/../view/cadastrar/fornecedor.php';
+        } else {
+            header("Location: index.php?acao=listarFornecedores.php");
+            exit();
+        }
+
     }
     
     public function alterarFuncionario() {
@@ -168,6 +221,26 @@ class FuncionarioController{
         $funcionarioDao->alterarFuncionario($objFuncionario);
     
         header("Location: index.php?acao=listarFuncionarios");
+        exit();
+    }
+
+    public function alterarFornecedor() {
+        $codigo = $_POST['txtcodigoFornecedor'];
+        $razaoSocial = $_POST['txtrazaoSocial'];
+        $nomeFantasia = $_POST['txtnomeFantasia'];
+        $cnpj = $_POST['txtcnpj'];
+        $endereco = $_POST['txtendereco'];
+        $cidade = $_POST['txtcidade'];
+        $cep = $_POST['txtcep'];
+        $pessoaContato = $_POST['txtpessoaContato'];
+        $telefone = $_POST['txttelefone']; 
+    
+        $objFornecedor = new Fornecedor($codigo, $razaoSocial, $nomeFantasia, $cnpj, $endereco, $cidade, $cep, $pessoaContato, $telefone);
+    
+        $forncedorDao = new GerenteDao();
+        $forncedorDao->alterarFornecedor($objFornecedor);
+    
+        header("Location: index.php?acao=listarFornecedor");
         exit();
     }
     

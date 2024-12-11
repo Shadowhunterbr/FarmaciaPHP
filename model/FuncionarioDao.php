@@ -67,12 +67,23 @@ class FornecedorDao{
     public function buscarTodosFornecedores(){
 
         $pdo = Conexao::obterConexao();
-        //echo "Banco de Dados Conectado com Sucesso!!!" .PHP_EOL;
 
-        $statement = $pdo->query("SELECT codigo, nome_fantasia FROM fornecedor");
+        $statement = $pdo->query("SELECT * FROM Fornecedor");
 
         return $statement->fetchAll(\PDO::FETCH_ASSOC);
        
+    }
+
+    public function buscarFornecedorPorCodigo($codigoFornecedor){
+        //Conexão com o Banco de Dados
+        $pdo = Conexao::obterConexao();
+ 
+        $stmt = $pdo->prepare("SELECT * FROM Fornecedor WHERE codigo = :codigo");
+        $stmt->bindParam(':codigo',$codigoFornecedor);
+        $stmt->execute();
+
+        return $stmt->fetch(\PDO::FETCH_ASSOC);
+        
     }
 
 }

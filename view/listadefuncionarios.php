@@ -15,7 +15,7 @@ protegePaginaGerente();
     <title>Lista de Funcionarios</title>
 </head>
 <body>
-    <h1 class="titulo1">Lista de funcionario</h1>
+    <h1 class="titulo1">Lista de Funcionarios</h1>
 
    <!-- <a href="index.php?acao=cadastrarFuncionario"></a> -->
     <a href="index.php?acao=listarProdutos"><button class="btnProdutos">Produtos</button></a>

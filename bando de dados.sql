@@ -2,6 +2,7 @@ create database farmacia;
 
 use farmacia;
 
+
 create table categoria (
 	codigo integer primary key auto_increment,
     categoria varchar(30) not null
@@ -12,7 +13,7 @@ create table genero(
 	codigo integer primary key,
     genero varchar(12) not null
 );
-select *from genero;
+
 create table prescricao_medica(
 	codigo integer primary key,
     prescricao char not null
@@ -23,7 +24,7 @@ create table funcionario(
 	codigo integer primary key auto_increment,
     nome varchar(60) not null,
     email varchar(50) not null UNIQUE,
-    login varchar(50) not null,
+    login varchar(50) not null UNIQUE,
     senha varchar(50) not null,
     telefone integer,
     cpf VARCHAR(14) NOT NULL UNIQUE,
@@ -42,35 +43,37 @@ create table fornecedor (
     cidade VARCHAR(50),
     cep VARCHAR(9),
     pessoa_contato varchar(40),
-    telefone integer
+    telefone varchar(18)
 
 );
 
-CREATE TABLE endereco_cliente (
-    codigo INTEGER PRIMARY KEY,
-    rua VARCHAR(50),
-    numero INTEGER,
-    bairro VARCHAR(50),
-    cidade VARCHAR(50),
-    cep VARCHAR(9),
-    UF VARCHAR(2)
-);
 
 CREATE TABLE cliente(
 	codigo integer primary key auto_increment,
     nome varchar(60) not null,
-    cod_endereco integer, -- fk endereço
     email varchar(50) not null UNIQUE,
     senha varchar(50) not null,
     telefone varchar(18),
     cpf VARCHAR(14) NOT NULL UNIQUE,
     cod_genero integer, -- fk genero
 	data_nascimento DATE not null,
-    foreign key (cod_endereco) references endereco_cliente(codigo),
     foreign key (cod_genero) references genero(codigo)
 );
 
-ALTER TABLE cliente MODIFY COLUMN telefone varchar(18);
+
+CREATE TABLE endereco_cliente (
+    codigo INTEGER PRIMARY KEY auto_increment,
+    cod_cliente integer,
+    rua VARCHAR(50),
+    numero INTEGER,
+    bairro VARCHAR(50),
+    cidade VARCHAR(50),
+    cep VARCHAR(9),
+    UF VARCHAR(2),
+    foreign key (cod_cliente) references cliente(codigo)
+);
+
+
 
 CREATE TABLE produtos(
     codigo INTEGER PRIMARY KEY AUTO_INCREMENT,
@@ -92,7 +95,7 @@ CREATE TABLE produtos(
 
 -- Tabela Pedidos
 CREATE TABLE pedidos(
-    codigo INTEGER PRIMARY KEY,
+    codigo INTEGER PRIMARY KEY auto_increment,
     cod_cliente INTEGER, -- FK para Clientes
     data_pedidos DATE NOT NULL,
     total decimal NOT NULL,
@@ -155,15 +158,15 @@ INSERT INTO fornecedor (codigo, razao_social, nome_fantasia, cnpj, endereco, cid
 
 INSERT INTO funcionario (codigo, nome, email, login, senha, telefone, cpf, cargo, cod_genero) VALUES 
 (1, 'Carlos Mendes', 'carlos@empresa.com', 'carlosm', 'senha123', 119876543, '12345678901', 'Atendente', 1),
-(2, 'Fernanda Lima', 'fernanda@empresa.com', 'fernandal', 'senha456', 2198763, '23456789012', 'Farmacêutica', 2),
-(3, 'Julio Santana', 'julio@empresa.com', 'julios', 'senha789', 31987654, '34567890123', 'Gerente', 1);
+(2, 'Fernanda Lima', 'fernanda@empresa.com', 'fernandal', '123', 2198763, '23456789012', 'Farmacêutica', 2),
+(3, 'Julio Santana', 'julio@empresa.com', 'julios', '123', 31987654, '34567890123', 'Gerente', 1);
+
+INSERT INTO produtos (nome, cod_categoria, cod_fornecedor, cod_prescricao, data_F, data_V, preco_custo, preco, quantidade_estoque, descricao_produto, imagem) 
+VALUES ('Paracetamol 500mg', 1, 1, 1, '2024-01-01', '2025-01-01', 2.50, 5.00, 100, 'Medicamento para alívio de dores e febre.', 'paracetamol.jpg'),
+('Dramin B6 50mg', 1, 2, 1, '2024-02-01', '2025-02-01', 3.00, 6.50, 80, 'Medicamento para enjoo e náuseas.', 'dramin.png'),
+('Dipirona 500mg', 1, 2, 1, '2024-03-01', '2025-03-01', 2.00, 4.00, 150, 'Medicamento analgésico e antitérmico.', 'dipirona.png'),
+('Ibuprofeno 600mg', 1, 3, 1, '2024-04-01', '2025-04-01', 3.50, 7.00, 120, 'Medicamento anti-inflamatório e analgésico.', 'ibuprofeno.jpg'),
+('Vitamina A-Z 60 cápsulas', 4, 1, 0, '2023-11-01', '2025-11-01', 10.00, 25.00, 200, 'Suplemento vitamínico completo.', 'Vitamina A-Z.png'),
+('Whey Protein 900g', 4, 3, 0, '2023-12-01', '2024-12-01', 50.00, 120.00, 50, 'Suplemento alimentar para ganho de massa muscular.', 'whey.png');
 
 
-INSERT INTO produtos (nome, cod_categoria, cod_fornecedor, cod_prescricao, data_F, data_V, preco_custo, preco, quantidade_estoque, descricao_produto, imagem)
-VALUES 
-('Paracetamol 500mg', 1, 1, NULL, '2024-11-01', '2025-11-01', 2.50, 5.00, 100, 'Analgésico e antipirético.', 'dramin.png'),
-('Vitamina C 1000mg', 2, 2, NULL, '2024-10-15', '2025-10-15', 3.00, 6.50, 200, 'Suplemento de vitamina C efervescente.', 'dramin.png'),
-('Amoxicilina 500mg', 3, 3, 1, '2024-09-10', '2025-09-10', 10.00, 20.00, 50, 'Antibiótico de amplo espectro.', 'dramin.png'),
-('Insulina Regular', 4, 4, 2, '2024-08-20', '2025-08-20', 25.00, 50.00, 30, 'Medicamento essencial para diabetes.', 'dramin.png'),
-('Shampoo Anticaspa', 5, 5, NULL, '2024-11-05', '2026-11-05', 8.00, 15.00, 150, 'Shampoo para controle da caspa.', 'dramin.png'),
-('Protetor Solar FPS 50', 6, 6, NULL, '2024-12-01', '2026-12-01', 12.00, 25.00, 120, 'Protetor solar para todos os tipos de pele.', 'dramin.png');

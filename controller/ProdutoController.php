@@ -107,9 +107,8 @@ class ProdutoController{
 
             $produtoDao = new ProdutoDao();
             $produtoDao->excluir($objProduto);
+            
 
-            header("Location: index.php?acao=listarProdutos");
-            exit();
 
         }
 
@@ -226,8 +225,14 @@ class ProdutoController{
                 header("Location: index.php?acao=listarProdutos");
                 exit();
             } catch (Exception $e) {
-                echo "Erro ao excluir a categoria: " . $e->getMessage();
-            }
+                
+    
+            echo "<script>
+                    alert('Não é possível excluir esta Categoria, pois ele está vinculado a um ou mais produtos.');
+                    window.location.href = 'index.php?acao=paginacadastrarcategoria';
+                    </script>";
+            exit();
+        }            
         } else {
             echo "Código da categoria não foi fornecido.";
         }

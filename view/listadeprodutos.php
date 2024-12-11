@@ -33,7 +33,9 @@ border-radius: 3px; /* Bordas arredondadas para as imagens */
     <a href="index.php?acao=paginacadastrar"><button class="btnCadastrarProd">Cadastrar Produtos</button></a>
     <a href="index.php?acao=paginacadastrarcategoria"><button class="btnCadastrarCategoria">Cadastrar Categorias</button></a>
     <a href="index.php?acao=paginaCadastrarFornecedor"><button class="btnCadastrarFornecedor">Cadastrar Fornecedores</button></a> <br><br>
-    <a href="index.php?acao=listarFuncionarios"><button class="btnListarFuncionarios">Funcionarios</button></a> <br><br>
+    <a href="index.php?acao=listarFuncionarios"><button class="btnListarFuncionarios">Funcionarios</button></a> 
+    <a href="index.php?acao=listarFornecedores"><button class="btnListarFuncionarios">Fornecedores</button></a> <br><br>
+
     <a href="index.php?acao=logout"><button class="btnSair">Sair</button></a>
     <br><br>
    

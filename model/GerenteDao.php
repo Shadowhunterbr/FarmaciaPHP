@@ -32,6 +32,29 @@ class GerenteDao extends FuncionarioDao{
         $stmt->execute();
     }
 
+    public function excluirFornecedor($objFornecedor) {
+        $pdo = Conexao::obterConexao();
+    
+        // Verificar se o fornecedor está associado a algum produto
+        $stmtCheck = $pdo->prepare("SELECT COUNT(*) as total FROM Produtos WHERE cod_fornecedor = :codigo");
+        $stmtCheck->bindParam(':codigo', $objFornecedor->getCodigoFornecedor());
+        $stmtCheck->execute();
+        $resultado = $stmtCheck->fetch(PDO::FETCH_ASSOC);
+    
+        if ($resultado['total'] > 0) {
+            // Retorna uma mensagem de erro caso o fornecedor esteja associado a algum produto
+            throw new Exception("O fornecedor não pode ser excluído porque está vinculado a um ou mais produtos.");
+        }
+    
+        // Caso não haja vínculo, prosseguir com a exclusão
+        $stmtDelete = $pdo->prepare("DELETE FROM Fornecedor WHERE codigo = :codigo");
+        $stmtDelete->bindParam(':codigo', $objFornecedor->getCodigoFornecedor());
+        $stmtDelete->execute();
+
+    }
+
+
+
     public function alterarFuncionario($objFuncionario) {
         // Conexão com o Banco de Dados
         $pdo = Conexao::obterConexao();
@@ -70,5 +93,35 @@ class GerenteDao extends FuncionarioDao{
     $stmt->bindParam(':telefone', $objFornecedor->getTelefone());
 
     $stmt->execute();
-    }   
+    }
+    
+    public function alterarFornecedor($objFornecedor) {
+        $pdo = Conexao::obterConexao();
+    
+        $stmt = $pdo->prepare("UPDATE fornecedor SET 
+            razao_social = :razao_social, 
+            nome_fantasia = :nome_fantasia, 
+            cnpj = :cnpj, 
+            endereco = :endereco, 
+            cidade = :cidade, 
+            cep = :cep, 
+            pessoa_contato = :pessoa_contato, 
+            telefone = :telefone 
+            WHERE codigo = :codigo");
+    
+        $stmt->bindParam(':codigo', $objFornecedor->getCodigoFornecedor());
+        $stmt->bindParam(':razao_social', $objFornecedor->getRazaoSocial());
+        $stmt->bindParam(':nome_fantasia', $objFornecedor->getNomeFantasia());
+        $stmt->bindParam(':cnpj', $objFornecedor->getCnpj());
+        $stmt->bindParam(':endereco', $objFornecedor->getEndereco());
+        $stmt->bindParam(':cidade', $objFornecedor->getCidade());
+        $stmt->bindParam(':cep', $objFornecedor->getCep());
+        $stmt->bindParam(':pessoa_contato', $objFornecedor->getPessoaContato());
+        $stmt->bindParam(':telefone', $objFornecedor->getTelefone());
+    
+        // Executa o comando SQL
+        $stmt->execute();
+    }
+    
+
 }

@@ -12,88 +12,82 @@ protegePaginaGerente();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="view\Estilos\cadastrarFuncionario.css">
-    <title><?php echo isset($funcionarios['codigo']) ? "Alteração de Funcionário" : "Cadastro de Funcionário"; ?></title>
+    <title><?php echo isset($fornecedor['codigo']) ? "Alteração de Fornecedor" : "Cadastro de Fornecedor"; ?></title>
 </head>
 <body>
     <div class="container">
-        <h1><?php echo isset($funcionarios['codigo']) ? "Alteração de Funcionário" : "Cadastro de Funcionário"; ?></h1>
-        <form action="index.php?acao=<?php echo isset($funcionarios['codigo']) ? 'alterarFuncionario' : 'cadastrarFuncionario'; ?>" method="POST">
+        <h1><?php echo isset($fornecedor['codigo']) ? "Alteração de Fornecedor" : "Cadastro de Fornecedor"; ?></h1>
+        <form action="index.php?acao=<?php echo isset($fornecedor['codigo']) ? 'alterarFornecedor' : 'cadastrarFornecedor'; ?>" method="POST">
             <div class="inputs">
                 <div class="input_label">
-                    <label for="txtcodigofuncionario">Código do Funcionário:</label>
-                    <input type="text" id="txtcodigofuncionario" name="txtcodigofuncionario"
-                           value="<?php echo isset($funcionarios['codigo']) ? $funcionarios['codigo'] : ''; ?>" readonly><br><br>
+                    <label for="txtcodigofornecedor">Código do Fornecedor:</label>
+                    <input type="text" id="txtcodigofornecedor" name="txtcodigofornecedor"
+                           value="<?php echo isset($fornecedor['codigo']) ? $fornecedor['codigo'] : ''; ?>" readonly><br><br>
                 </div>
             </div>
             <div class="inputs">
                 <div class="input_label">
-                    <label for="txtnomefuncionario">Nome:</label>
-                    <input type="text" id="txtnomefuncionario" name="txtnomefuncionario"
-                           value="<?php echo isset($funcionarios['nome']) ? $funcionarios['nome'] : ''; ?>"><br><br>
+                    <label for="txtrazaoSocial">Razão Social:</label>
+                    <input type="text" id="txtrazaoSocial" name="txtrazaoSocial"
+                           value="<?php echo isset($fornecedor['razao_social']) ? $fornecedor['razao_social'] : ''; ?>"><br><br>
                 </div>
             </div>
             <div class="inputs">
                 <div class="input_label">
-                    <label for="txtemailfuncionario">Email:</label>
-                    <input type="email" id="txtemailfuncionario" name="txtemailfuncionario"
-                           value="<?php echo isset($funcionarios['email']) ? $funcionarios['email'] : ''; ?>"><br><br>
+                    <label for="txtnomeFantasia">Nome Fantasia:</label>
+                    <input type="text" id="txtnomeFantasia" name="txtnomeFantasia"
+                           value="<?php echo isset($fornecedor['nome_fantasia']) ? $fornecedor['nome_fantasia'] : ''; ?>"><br><br>
                 </div>
             </div>
             <div class="inputs">
                 <div class="input_label">
-                    <label for="txtloginfuncionario">Login:</label>
-                    <input type="text" id="txtloginfuncionario" name="txtloginfuncionario"
-                           value="<?php echo isset($funcionarios['login']) ? $funcionarios['login'] : ''; ?>"><br><br>
+                    <label for="txtcnpj">CNPJ:</label>
+                    <input type="text" id="txtcnpj" name="txtcnpj"
+                           value="<?php echo isset($fornecedor['cnpj']) ? $fornecedor['cnpj'] : ''; ?>"><br><br>
                 </div>
             </div>
             <div class="inputs">
                 <div class="input_label">
-                    <label for="txtsenhafuncionario">Senha:</label>
-                    <input type="password" id="txtsenhafuncionario" name="txtsenhafuncionario"
-                           value="<?php echo isset($funcionarios['senha']) ? $funcionarios['senha'] : ''; ?>"><br><br>
+                    <label for="txtendereco">Endereço:</label>
+                    <input type="text" id="txtendereco" name="txtendereco"
+                           value="<?php echo isset($fornecedor['endereco']) ? $fornecedor['endereco'] : ''; ?>"><br><br>
                 </div>
             </div>
             <div class="inputs">
                 <div class="input_label">
-                    <label for="txttelefonefuncionario">Telefone:</label>
-                    <input type="text" id="txttelefonefuncionario" name="txttelefonefuncionario"
-                           value="<?php echo isset($funcionarios['telefone']) ? $funcionarios['telefone'] : ''; ?>"><br><br>
+                    <label for="txtcidade">Cidade:</label>
+                    <input type="text" id="txtcidade" name="txtcidade"
+                           value="<?php echo isset($fornecedor['cidade']) ? $fornecedor['cidade'] : ''; ?>"><br><br>
                 </div>
             </div>
             <div class="inputs">
                 <div class="input_label">
-                    <label for="txtcpffuncionario">CPF:</label>
-                    <input type="text" id="txtcpffuncionario" name="txtcpffuncionario"
-                           value="<?php echo isset($funcionarios['cpf']) ? $funcionarios['cpf'] : ''; ?>"><br><br>
+                    <label for="txtcep">CEP:</label>
+                    <input type="text" id="txtcep" name="txtcep"
+                           value="<?php echo isset($fornecedor['cep']) ? $fornecedor['cep'] : ''; ?>"><br><br>
                 </div>
             </div>
             <div class="inputs">
                 <div class="input_label">
-                    <label for="txtcargofuncionario">Cargo:</label>
-                    <input type="text" id="txtcargofuncionario" name="txtcargofuncionario"
-                           value="<?php echo isset($funcionarios['cargo']) ? $funcionarios['cargo'] : ''; ?>"><br><br>
+                    <label for="txtpessoaContato">Pessoa de Contato:</label>
+                    <input type="text" id="txtpessoaContato" name="txtpessoaContato"
+                           value="<?php echo isset($fornecedor['pessoa_contato']) ? $fornecedor['pessoa_contato'] : ''; ?>"><br><br>
                 </div>
             </div>
             <div class="inputs">
                 <div class="input_label">
-                    <label for="generofuncionario">Gênero:</label>
-                    <select id="generofuncionario" name="generofuncionario" required>
-                        <?php
-                        foreach ($generos as $gr) {
-                            $selected = (isset($funcionarios['cod_genero']) && $funcionarios['cod_genero'] == $gr['codigo']) ? "selected" : "";
-                            echo "<option value='" . $gr['codigo'] . "' $selected>" . $gr['genero'] . "</option>";
-                        }
-                        ?>
-                    </select><br><br>
+                    <label for="txttelefone">Telefone:</label>
+                    <input type="text" id="txttelefone" name="txttelefone"
+                           value="<?php echo isset($fornecedor['telefone']) ? $fornecedor['telefone'] : ''; ?>"><br><br>
                 </div>
             </div>
             <div class="submits">
-                <input type="hidden" name="acao" value="<?php echo isset($funcionarios['codigo']) ? "alterarFuncionario" : "cadastrarFuncionario"; ?>">
+                <input type="hidden" name="acao" value="<?php echo isset($fornecedor['codigo']) ? "alterarFornecedor" : "cadastrarFornecedor"; ?>">
                 <button type="submit" class="submit">
-                    <?php echo isset($funcionarios['codigo']) ? "Alterar Funcionário" : "Cadastrar Funcionário"; ?>
+                    <?php echo isset($fornecedor['codigo']) ? "Alterar Fornecedor" : "Cadastrar Fornecedor"; ?>
                 </button>
             </div>
         </form>
-        </div>
+    </div>
 </body>
 </html>
