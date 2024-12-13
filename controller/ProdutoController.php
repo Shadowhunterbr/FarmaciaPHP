@@ -27,7 +27,7 @@ class ProdutoController{
         $totalPrecoCusto = $produtoDao->calcularTotalPrecoCustoVendidos();
         $totalLiquido =  $totalVendas- $totalPrecoCusto; 
 
-        require_once __DIR__ . "/../view/listadeprodutos.php";
+        require_once __DIR__ . "/../view/listas/listadeprodutos.php";
     }
 
 
@@ -196,7 +196,7 @@ class ProdutoController{
         $categoriaDao = new ProdutoDao();
         $categorias = $categoriaDao->buscarTodasCategorias();
     
-        require_once __DIR__ . "/../view/listadecategoria.php";
+        require_once __DIR__ . "/../view/listas/listadecategoria.php";
     }
     
     

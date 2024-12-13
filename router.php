@@ -61,7 +61,12 @@ switch ($acao) {
         break;
     case 'alterarFornecedor':
         $funcionarioController->alterarFornecedor();
-        break;               
+        break;
+    case 'paginaalterarfuncionario':
+        $funcionarioController->mostrarPaginaAlterar();
+        break;
+    case 'alterarFuncionario':
+        $funcionarioController->alterarFuncionario();                   
 
     // Ações para Produtos
     case 'listarProdutos':
@@ -88,14 +93,14 @@ switch ($acao) {
     case 'paginacadastrarcategoria':
         $produtoController->mostrarPaginaCadastroCategoria();
         break;
-    case 'cadastrarCategoria':  // Ação para cadastrar ou atualizar a categoria
+    case 'cadastrarCategoria':  
         $produtoController->cadastrarCategoria();
         break;
  
     case 'listarCategorias': // Listar categorias
         $produtoController->listarCategorias();
         break;
-    case 'paginaalterarcategoria': // Página para alterar categoria
+    case 'paginaalterarcategoria': 
         $produtoController->mostrarPaginaAlterarCategoria();
         break;
 
@@ -105,6 +110,8 @@ switch ($acao) {
     case 'excluircategoria': // Excluir categoria
         $produtoController->excluirCategoria();
         break;
+        
+    // Ações para clientes:    
     case 'loginCliente':
         $clienteController->mostrarPaginaLogin();
         break;
@@ -127,7 +134,7 @@ switch ($acao) {
         $clienteController->cadastrarCliente();
         break;    
     case 'catalogoDeProdutos':
-        $search = $_GET['search'] ?? null; // Recebe o termo de pesquisa, se existir
+        $search = $_GET['search'] ?? null; 
         $clienteController->catalogoDeProdutos($search);
         break;
     case 'listarProdutosPorCategoria':
@@ -163,29 +170,22 @@ switch ($acao) {
             header("Location: index.php?acao=mostrarCarrinho");
             break;
             case 'finalizarPedido':
-                // Garantir que o codCliente esteja na sessão
+            
                 $codCliente = $_SESSION['codCliente'] ?? null;
                 if ($codCliente) {
-                    $clienteController->finalizarPedido($codCliente); // Passar o codCliente como argumento
+                    $clienteController->finalizarPedido($codCliente); 
                 } else {
-                    // Caso o cliente não esteja logado, redirecionar para o login
+                    // Se o cliente não esteja logado, redirecionar para o login
                     header("Location: index.php?acao=loginCliente");
                     exit();
                 }
                 break;      
 
-        case 'paginaalterarfuncionario':
-            $funcionarioController->mostrarPaginaAlterar();
-            break;
-            
-        case 'alterarFuncionario':
-            $funcionarioController->alterarFuncionario();
             break;
         case 'mostrarPedidos':
             $clienteController->mostrarPedidos();
             break; 
             case 'processarUploadReceita':
-                echo "Processando upload de receita..."; // Para depuração
                 $codCliente = $_POST['codCliente'] ?? null;
                 if ($codCliente && isset($_FILES['receita'])) {
                     $uploadDir = 'view/receitas/';
@@ -194,11 +194,12 @@ switch ($acao) {
                     if (move_uploaded_file($_FILES['receita']['tmp_name'], $uploadFile)) {
                         echo "<script>alert('Receita enviada com sucesso!');</script>";
                         header("Location: index.php?acao=finalizarPedido");
-                        exit; // Importante
+                        exit; 
                     } else {
                         echo "<script>alert('Erro ao enviar a receita. Tente novamente.');</script>";
                         header("Location: index.php?acao=mostrarCarrinho");
-                        exit; // Importante
+                        exit; 
+                        
                     }
                 }
                 break;

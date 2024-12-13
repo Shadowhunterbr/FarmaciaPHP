@@ -69,14 +69,14 @@ class FuncionarioController{
         $funcionarioDao = new FuncionarioDao();
         $funcionarios = $funcionarioDao->buscarTodosFuncionarios();
 
-        require_once __DIR__ . "/../view/listadefuncionarios.php";
+        require_once __DIR__ . "/../view/listas/listadefuncionarios.php";
     }
 
     public function listarFornecedores(){
         $forncedorDao = new FornecedorDao();
         $fornecedores = $forncedorDao->buscarTodosFornecedores();
 
-        require_once __DIR__ . "/../view/listadefornecedores.php";
+        require_once __DIR__ . "/../view/listas/listadefornecedores.php";
     }
 
 

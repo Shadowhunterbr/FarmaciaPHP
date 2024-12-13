@@ -1,5 +1,5 @@
 <?php
-include('protect.php');
+include('view/protect.php');
 protegePaginaGerente();
 ?>
 

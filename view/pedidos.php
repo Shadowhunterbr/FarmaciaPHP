@@ -1,11 +1,8 @@
 <?php
-include('protect.php');
- // Inicie a sessão para acessar variáveis de sessão
+include('view/protect.php');
 
-// Obter o código do cliente da sessão
 $codCliente = $_SESSION['codCliente'] ?? null;
 
-// Verificar se o cliente está logado
 if (!$codCliente) {
     echo "Erro: cliente não autenticado. Faça login novamente.";
     exit;
