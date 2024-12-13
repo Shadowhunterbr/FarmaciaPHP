@@ -66,5 +66,8 @@ Instruções detalhadas sobre como instalar e rodar o projeto localmente. Um exe
 
 4. Inicie o apache no *XAMPP Control Panel*
 
-5. Entre em um navegador, Digite *Localhost/FarmaciaPHP-main*
+5. Entre em um navegador, Digite *Localhost/FarmaciaPHP-main* 
+   ```bash
+      Localhost/FarmaciaPHP-main
+   
    
