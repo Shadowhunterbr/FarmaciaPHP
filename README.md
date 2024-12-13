@@ -69,5 +69,8 @@ Instruções detalhadas sobre como instalar e rodar o projeto localmente. Um exe
 5. Entre em um navegador, Digite *Localhost/FarmaciaPHP-main* 
    ```bash
       Localhost/FarmaciaPHP-main
-   
-   
+6. Para acessar o sistema, há dois tipos de Login, Cliente e Funcionario, no arquivo *banco de dados.sql* contem 2 inserts para login:
+## Cliente:
+- E-mail: email@e , Senha: 123
+## Funcionario:
+- Login: julios , Senha: 123   (Funcionario com cargo de *Gerente*)
