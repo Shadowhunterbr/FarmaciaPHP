@@ -170,3 +170,5 @@ VALUES ('Paracetamol 500mg', 1, 1, 1, '2024-01-01', '2025-01-01', 2.50, 5.00, 10
 ('Whey Protein 900g', 4, 3, 0, '2023-12-01', '2024-12-01', 50.00, 120.00, 50, 'Suplemento alimentar para ganho de massa muscular.', 'whey.png');
 
 
+INSERT INTO Cliente (nome , email, senha, telefone, cpf, cod_genero, data_nascimento) values
+('João', 'email@e', '123', '11999999', '222222222', '1', '2000-03-01');
