@@ -1,6 +1,6 @@
-# Nome do Projeto
+# FARMACIA PHP
 
-Sistema Farmacia PHP
+
 ![image](https://github.com/user-attachments/assets/b0c5b714-af1d-46f4-9dd5-facfa4986669)
 
 
