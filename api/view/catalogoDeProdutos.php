@@ -96,9 +96,16 @@ include('view/protect.php');
 
        .search-bar {
            display: flex;
+           justify-content: flex-start;
            margin-bottom: 20px;
-           width: 500px;
+           width: 650px;
+           align-items: center;
        }
+        .search-bar form {
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }       
 
        .search-bar input {
            width: 200%;
