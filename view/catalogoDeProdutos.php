@@ -119,7 +119,7 @@ include('view/protect.php');
 
        .product {
            display: inline-block;
-           width: 30%;
+           width: 28%;
            margin: 1%;
            text-align: center;
            background: white;
@@ -153,6 +153,17 @@ include('view/protect.php');
            color: green;
            font-size: 14px;
        }
+
+       .products ul {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            justify-content: flex-start;
+       }
+
+       
     </style>
 </head>
 <body>

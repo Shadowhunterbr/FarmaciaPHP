@@ -3,12 +3,7 @@ include('view/protect.php');
 ?>
 
 <style>
-    table img {
-    max-width: 100px; /* Limita a largura máxima da imagem */
-    max-height: 100px; /* Limita a altura máxima da imagem */
-    object-fit: cover; /* Garante que a imagem seja ajustada sem distorção */
-    border-radius: 5px; /* Opcional: adiciona bordas arredondadas */
-}
+
 </style>
 
 <!DOCTYPE html>

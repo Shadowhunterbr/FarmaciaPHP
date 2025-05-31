@@ -15,6 +15,7 @@ $pedidos = $pedidoDao->buscarPedidos($codCliente);
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+    <link rel="stylesheet" href="view\Estilos\pedidos.css">
     <meta charset="UTF-8">
     <title>Pedidos</title>
 </head>
@@ -46,9 +47,10 @@ $pedidos = $pedidoDao->buscarPedidos($codCliente);
                         <td>Concluido</td>
                     </tr>
                 <?php endforeach; ?>
-                <a href="?acao=catalogoDeProdutos"><Button>Catalago de Produtos</Button></a>
+                
             </tbody>
         </table>
+        <a href="?acao=catalogoDeProdutos"><Button>Catalago de Produtos</Button></a>
     <?php endif; ?>
 </body>
 </html>

@@ -16,8 +16,8 @@ class Produto {
     private $precoCusto;
     private $imagem;
 // 9 variaveis
-    
-    //melancia
+
+//melancia
 
     // Construtor da classe Produto
     public function __construct( $codigo,$nomeProduto, $precoCusto, $preco, $quantidade_estoque, $cod_categoria, $cod_fornecedor, $cod_prescricao,$data_F,$data_V,$descricaoProduto,$imagem) {
@@ -33,8 +33,7 @@ class Produto {
         $this->data_V = $data_V;
         $this->descricaoProduto = $descricaoProduto;
         $this->imagem = $imagem;
-        
-        
+   
     }
 
     // Getters e Setters

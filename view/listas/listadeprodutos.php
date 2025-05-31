@@ -6,12 +6,7 @@ protegePagina()
 
 ?>
 <style>
-.product img {
 
-max-height: 44px; /* Altura fixa */
-object-fit: cover; /* Assegura que a imagem cubra o espaço disponível sem distorcer */
-border-radius: 3px; /* Bordas arredondadas para as imagens */
-}
 </style>
 <!DOCTYPE html>
 <html lang="en">
@@ -56,7 +51,7 @@ border-radius: 3px; /* Bordas arredondadas para as imagens */
 
     <table border="5%" style="width: 70%; border-color:rgb(149, 149, 234);">
 
-        <tr style="color: white;background-color: #760d0d;">
+        <tr style="color: white;background-color: #760d0d; ">
             <th>Código</th>
             <th>*</th>
             <th>Nome do Produto</th>
@@ -72,7 +67,7 @@ border-radius: 3px; /* Bordas arredondadas para as imagens */
             <th colspan="2">Ação</th>
         </tr>
         <?php foreach($produtos as $produto): ?>
-            <tr>
+            <tr style="text-align: center;">
                 <td><?php echo $produto['codigo'] ?></td>
                 <td class="product"><img src="view/imgs/<?= htmlspecialchars($produto['imagem']) ?>" alt="<?= htmlspecialchars($produto['nome']) ?>"></td>
                 <td><?php echo $produto['nome'] ?></td>

@@ -53,6 +53,7 @@ class ProdutoDao{
         return $statement->fetchAll(\PDO::FETCH_ASSOC);
     }
 
+ 
     public function cadastrar($objProduto){
         //Conexão com o Banco de Dados
         $pdo = Conexao::obterConexao();
