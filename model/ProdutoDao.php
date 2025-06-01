@@ -17,6 +17,17 @@ class ProdutoDao{
 
     }
 
+    public function buscarTodosProdutosAtivos(){
+        //Conexão com o Banco de Dados
+        $pdo = Conexao::obterConexao();
+        //echo "Banco de Dados Conectado com Sucesso!!!" .PHP_EOL;
+
+        $statement = $pdo->query("SELECT * FROM Produtos WHERE status = 1");
+
+        return $statement->fetchAll(\PDO::FETCH_ASSOC);
+
+    }
+
     public function buscarTodasCategorias(){
          
         $pdo = Conexao::obterConexao();
@@ -74,16 +85,21 @@ class ProdutoDao{
         $stmt->execute();
     }
 
-    public function excluir($objProduto){
-        //Conexão com o Banco de Dados
-        $pdo = Conexao::obterConexao();
-        
+public function excluir($objProduto){
+    $pdo = Conexao::obterConexao();
+
+    try {
         $stmt = $pdo->prepare("DELETE FROM Produtos WHERE codigo = :codigo");
-        $stmt->bindParam(':codigo',$objProduto->getCodigo());
-
+        $stmt->bindParam(':codigo', $objProduto->getCodigo());
         $stmt->execute();
+    } catch (PDOException $e) {
+        if ($e->getCode() == 23000) {
+            throw new Exception("Não é possível excluir este produto porque ele já foi vendido ou está em um pedido.");
+        } else {
+            throw $e;
+        }
     }
-
+}
     public function buscarProdutoPorCodigo($codigo){
         //Conexão com o Banco de Dados
         $pdo = Conexao::obterConexao();
@@ -118,7 +134,13 @@ class ProdutoDao{
 
     }
 
-
+public function alterarStatus($codigo, $status) {
+    $pdo = Conexao::obterConexao();
+    $stmt = $pdo->prepare("UPDATE Produtos SET status = :status WHERE codigo = :codigo");
+    $stmt->bindParam(':status', $status, PDO::PARAM_INT);
+    $stmt->bindParam(':codigo', $codigo, PDO::PARAM_INT);
+    $stmt->execute();
+}
     public function cadastrarCategoria($objCategoria) {
         try {
             $pdo = Conexao::obterConexao();

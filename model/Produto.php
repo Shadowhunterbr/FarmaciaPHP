@@ -15,12 +15,13 @@ class Produto {
     private $descricaoProduto;
     private $precoCusto;
     private $imagem;
+    private $status; // Adicionando status como uma variável privada
 // 9 variaveis
 
 //melancia
 
     // Construtor da classe Produto
-    public function __construct( $codigo,$nomeProduto, $precoCusto, $preco, $quantidade_estoque, $cod_categoria, $cod_fornecedor, $cod_prescricao,$data_F,$data_V,$descricaoProduto,$imagem) {
+    public function __construct( $codigo,$nomeProduto, $precoCusto, $preco, $quantidade_estoque, $cod_categoria, $cod_fornecedor, $cod_prescricao,$data_F,$data_V,$descricaoProduto,$imagem,$status) {
         $this->codigo = $codigo;
         $this->nomeProduto = $nomeProduto;
         $this->precoCusto = $precoCusto;
@@ -33,6 +34,8 @@ class Produto {
         $this->data_V = $data_V;
         $this->descricaoProduto = $descricaoProduto;
         $this->imagem = $imagem;
+        $this->status = $status; // Inicializando o status como 'ativo'
+
    
     }
 
@@ -119,5 +122,12 @@ class Produto {
     public function setImagem($imagem) {
         $this->imagem = $imagem;
         
+    }
+
+    public function getStatus() {
+        return $this->status;
+    }
+    public function setStatus($status) {
+        $this->status = $status;
     }
 }

@@ -87,6 +87,10 @@ switch ($acao) {
     case 'alterar':
         $produtoController->alterar();
         break;
+    case 'alterarStatus':
+        $produtoController->alterarStatus();
+        break;
+
     case 'uploadImagem':
         $produtoController->salvarImagem();
         break;    

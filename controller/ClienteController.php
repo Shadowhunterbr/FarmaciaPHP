@@ -117,7 +117,7 @@ class ClienteController{
         if($search){
             $produtos = $produtoDao->buscarPorNome($search);       
         }else{
-            $produtos = $produtoDao->buscarTodosProdutos();
+            $produtos = $produtoDao->buscarTodosProdutosAtivos();
         }
         
         $categorias = $produtoDao->buscarTodasCategorias();

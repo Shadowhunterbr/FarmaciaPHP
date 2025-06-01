@@ -87,8 +87,9 @@ class ProdutoController{
         $data_V = $_POST['txtdatavalidade'];
         $descricaoProduto = $_POST['txtdescricao_produto'];
         $imagem = $_POST['imagem_produto'];
+        $status = 0; 
         
-        $objProduto = new Produto($codigo,$nomeProduto,$precoCusto,$preco,$quantidade_estoque,$cod_categoria,$cod_forncedor,$cod_prescricao,$data_F,$data_V,$descricaoProduto,$imagem);
+        $objProduto = new Produto($codigo,$nomeProduto,$precoCusto,$preco,$quantidade_estoque,$cod_categoria,$cod_forncedor,$cod_prescricao,$data_F,$data_V,$descricaoProduto,$imagem,$status);
         
         $produtoDao = new ProdutoDao();
         $produtoDao->cadastrar($objProduto);
@@ -103,7 +104,7 @@ class ProdutoController{
             
             $codigo = $_GET['codigo'];
             
-            $objProduto = new Produto($codigo,null,null,null,null,null,null,null,null,null,null,null);
+            $objProduto = new Produto($codigo,null,null,null,null,null,null,null,null,null,null,null,null);
 
             $produtoDao = new ProdutoDao();
             $produtoDao->excluir($objProduto);
@@ -130,13 +131,35 @@ class ProdutoController{
 
         $produtoDao = new ProdutoDao();
 
-        $objProduto = new Produto($codigo,$nomeProduto,$precoCusto,$preco,$quantidade_estoque,$cod_categoria,$cod_forncedor,$cod_prescricao,$data_F,$data_V,$descricaoProduto, $imagem);
+        $objProduto = new Produto($codigo,$nomeProduto,$precoCusto,$preco,$quantidade_estoque,$cod_categoria,$cod_forncedor,$cod_prescricao,$data_F,$data_V,$descricaoProduto, $imagem, 'ativo'); // 'ativo' é o status padrão
         $produtoDao->alterar($objProduto);
 
         header("Location: index.php?acao=listarProdutos");
         exit();
 
     }
+
+    public function alterarStatus() {
+    if (isset($_GET['codigo']) && isset($_GET['status'])) {
+        $codigo = $_GET['codigo'];
+        $status = $_GET['status'];
+
+        $produtoDao = new ProdutoDao();
+        try {
+            $produtoDao->alterarStatus($codigo, $status); // O DAO faz o UPDATE
+            header("Location: index.php?acao=listarProdutos");
+            exit();
+        } catch (Exception $e) {
+            echo "Erro ao alterar status do produto: " . $e->getMessage();
+            exit();
+        }
+    } else {
+        echo "Código ou status do produto não fornecido.";
+        exit();
+    }
+}
+
+
 
     public function cadastrarCategoria(){
         $codigo = $_POST['txtcodigoCategoria'];

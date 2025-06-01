@@ -64,7 +64,7 @@ protegePagina()
             <th>Data de Fabricação</th>
             <th>Data de Validade</th>
            
-            <th colspan="2">Ação</th>
+            <th colspan="3">Ação</th>
         </tr>
         <?php foreach($produtos as $produto): ?>
             <tr style="text-align: center;">
@@ -106,6 +106,17 @@ protegePagina()
                     ?>
                 </td>
                 <td><a href="index.php?acao=paginaalterar&codigo=<?php echo $produto['codigo'] ?>" class="alterar"><i class="fa-regular fa-pen-to-square"></i>ALTERAR</a></td>
+
+                        <td>
+            <?= $produto['status'] == 1 ? 'Ativo' : 'Inativo' ?><br>
+            <a 
+                href="index.php?acao=alterarStatus&codigo=<?= $produto['codigo'] ?>&status=<?= $produto['status'] == 1 ? 0 : 1 ?>" 
+                class="<?= $produto['status'] == 1 ? 'inativar' : 'ativar' ?>" 
+                onclick="return confirm('Tem certeza que deseja <?= $produto['status'] == 1 ? 'inativar' : 'ativar' ?> este produto?');">
+                <?= $produto['status'] == 1 ? 'Inativar' : 'Ativar' ?>
+            </a>
+        </td>
+
                 <td><a href="index.php?acao=excluir&codigo=<?php echo $produto['codigo'] ?>" class="excluir" onclick="return confirm('Tem certeza que deseja excluir este Produto?');">EXCLUIR</a></td>
             </tr>
         <?php endforeach; ?>
